@@ -43,7 +43,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+            Authorization: `Bearer ${process.env.TOKEN}`,
           },
           body: JSON.stringify({
             query: `
