@@ -39,6 +39,8 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
         const response = await fetch(`https://api.github.com/users/${username}`)
         const data: GitHubProfileData = await response.json()
 
+        console.log(data)
+        console.log(process.env.NEXT_PUBLIC_TOKEN)
         const contributionsResponse = await fetch("https://api.github.com/graphql", {
           method: "POST",
           headers: {
