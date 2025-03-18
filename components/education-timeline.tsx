@@ -8,7 +8,7 @@ const education = [
   {
     institution: "Jaypee Institute of Information Technology",
     degree: "B.Tech in Computer Science",
-    period: "2020 - 2024",
+    period: "2023 - 2027",
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-jiit-OqNqpg3UeKFj7u0RiT4RE2V9IptgXz.png",
     description: "Currently pursuing Bachelor's degree with focus on Computer Science and Engineering",
     icon: GraduationCap,
@@ -16,9 +16,9 @@ const education = [
   {
     institution: "St. Joseph's Sr. Sec. School",
     degree: "High School",
-    period: "2018 - 2020",
+    period: "2008 - 2023",
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/stjosephjahangirabad-NKRLnlGcKqYxLj2u3FTOUAUmp4yYKj.png",
-    description: "Completed senior secondary education with focus on Mathematics and Computer Science",
+    description: "Completed senior secondary education with CISCE",
     icon: Award,
   },
 ]
@@ -77,4 +77,3 @@ export default function EducationTimeline() {
     </motion.div>
   )
 }
-

@@ -7,7 +7,7 @@ const socialLinks = [
   {
     name: "GitHub",
     icon: Github,
-    href: "https://github.com/kushkansal/",
+    href: "https://github.com/kshknsl/",
     color: "hover:text-gray-900 dark:hover:text-white",
   },
   {
@@ -25,13 +25,13 @@ const socialLinks = [
   {
     name: "Twitter",
     icon: Twitter,
-    href: "https://twitter.com/kansalkkush",
+    href: "https://twitter.com/knslji",
     color: "hover:text-[#1da1f2] dark:hover:text-[#2db1ff]",
   },
   {
     name: "Instagram",
     icon: Instagram,
-    href: "https://www.instagram.com/kushkansal0/",
+    href: "https://www.instagram.com/kushkansal.exe/",
     color: "hover:text-[#e4405f] dark:hover:text-[#f4506f]",
   },
 ]

@@ -53,7 +53,6 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
               <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => {
-                  // Determine color based on tech name
                   let bgColor = "bg-gray-500"
                   if (tech === "NodeJS") bgColor = "bg-green-600"
                   if (tech === "EJS") bgColor = "bg-indigo-600"
@@ -63,7 +62,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                   if (tech === "MySQL") bgColor = "bg-orange-500"
                   if (tech === "PHP" || tech === "Php") bgColor = "bg-purple-500"
                   if (tech === "C++") bgColor = "bg-pink-600"
-                  if (tech === "C") bgColor = "bg-gray-600"
+                  if (tech === "C") bgColor = "bg-amber-500"
                   if (tech === "JAVA" || tech === "Java") bgColor = "bg-yellow-700"
 
                   return (
@@ -84,4 +83,3 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
     </div>
   )
 }
-

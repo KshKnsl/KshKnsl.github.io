@@ -9,7 +9,6 @@ interface LoadingScreenProps {
   onLoadingComplete: () => void;
 }
 
-// Memoize the Stars component to prevent unnecessary re-renders
 const StarsCanvas = memo(() => (
   <Canvas 
     camera={{ position: [0, 0, 3] }} 
@@ -38,16 +37,13 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    // Use a single interval for smoother progress
     const interval = setInterval(() => {
       setProgress(prev => {
-        // Accelerate progress as it gets closer to 100
         const increment = 2 + Math.floor((100 - prev) / 15)
         const newProgress = prev + increment
         
         if (newProgress >= 100) {
           clearInterval(interval)
-          // Complete loading after a short delay
           setTimeout(() => {
             onLoadingComplete()
           }, 50)

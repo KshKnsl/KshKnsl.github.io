@@ -63,9 +63,9 @@ export default function BrowserNavbar({ activeSection }: { activeSection: string
   }
 
   const tabs = [
+    { id: "terminal", label: "Terminal", icon: <Terminal className="w-4 h-4" />, href: "#terminal" },
     { id: "about", label: "About", icon: <User className="w-4 h-4" />, href: "#about" },
     { id: "projects", label: "Projects", icon: <Code className="w-4 h-4" />, href: "#projects" },
-    { id: "terminal", label: "Terminal", icon: <Terminal className="w-4 h-4" />, href: "#terminal" },
     { id: "contact", label: "Contact", icon: <Mail className="w-4 h-4" />, href: "#contact" },
   ]
 
@@ -160,11 +160,10 @@ export default function BrowserNavbar({ activeSection }: { activeSection: string
               </div>
 
               <Link
-                href="#"
+                href="/assets/Kush Kansal (2).pdf"
                 className="hidden md:flex items-center space-x-1 px-3 py-1.5 text-white bg-gradient-primary rounded-full shadow-sm hover:shadow-md transition-all text-sm font-medium border border-[#3b82f6]/20 dark:border-[#60a5fa]/20"
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.2)" }}
               >
                 <Download className="w-4 h-4 mr-1" />
@@ -227,12 +226,10 @@ export default function BrowserNavbar({ activeSection }: { activeSection: string
 
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                     <Link
-                      href="#"
+                      href="/assets/Kush Kansal (2).pdf"
                       className="mt-2 flex items-center justify-center px-4 py-3 text-white rounded-lg bg-gradient-primary border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-md"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setIsMenuOpen(false);
-                      }}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={{ boxShadow: "2px 2px 0px rgba(0,0,0,0.2)" }}
                     >
                       <Download className="w-5 h-5 mr-2" />

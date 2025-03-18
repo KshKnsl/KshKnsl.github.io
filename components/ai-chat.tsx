@@ -23,7 +23,6 @@ export default function AiChat() {
   const prevMessagesLengthRef = useRef(0);
 
   useEffect(() => {
-    // Only scroll if messages length has changed (not on initial render)
     if (messages.length > prevMessagesLengthRef.current) {
       scrollToBottom();
     }

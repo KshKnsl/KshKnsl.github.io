@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Terminal } from "lucide-react"
+import { Terminal, Download } from "lucide-react"
 import Link from "next/link"
 
 const roleTitles = [
@@ -22,7 +22,6 @@ export default function HeroSection() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    // Check if we're on mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
@@ -147,7 +146,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-base sm:text-lg md:text-xl dark:text-gray-400"
             >
-              CSE @JIIT&apos; 27 || Java || JavaScript || Web Developer || 900+ LeetCode || 3 ⭐ CodeChef
+              CSE @JIIT&apos; 27 || Java || JavaScript || Full Stack Developer || 900+ LeetCode || 3 ⭐ CodeChef
             </motion.p>
 
             <motion.div
@@ -162,6 +161,16 @@ export default function HeroSection() {
                 className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-[#0d47a1] to-[#3b82f6] text-white font-medium transition-all hover:shadow-lg hover:shadow-blue-500/25"
               >
                 Get in touch
+              </Link>
+              <Link
+                href="/assets/Kush Kansal (2).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg border
+                border-blue-700 dark:border-blue-500 text-blue-700 dark:text-blue-400 font-medium hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Resume
               </Link>
               <Link
                 href="#terminal"

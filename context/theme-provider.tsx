@@ -69,7 +69,6 @@ export function ThemeProvider({
     },
   }
 
-  // Prevent hydration mismatch by rendering a basic version first
   if (!mounted) {
     return <ThemeProviderContext.Provider {...props} value={value}>
       <div style={{ visibility: 'hidden' }}>{children}</div>

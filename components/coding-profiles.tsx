@@ -6,7 +6,6 @@ import { Code, Award, TrendingUp, BarChart, ExternalLink, X, Star } from "lucide
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
-// Add import for CountUp component
 import CountUp from "./count-up"
 
 interface Platform {
@@ -74,7 +73,7 @@ export default function CodingProfiles() {
   const getLCRating = async () => {
     try {
       const response = await fetch("https://alfa-leetcode-api.onrender.com/userContestRankingInfo/kshkansal")
-      // Check if response is ok before trying to parse JSON
+      
       if (!response.ok) {
         console.error("Error fetching rating: API returned status", response.status)
         return 0
@@ -98,7 +97,6 @@ export default function CodingProfiles() {
   }, [])
 
   useEffect(() => {
-    // Fetch all data on component mount
     handleCFsubmit()
     handleCCsubmit()
     handleLCsubmit()
@@ -213,7 +211,6 @@ export default function CodingProfiles() {
     return data[data.length - 1]
   }
 
-  // Update the renderProfileCard function to make it more mobile responsive
   const renderProfileCard = (platform: Platform, data: PlatformData | ContestData[] | null, isLoading: boolean) => {
     const safeUrl = platform.url || '#'
     return (

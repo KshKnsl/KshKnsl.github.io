@@ -50,14 +50,11 @@ export default function ContactForm() {
     if (!validateForm()) return
 
     setIsSubmitting(true)
-
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)
       setFormState({ name: "", email: "", phone: "", message: "" })
 
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false)
       }, 5000)

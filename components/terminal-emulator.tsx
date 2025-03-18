@@ -6,7 +6,6 @@ import { motion} from "framer-motion"
 import { useTheme } from "@/context/theme-provider"
 import TerminalInput from "./terminal-input"
 
-// Responsive ASCII art banners for different screen sizes
 const BANNERS = {
   large: `<span class="text-green-600 dark:text-green-400 block whitespace-pre-wrap font-mono text-base leading-tight">
   _  __           _       _  __                      _ 
@@ -37,7 +36,6 @@ Kush Kansal
 </span>`,
 }
 
-// Add a type definition for the COMMANDS object
 type CommandsType = {
   [key: string]: string | string[] | (() => string) | ((args?: string) => string);
 };
@@ -46,11 +44,11 @@ const COMMANDS: CommandsType = {
   help: `<span class="text-green-600 dark:text-green-400 font-bold">Available commands:</span>
   <span class="text-yellow-600 dark:text-yellow-400">about</span> - Learn about me
   <span class="text-yellow-600 dark:text-yellow-400">education</span> - My educational background
-  <span class="text-yellow-600 dark:text-yellow-400">experience</span> - My work experience
   <span class="text-yellow-600 dark:text-yellow-400">skills</span> - My technical skills
   <span class="text-yellow-600 dark:text-yellow-400">projects</span> - View my projects
   <span class="text-yellow-600 dark:text-yellow-400">social</span> - My social media links
   <span class="text-yellow-600 dark:text-yellow-400">contact</span> - How to reach me
+  <span class="text-yellow-600 dark:text-yellow-400">resume</span> - Download my resume
   <span class="text-yellow-600 dark:text-yellow-400">tech</span> - Technologies I use
   <span class="text-yellow-600 dark:text-yellow-400">joke</span> - Get a programming joke
   <span class="text-yellow-600 dark:text-yellow-400">time</span> - Display current time
@@ -76,14 +74,14 @@ const COMMANDS: CommandsType = {
   
 I'm currently pursuing my B.tech from JIIT and have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies.
 
-<span class="text-purple-600 dark:text-purple-400">• 700+ LeetCode problems solved</span>
+<span class="text-purple-600 dark:text-purple-400">• 900+ LeetCode problems solved</span>
 <span class="text-purple-600 dark:text-purple-400">• 3 ⭐ CodeChef</span>
 <span class="text-purple-600 dark:text-purple-400">• Full-stack web developer</span>`,
 
   education: `<span class="text-pink-600 dark:text-pink-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">🎓</span> Education:</span>
 
 <span class="text-blue-600 dark:text-blue-400 font-bold">B.Tech Computer Science</span>
-<span class="text-gray-600 dark:text-gray-400">Jaypee Institute of Information Technology (2020-2024)</span>
+<span class="text-gray-600 dark:text-gray-400">Jaypee Institute of Information Technology (2023-2027)</span>
 
 <span class="text-blue-600 dark:text-blue-400 font-bold">High School</span>
 <span class="text-gray-600 dark:text-gray-400">St. Joseph's Sr. Sec. School, Jahangirabad</span>`,
@@ -99,9 +97,9 @@ I'm currently pursuing my B.tech from JIIT and have a keen interest in technolog
   contact: `<span class="text-purple-600 dark:text-purple-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">📧</span> Contact Information:</span>
 
 <span class="text-blue-600 dark:text-blue-400 font-bold">Email:</span> kushkansal0@gmail.com
-<span class="text-blue-600 dark:text-blue-400 font-bold">GitHub:</span> github.com/KushKansal
+<span class="text-blue-600 dark:text-blue-400 font-bold">GitHub:</span> github.com/KshKnsl
 <span class="text-blue-600 dark:text-blue-400 font-bold">LinkedIn:</span> linkedin.com/in/kushkansal
-<span class="text-blue-600 dark:text-blue-400 font-bold">Twitter:</span> twitter.com/kansalkkush`,
+<span class="text-blue-600 dark:text-blue-400 font-bold">Twitter:</span> twitter.com/knsljis`,
 
   projects: `<span class="text-yellow-600 dark:text-yellow-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">🚀</span> Featured Projects:</span>
 
@@ -117,7 +115,7 @@ I'm currently pursuing my B.tech from JIIT and have a keen interest in technolog
 
 <span class="text-green-600 dark:text-green-400 font-bold">3. ReadMates</span>
    A collaborative hub for tech enthusiasts, writers, and readers
-   <span class="text-blue-600 dark:text-blue-400">Technologies:</span> TypeScript, React, Next.js
+   <span class="text-blue-600 dark:text-blue-400">Technologies:</span> TypeScript, React, MongoDB, Express, NodeJS
    <span class="text-blue-600 dark:text-blue-400">Link:</span> <a href="https://readmates.vercel.app/" class="text-cyan-600 dark:text-cyan-400 underline">https://readmates.vercel.app/</a>
 
 <span class="text-green-600 dark:text-green-400 font-bold">4. Chintan Trivia</span>
@@ -137,32 +135,17 @@ I'm currently pursuing my B.tech from JIIT and have a keen interest in technolog
 
 Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to navigate to the projects section of the website.`,
 
-  experience: `<span class="text-red-600 dark:text-red-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">💼</span> Professional Experience:</span>
-
-<span class="text-cyan-600 dark:text-cyan-400 font-bold">Senior Frontend Developer</span>
-<span class="text-gray-600 dark:text-gray-400">Tech Innovations Inc. (2021 - Present)</span>
-• Led a team of 5 developers
-• Implemented CI/CD pipelines
-• Reduced load times by 40%
-
-<span class="text-cyan-600 dark:text-cyan-400 font-bold">Full Stack Developer</span>
-<span class="text-gray-600 dark:text-gray-400">Digital Solutions LLC (2018 - 2021)</span>
-• Built RESTful APIs
-• Implemented authentication systems
-• Optimized database queries
-
-<span class="text-cyan-600 dark:text-cyan-400 font-bold">Junior Developer</span>
-<span class="text-gray-600 dark:text-gray-400">StartUp Studio (2016 - 2018)</span>
-• Developed responsive websites
-• Fixed bugs and improved performance
-• Collaborated with design team`,
-
   social: `<span class="text-pink-600 dark:text-pink-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">🔗</span> Social Media Links:</span>
 
-<span class="text-blue-600 dark:text-blue-400 font-bold">GitHub:</span> <a href="https://github.com/kushkansal/" class="text-cyan-600 dark:text-cyan-400 underline">github.com/kushkansal</a>
+<span class="text-blue-600 dark:text-blue-400 font-bold">GitHub:</span> <a href="https://github.com/kshknsl/" class="text-cyan-600 dark:text-cyan-400 underline">github.com/kshknsl</a>
 <span class="text-blue-600 dark:text-blue-400 font-bold">LinkedIn:</span> <a href="https://www.linkedin.com/in/kushkansal/" class="text-cyan-600 dark:text-cyan-400 underline">linkedin.com/in/kushkansal</a>
-<span class="text-blue-600 dark:text-blue-400 font-bold">Twitter:</span> <a href="https://twitter.com/kansalkkush" class="text-cyan-600 dark:text-cyan-400 underline">twitter.com/kansalkkush</a>
-<span class="text-blue-600 dark:text-blue-400 font-bold">Instagram:</span> <a href="https://www.instagram.com/kushkansal0/" class="text-cyan-600 dark:text-cyan-400 underline">instagram.com/kushkansal0</a>`,
+<span class="text-blue-600 dark:text-blue-400 font-bold">Twitter:</span> <a href="https://twitter.com/knslji" class="text-cyan-600 dark:text-cyan-400 underline">twitter.com/knslji</a>
+<span class="text-blue-600 dark:text-blue-400 font-bold">Instagram:</span> <a href="https://www.instagram.com/kushkansal.exe/" class="text-cyan-600 dark:text-cyan-400 underline">instagram.com/kushkansal.exe</a>`,
+
+  resume: `<span class="text-emerald-600 dark:text-emerald-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">📄</span> Resume:</span>
+
+Click the link below to download my resume:
+<a href="/assets/Kush Kansal (2).pdf" target="_blank" rel="noopener noreferrer" class="text-cyan-600 dark:text-cyan-400 underline">Download Resume</a>`,
 
   tech: `<span class="text-green-600 dark:text-green-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">⚙️</span> Technologies I Use:</span>
 
@@ -182,7 +165,6 @@ Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to na
   ],
 
   time: () => {
-    // Safe for SSR
     if (typeof window === "undefined") {
       return `<span class="text-yellow-600 dark:text-yellow-300"><span class="text-yellow-600 dark:text-yellow-300">🕒</span> Current time:</span> <span class="text-cyan-600 dark:text-cyan-400 font-bold">Loading time...</span>`;
     }
@@ -192,10 +174,8 @@ Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to na
   },
 
   banner: () => {
-    // Return appropriate banner based on screen width
-    // Safe for SSR - don't access window directly
     if (typeof window === "undefined") {
-      return BANNERS.medium; // Default for server rendering
+      return BANNERS.medium;
     }
     
     const width = window.innerWidth;
@@ -207,18 +187,16 @@ Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to na
 
   theme: "This command would toggle the theme if implemented in the actual terminal.",
 
-  // Unix-like commands
   ls: (args: string | undefined) => {
     const directories: Record<string, string[]> = {
       "/": ["home", "projects", "about", "skills", "contact.txt", "resume.pdf"],
       "/home": ["kush", "documents", "downloads"],
       "/home/kush": ["projects", "notes.txt", "todo.md"],
       "/projects": ["url-shortener", "portfolio-site", "chintan-trivia", "wheel-buddy", "task-master", "text-editor"],
-      "/about": ["education.txt", "experience.txt", "hobbies.txt"],
+      "/about": ["education.txt"],
       "/skills": ["languages.txt", "frameworks.txt", "tools.txt"],
     }
 
-    // Default to root if no path specified
     const path = args ? args.trim() : "/"
 
     if (!directories[path]) {
@@ -264,8 +242,6 @@ Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to na
       "notes.txt": `<span class="text-gray-600 dark:text-gray-300">- Remember to update portfolio\n- Complete LeetCode challenge\n- Study for exams</span>`,
       "todo.md": `<span class="text-gray-600 dark:text-gray-300"># TODO\n- [ ] Finish portfolio website\n- [ ] Apply for internships\n- [x] Complete Java assignment</span>`,
       "education.txt": COMMANDS.education as string,
-      "experience.txt": COMMANDS.experience as string,
-      "hobbies.txt": `<span class="text-gray-600 dark:text-gray-300">- Coding\n- Reading\n- Gaming\n- Photography</span>`,
       "languages.txt": `<span class="text-gray-600 dark:text-gray-300">- JavaScript\n- TypeScript\n- Java\n- Python\n- C++</span>`,
       "frameworks.txt": `<span class="text-gray-600 dark:text-gray-300">- React\n- Next.js\n- Express\n- Tailwind CSS</span>`,
       "tools.txt": `<span class="text-gray-600 dark:text-gray-300">- Git\n- Docker\n- VS Code\n- Figma</span>`,
@@ -352,13 +328,12 @@ Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to na
     }
 
     const section = args.trim().toLowerCase()
-    const validSections = ["projects", "about", "experience", "contact", "skills"]
+    const validSections = ["projects", "about", "contact", "skills"]
 
     if (!validSections.includes(section)) {
       return `<span class="text-red-600 dark:text-red-500">cd: ${section}: No such file or directory</span>`
     }
 
-    // This would actually navigate to the section in a real implementation
     return `<span class="text-green-600 dark:text-green-400">Navigating to #${section} section...</span>`
   },
 
@@ -426,12 +401,10 @@ Type <span class="text-yellow-600 dark:text-yellow-400">help</span> to see avail
     }
   }
 
-  // Handle command execution
   const handleCommand = (cmd: string) => {
     const trimmedCmd = cmd.trim()
     if (!trimmedCmd) return
     
-    // Process command
     const output = processCommand(trimmedCmd)
     setHistory(prev => [...prev, `<span class="text-blue-500 dark:text-blue-400">$ </span>${trimmedCmd}`, output])
   }
@@ -439,7 +412,6 @@ Type <span class="text-yellow-600 dark:text-yellow-400">help</span> to see avail
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-800">
-        {/* Terminal Header */}
         <div className="flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-black">
           <div className="flex space-x-2">
             <button
@@ -456,7 +428,6 @@ Type <span class="text-yellow-600 dark:text-yellow-400">help</span> to see avail
           <div className="text-xs text-gray-500 dark:text-gray-600">v2.0.0</div>
         </div>
 
-        {/* Terminal Body */}
         <div
           ref={terminalRef}
           className={`h-96 sm:h-96 overflow-auto p-4 font-mono text-sm ${
@@ -472,7 +443,6 @@ Type <span class="text-yellow-600 dark:text-yellow-400">help</span> to see avail
           tabIndex={0}
           aria-label="Terminal input area"
         >
-          {/* Terminal History */}
           {history.map((line, i) => (
             <motion.div
               key={i}

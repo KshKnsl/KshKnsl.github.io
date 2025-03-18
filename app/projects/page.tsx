@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
-// Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -22,14 +21,14 @@ const projects = [
   {
     title: "URL Shortener",
     liveLink: "https://tinyu.vercel.app/",
-    codeLink: "https://github.com/KushKansal/URL-Shorten",
+    codeLink: "https://github.com/KshKnsl/URL-Shorten",
     description: "A free tool to shorten URLs and generate QR codes & links making it easy to share.",
     technologies: ["NodeJS", "EJS"],
   },
   {
     title: "Portfolio Site",
     liveLink: "/",
-    codeLink: "https://github.com/KushKansal/Portfolio",
+    codeLink: "https://github.com/KshKnsl/Portfolio",
     description:
       "My personal portfolio website showcasing my projects and skills with an interactive terminal.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
