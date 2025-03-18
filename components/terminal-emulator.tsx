@@ -145,7 +145,7 @@ Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to na
   resume: `<span class="text-emerald-600 dark:text-emerald-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">📄</span> Resume:</span>
 
 Click the link below to download my resume:
-<a href="/assets/Kush Kansal (2).pdf" target="_blank" rel="noopener noreferrer" class="text-cyan-600 dark:text-cyan-400 underline">Download Resume</a>`,
+<a href="/assets/KushKansal.pdf" target="_blank" rel="noopener noreferrer" class="text-cyan-600 dark:text-cyan-400 underline">Download Resume</a>`,
 
   tech: `<span class="text-green-600 dark:text-green-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">⚙️</span> Technologies I Use:</span>
 

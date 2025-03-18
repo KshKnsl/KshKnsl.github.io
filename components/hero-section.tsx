@@ -163,7 +163,7 @@ export default function HeroSection() {
                 Get in touch
               </Link>
               <Link
-                href="/assets/Kush Kansal (2).pdf"
+                href="/assets/KushKansal.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg border

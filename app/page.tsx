@@ -68,6 +68,22 @@ const personalInfo = {
   about: `Hi everyone. My name is Kush Kansal and I am a second-year college student pursuing my B.tech from JIIT. I have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies. Driven by a strong sense of curiosity. Currently, my skills are in HTML, CSS, Object Oriented programming, C, C++, and Java. I am currently learning full-stack web development and DSA. My unwavering determination propels me towards achieving excellence, and I aspire to contribute significantly to society by enhancing people&apos;s lives.`,
   projects: [
     {
+      title: "GuruGram",
+      liveLink: "https://gurugramm.vercel.app",
+      codeLink: "https://github.com/KshKnsl/GuruGram",
+      description:
+        "A mentorship platform that connects students with industry professionals to bridge the gap between academics and real-world skills. With features like skill-based matching, video communication, and progress tracking.",
+      technologies: ["React", "Node.js", "Express", "MongoDB"],
+    },
+    {
+      title: "Cubix",
+      liveLink: "https://kshknsl.github.io/cubix/",
+      codeLink: "https://github.com/KshKnsl/cubix",
+      description:
+        "A web-based puzzle solver that efficiently solves Rubik's Cube, 15-Puzzle, and Sudoku using advanced algorithms. The frontend, built with React, provides an interactive UI, while the backend, powered by C++, ensures fast and optimized solutions.",
+      technologies: ["React", "C++"],
+    },
+    {
       title: "URL Shortener",
       description:
         "A free tool to shorten URLs and generate QR codes & links making it easy to share.",
@@ -98,22 +114,6 @@ const personalInfo = {
       liveLink: "http://chintan.42web.io/",
       codeLink: "https://github.com/KshKnsl/ChintanTrivia",
       technologies: ["PHP", "Tailwind CSS", "JavaScript", "MySQL"],
-    },
-    {
-      title: "Wheel Buddy",
-      description:
-        "A console-based car booking and car-pooling system with user management and booking features.",
-      liveLink: "https://github.com/KshKnsl/WheelBuddy",
-      codeLink: "https://github.com/KshKnsl/WheelBuddy",
-      technologies: ["C++"],
-    },
-    {
-      title: "Task Master",
-      description:
-        "A console-based To-Do List application that simplifies task management and helps you stay organized.",
-      liveLink: "https://github.com/KshKnsl/TaskMaster-X",
-      codeLink: "https://github.com/KshKnsl/TaskMaster-X",
-      technologies: ["C"],
     },
   ],
   highlights: [
@@ -179,7 +179,7 @@ export default function Home() {
             }
           });
         },
-        { threshold: 0.3 } 
+        { threshold: 0.3 }
       );
 
       observer.observe(ref.current);
@@ -215,8 +215,8 @@ export default function Home() {
   // Skip loading screen if user has already interacted with the site
   useEffect(() => {
     // Check if user has visited before
-    const hasVisited = sessionStorage.getItem('hasVisited');
-    
+    const hasVisited = sessionStorage.getItem("hasVisited");
+
     // If this is a return visit, skip the loading screen
     if (hasVisited) {
       setIsLoading(false);
@@ -225,29 +225,29 @@ export default function Home() {
       const maxLoadingTime = setTimeout(() => {
         handleLoadingComplete();
       }, 3000); // Maximum 3 seconds for loading screen
-      
+
       return () => clearTimeout(maxLoadingTime);
     }
-    
+
     // Add interaction detection
     const handleInteraction = () => {
       setHasInteracted(true);
     };
-    
-    window.addEventListener('click', handleInteraction);
-    window.addEventListener('keydown', handleInteraction);
-    window.addEventListener('scroll', handleInteraction);
-    
+
+    window.addEventListener("click", handleInteraction);
+    window.addEventListener("keydown", handleInteraction);
+    window.addEventListener("scroll", handleInteraction);
+
     return () => {
-      window.removeEventListener('click', handleInteraction);
-      window.removeEventListener('keydown', handleInteraction);
-      window.removeEventListener('scroll', handleInteraction);
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("keydown", handleInteraction);
+      window.removeEventListener("scroll", handleInteraction);
     };
   }, []);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
-    sessionStorage.setItem('hasVisited', 'true');
+    sessionStorage.setItem("hasVisited", "true");
   };
 
   useEffect(() => {
@@ -255,7 +255,7 @@ export default function Home() {
       const timer = setTimeout(() => {
         handleLoadingComplete();
       }, 500);
-      
+
       return () => clearTimeout(timer);
     }
   }, [isLoading, hasInteracted]);
@@ -263,7 +263,8 @@ export default function Home() {
   useEffect(() => {
     if (isLoading) {
       const preloadHero = new window.Image();
-      preloadHero.src = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg";
+      preloadHero.src =
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg";
     }
   }, [isLoading]);
 
@@ -451,10 +452,22 @@ export default function Home() {
                 ))}
               </div>
 
-              <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div className="min-h-[200px] flex items-center justify-center">
+                    Loading...
+                  </div>
+                }
+              >
                 <CodingProfiles />
               </Suspense>
-              <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div className="min-h-[200px] flex items-center justify-center">
+                    Loading...
+                  </div>
+                }
+              >
                 <GitHubProfile username="kshknsl" />
               </Suspense>
             </motion.div>
@@ -480,7 +493,13 @@ export default function Home() {
               viewport={{ once: true }}
               className="p-3 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0A0A0A] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)]"
             >
-              <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div className="min-h-[200px] flex items-center justify-center">
+                    Loading...
+                  </div>
+                }
+              >
                 <TechStackGrid />
               </Suspense>
             </motion.div>
@@ -522,7 +541,13 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="min-h-[200px] flex items-center justify-center">
+                  Loading...
+                </div>
+              }
+            >
               <ProjectGrid projects={personalInfo.projects} />
             </Suspense>
           </motion.div>
@@ -533,7 +558,7 @@ export default function Home() {
           >
             <Link
               href="/projects"
-              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-00 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
+              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-00 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
             >
               View All Projects
               <ArrowUpRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
@@ -570,7 +595,13 @@ export default function Home() {
               My academic background and achievements
             </p>
           </motion.div>
-          <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="min-h-[200px] flex items-center justify-center">
+                Loading...
+              </div>
+            }
+          >
             <EducationTimeline />
           </Suspense>
         </div>
@@ -615,7 +646,13 @@ export default function Home() {
           >
             <motion.div variants={fadeInUp} className="lg:col-span-1">
               <div className="space-y-6 sm:space-y-8 mb-3flex gap-2">
-                <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+                <Suspense
+                  fallback={
+                    <div className="min-h-[200px] flex items-center justify-center">
+                      Loading...
+                    </div>
+                  }
+                >
                   <ContactIcons />
                 </Suspense>
               </div>
@@ -648,7 +685,13 @@ export default function Home() {
                   Have a quick question? Chat with my AI twin and get instant
                   responses
                 </p>
-                <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+                <Suspense
+                  fallback={
+                    <div className="min-h-[200px] flex items-center justify-center">
+                      Loading...
+                    </div>
+                  }
+                >
                   <AiChat />
                 </Suspense>
               </motion.div>
@@ -659,7 +702,13 @@ export default function Home() {
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
               className="lg:col-span-1"
             >
-              <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div className="min-h-[200px] flex items-center justify-center">
+                    Loading...
+                  </div>
+                }
+              >
                 <ContactForm />
               </Suspense>
             </motion.div>
@@ -711,7 +760,13 @@ export default function Home() {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
           >
-            <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="min-h-[200px] flex items-center justify-center">
+                  Loading...
+                </div>
+              }
+            >
               <AiChat />
             </Suspense>
           </motion.div>
@@ -734,7 +789,13 @@ export default function Home() {
           </motion.div>
         </div>
         <div className="viscount-container h-[70px] overflow-hidden w-full">
-          <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center">Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="min-h-[200px] flex items-center justify-center">
+                Loading...
+              </div>
+            }
+          >
             <VisitorCounter />
           </Suspense>
         </div>

@@ -160,7 +160,7 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
               </div>
 
               <Link
-                href="/assets/Kush Kansal (2).pdf"
+                href="/assets/KushKansal.pdf"
                 className="hidden md:flex items-center space-x-1 px-3 py-1.5 text-white bg-gradient-primary rounded-full shadow-sm hover:shadow-md transition-all text-sm font-medium border border-[#3b82f6]/20 dark:border-[#60a5fa]/20"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -226,7 +226,7 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
 
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                     <Link
-                      href="/assets/Kush Kansal (2).pdf"
+                      href="/assets/KushKansal.pdf"
                       className="mt-2 flex items-center justify-center px-4 py-3 text-white rounded-lg bg-gradient-primary border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-md"
                       target="_blank"
                       rel="noopener noreferrer"
