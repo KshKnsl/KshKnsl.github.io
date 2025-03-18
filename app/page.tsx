@@ -45,7 +45,6 @@ const fadeInUp = {
     },
   },
 };
-
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -60,12 +59,12 @@ const staggerContainer = {
 const personalInfo = {
   name: "Kush Kansal",
   title:
-    "CSE @JIIT&apos; 27 || Java || JavaScript || Web Developer || 700+ LeetCode || 3 ⭐ CodeChef",
+    "CSE @JIIT&apos; 27 || Java || JavaScript || Web Developer || 900+ LeetCode || 3 ⭐ CodeChef",
   email: "kushkansal0@gmail.com",
-  github: "https://github.com/kushkansal/",
+  github: "https://github.com/KshKnsl/",
   linkedin: "https://www.linkedin.com/in/kushkansal/",
-  instagram: "https://www.instagram.com/kushkansal0/",
-  twitter: "https://twitter.com/kansalkkush",
+  instagram: "https://www.instagram.com/kushkansal.exe/",
+  twitter: "https://twitter.com/knslji",
   about: `Hi everyone. My name is Kush Kansal and I am a second-year college student pursuing my B.tech from JIIT. I have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies. Driven by a strong sense of curiosity. Currently, my skills are in HTML, CSS, Object Oriented programming, C, C++, and Java. I am currently learning full-stack web development and DSA. My unwavering determination propels me towards achieving excellence, and I aspire to contribute significantly to society by enhancing people&apos;s lives.`,
   projects: [
     {
@@ -73,7 +72,7 @@ const personalInfo = {
       description:
         "A free tool to shorten URLs and generate QR codes & links making it easy to share.",
       liveLink: "https://tinyu.vercel.app/",
-      codeLink: "https://github.com/KushKansal/URL-Shorten",
+      codeLink: "https://github.com/KshKnsl/URL-Shorten",
       technologies: ["NodeJS", "EJS"],
     },
     {
@@ -81,7 +80,7 @@ const personalInfo = {
       description:
         "My personal portfolio website showcasing my projects and skills with an interactive terminal.",
       liveLink: "#",
-      codeLink: "https://github.com/KushKansal/Portfolio",
+      codeLink: "https://github.com/KshKnsl/Portfolio",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
     },
     {
@@ -90,7 +89,7 @@ const personalInfo = {
         "A collaborative hub for tech enthusiasts, writers, and readers with real-time co-editing experience.",
       liveLink: "https://readmates.vercel.app/",
       codeLink: "https://github.com/KshKnsl/ReadMates",
-      technologies: ["TypeScript", "React", "Next.js"],
+      technologies: ["TypeScript", "React", "MERN"],
     },
     {
       title: "Chintan Trivia",
@@ -121,13 +120,13 @@ const personalInfo = {
     {
       title: "Problem Solver",
       description:
-        "700+ problems solved on LeetCode with strong algorithmic skills",
+        "1200+ problems solved on various platforms with strong algorithmic skills",
       icon: <Cpu className="w-6 h-6 text-blue-500" />,
     },
     {
       title: "Competitive Coder",
       description:
-        "3⭐ rating on CodeChef with consistent participation in contests",
+        "Highly rated on CodeChef and Codeforces with consistent participation in contests",
       icon: <Award className="w-6 h-6 text-yellow-500" />,
     },
     {
@@ -164,11 +163,9 @@ export default function Home() {
   const educationRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
-  // Section detection for navigation highlighting
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
-    // Use type assertion to handle the refs
     type SectionRef = React.RefObject<HTMLElement>;
 
     const createObserver = (ref: SectionRef, id: string) => {
@@ -182,14 +179,13 @@ export default function Home() {
             }
           });
         },
-        { threshold: 0.3 } // 30% of the section needs to be visible
+        { threshold: 0.3 } 
       );
 
       observer.observe(ref.current);
       observers.push(observer);
     };
 
-    // Use type assertions to pass the refs
     createObserver(heroRef as SectionRef, "hero");
     createObserver(terminalRef as SectionRef, "terminal");
     createObserver(aboutRef as SectionRef, "about");
@@ -197,13 +193,10 @@ export default function Home() {
     createObserver(educationRef as SectionRef, "education");
     createObserver(contactRef as SectionRef, "contact");
 
-    // Prevent auto-scrolling to terminal on page load
-    // Make sure we're at the top of the page on load
     if (typeof window !== "undefined") {
       window.history.scrollRestoration = "manual";
       window.scrollTo(0, 0);
 
-      // Force scroll to top on initial load
       setTimeout(() => {
         window.scrollTo({
           top: 0,
@@ -257,22 +250,18 @@ export default function Home() {
     sessionStorage.setItem('hasVisited', 'true');
   };
 
-  // Skip loading if user has interacted
   useEffect(() => {
     if (isLoading && hasInteracted) {
       const timer = setTimeout(() => {
         handleLoadingComplete();
-      }, 500); // Shorter timeout if user has interacted
+      }, 500);
       
       return () => clearTimeout(timer);
     }
   }, [isLoading, hasInteracted]);
 
-  // Preload critical components
   useEffect(() => {
-    // Preload critical components while showing loading screen
     if (isLoading) {
-      // Preload the hero section component
       const preloadHero = new window.Image();
       preloadHero.src = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg";
     }
@@ -544,7 +533,7 @@ export default function Home() {
           >
             <Link
               href="/projects"
-              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-[#0A0A0A] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
+              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-00 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900 transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
             >
               View All Projects
               <ArrowUpRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
