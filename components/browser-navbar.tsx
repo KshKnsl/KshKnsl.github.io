@@ -20,7 +20,7 @@ import { getRandomMessage } from "@/utils/messages"
 import { scrollToElement } from "@/utils/scroll-utils"
 import ThemeToggle from "./theme-toggle"
 
-export default function BrowserNavbar({ activeSection }: { activeSection: string }) {
+export default function BrowserNavbar({ activeSection }: { activeSection?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [currentUrl] = useState("kushkansal.me")

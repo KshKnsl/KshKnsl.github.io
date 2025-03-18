@@ -247,7 +247,7 @@ export default function TechStackGrid() {
           }}
           className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
             activeCategory === null 
-              ? 'bg-blue-500 text-white shadow-md' 
+              ? 'bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md' 
               : 'bg-gray-100 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
@@ -263,7 +263,7 @@ export default function TechStackGrid() {
             }}
             className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
               activeCategory === category.name 
-                ? 'bg-blue-500 text-white shadow-md' 
+                ? 'bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md' 
                 : 'bg-gray-100 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
@@ -334,7 +334,7 @@ export default function TechStackGrid() {
         <div className="flex justify-center mt-4">
           <button
             onClick={handleShowMore}
-            className="px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-600 transition-colors"
+            className="px-4 py-2 bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-600 transition-colors"
           >
             Show More
           </button>

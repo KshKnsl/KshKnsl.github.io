@@ -176,7 +176,7 @@ export default function HeroSection() {
                 href="#terminal"
                 onClick={(e) => handleNavClick(e, "#terminal")}
                 className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg border 
-               text-black border-gray-700 dark:text-white font-medium hover:bg-gray-800/50 transition-all"
+               text-black border-gray-700 dark:text-white font-medium hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all"
               >
                 <Terminal className="w-4 h-4 mr-2" />
                 Open Terminal
