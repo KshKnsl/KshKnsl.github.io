@@ -57,6 +57,40 @@ interface LoadingState {
   [key: string]: boolean;
 }
 
+const dummyData: {
+  [key: string]: ContestData[] | PlatformData;
+} = {
+  cf: [
+    {
+      rating: 1270,
+      contestName: "Codeforces Round 100...",
+      rank: 2888,
+      oldRating: 1200,
+      newRating: 1270,
+      timestamp: 0,
+      handle: "mrkushkansal",
+    },
+  ],
+  cc: {
+    rating: 1679,
+    stars: 3,
+    global_rank: 11897,
+    country_rank: 10186,
+  },
+  lc: {
+    totalSolved: 918,
+    totalQuestions: 3491,
+    easySolved: 300,
+    mediumSolved: 500,
+    hardSolved: 118,
+    ranking: 25793,
+  },
+  gfg: {
+    institution_rank: 300,
+    totalProblemsSolved: 256,
+  },
+}
+
 export default function CodingProfiles() {
   const [cfData, setCFContestDetails] = useState<ContestData[] | null>(null)
   const [ccData, setCCContestDetails] = useState<ContestData[] | null>(null)
@@ -236,9 +270,7 @@ export default function CodingProfiles() {
         </div>
         <div className="p-3">
           {isLoading ? (
-            <div className="flex justify-center items-center h-20">
-              <div className={`animate-spin rounded-full h-5 w-5 border-b-2 ${platform.color}`}></div>
-            </div>
+            renderPlatformData(platform.id, dummyData[platform.id], safeUrl)
           ) : (
             renderPlatformData(platform.id, data, safeUrl)
           )}
