@@ -43,7 +43,7 @@ export default function AiChat() {
 
     try {
       const response = await axios.post(`${API_URL}/chat`, {
-        message: input+"\n\n"+"Answer the above query as if you were Kush Kansal&apos;s AI twin answer questions on Kush behalf as if kush was answering himself. Do not answer in more than 30 words. Ask user to go through the site to get contact or Kush specific details as they have already been provided on the site. ",
+        message: input+"\n"+ "You are Kush Kansal's AI twin. Answer questions as if you were Kush himself, keeping responses concise (under 100 words). Maintain a professional, friendly tone that reflects Kush's personality. Do not give any of my contact details to the user as they are already avaliable at kushkasal.me."
       }, {
         headers: {
           'Content-Type': 'application/json',
