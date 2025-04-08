@@ -162,16 +162,16 @@ export default function HeroSection() {
               >
                 Get in touch
               </Link>
-              <Link
-                href="/assets/KushKansal.pdf"
+                <Link
+                href="https://drive.google.com/file/d/1PGtFhTsbfNuqJEsPgsTLSs9hKZm6uFc3/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg border
                 border-blue-700 dark:border-blue-500 text-blue-700 dark:text-blue-400 font-medium hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all"
-              >
+                >
                 <Download className="w-4 h-4 mr-2" />
                 Resume
-              </Link>
+                </Link>
               <Link
                 href="#terminal"
                 onClick={(e) => handleNavClick(e, "#terminal")}

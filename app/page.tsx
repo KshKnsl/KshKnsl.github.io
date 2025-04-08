@@ -164,6 +164,14 @@ export default function Home() {
   const contactRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const script = document.createElement("script");
+    script.defer = true;
+    script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    script.setAttribute(
+      "data-cf-beacon",
+      '{"token": "f7aee356940d45e99e23b7db806fc558"}'
+    );
+    document.head.appendChild(script);
     const observers: IntersectionObserver[] = [];
     const API_URL = "https://ntyx.onrender.com/";
 
