@@ -2,7 +2,6 @@
 
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useRef, useState, Suspense, lazy } from "react";
-import Link from "next/link";
 import {
   Mail,
   Code,
@@ -20,6 +19,7 @@ import LoadingScreen from "@/components/loading-screen";
 import HeroSection from "@/components/hero-section";
 import Image from "next/image";
 import { handleHashLinkClick } from "@/utils/scroll-utils";
+import Link from "next/link";
 
 // Lazy load components that aren't needed immediately
 const ProjectGrid = lazy(() => import("@/components/project-grid"));
@@ -175,8 +175,8 @@ export default function Home() {
       }
       const data = await response.json();
       console.log("Backend data loaded:", data);
-      } catch (error) {
-      console.error("Error fetching backend data:", error);
+      } catch (_) {
+      console.error("Error fetching backend data:", _);
       }
     };
 

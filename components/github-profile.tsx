@@ -69,7 +69,8 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
           contributions: totalContributions,
           loaded: true,
         })
-      } catch (error) {
+      } catch
+      {
         // console.error("Error fetching GitHub profile:", error)
         setProfile((prev) => ({ ...prev, loaded: true }))
       }

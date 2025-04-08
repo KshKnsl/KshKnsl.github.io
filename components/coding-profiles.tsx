@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Code, Award, TrendingUp, BarChart, ExternalLink, X, Star } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import React from "react"
 import CountUp from "./count-up"
 
@@ -114,7 +113,7 @@ export default function CodingProfiles() {
       }
       const data = await response.json()
       return data?.data?.userContestRanking?.rating || 0
-    } catch (error) {
+    } catch {
       // console.error("Error fetching rating:", error)
       return 0
     }
@@ -146,7 +145,7 @@ export default function CodingProfiles() {
         setCFContestDetails(data.result)
         setLoading((prev) => ({ ...prev, cf: false }))
       })
-      .catch((error) => {
+      .catch(() => {
         // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, cf: false }))
       })
@@ -161,7 +160,7 @@ export default function CodingProfiles() {
         setCCContestDetails(data)
         setLoading((prev) => ({ ...prev, cc: false }))
       })
-      .catch((error) => {
+      .catch(() => {
         // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, cc: false }))
       })
@@ -176,7 +175,7 @@ export default function CodingProfiles() {
         setLCContestDetails(data)
         setLoading((prev) => ({ ...prev, lc: false }))
       })
-      .catch((error) => {
+      .catch(() => {
         // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, lc: false }))
       })
@@ -191,7 +190,7 @@ export default function CodingProfiles() {
         setGFGContestDetails(data)
         setLoading((prev) => ({ ...prev, gfg: false }))
       })
-      .catch((error) => {
+      .catch(() => {
         // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, gfg: false }))
       })
@@ -246,7 +245,7 @@ export default function CodingProfiles() {
   }
 
   const renderProfileCard = (platform: Platform, data: PlatformData | ContestData[] | null, isLoading: boolean) => {
-    const safeUrl = platform.url || '#'
+const safeUrl = platform.url || '#'
     return (
       <motion.div
         className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0A0A0A] overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)] h-full"
@@ -290,6 +289,7 @@ export default function CodingProfiles() {
     }
 
     const safeUrl = platformUrl || '#'
+    safeUrl.trim()
 
     function getTitle(rating: number) {
       if (rating < 1200) return "Newbie"
