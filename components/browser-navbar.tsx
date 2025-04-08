@@ -159,16 +159,16 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
                 <ThemeToggle />
               </div>
 
-              <Link
-                href="/assets/KushKansal.pdf"
+                <Link
+                href="https://drive.google.com/file/d/1PGtFhTsbfNuqJEsPgsTLSs9hKZm6uFc3/view?usp=sharing"
                 className="hidden md:flex items-center space-x-1 px-3 py-1.5 text-white bg-gradient-primary rounded-full shadow-sm hover:shadow-md transition-all text-sm font-medium border border-[#3b82f6]/20 dark:border-[#60a5fa]/20"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.2)" }}
-              >
+                >
                 <Download className="w-4 h-4 mr-1" />
                 <span>Resume</span>
-              </Link>
+                </Link>
 
               <motion.button
                 className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
@@ -226,7 +226,7 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
 
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                     <Link
-                      href="/assets/KushKansal.pdf"
+                      href="https://drive.google.com/file/d/1PGtFhTsbfNuqJEsPgsTLSs9hKZm6uFc3/view?usp=sharing"
                       className="mt-2 flex items-center justify-center px-4 py-3 text-white rounded-lg bg-gradient-primary border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-md"
                       target="_blank"
                       rel="noopener noreferrer"

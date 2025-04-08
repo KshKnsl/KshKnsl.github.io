@@ -70,7 +70,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
           loaded: true,
         })
       } catch (error) {
-        console.error("Error fetching GitHub profile:", error)
+        // console.error("Error fetching GitHub profile:", error)
         setProfile((prev) => ({ ...prev, loaded: true }))
       }
     }
@@ -96,7 +96,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
         <div className="flex items-center gap-3 text-xl">
             <Github className="rounded-full"/>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{profile.data.name}</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">GitHub</h2>
             <p className="text-sm text-gray-600 dark:text-gray-300">
               <Link href={profile.data.htmlUrl || `https://github.com/${username}`} target="_blank" rel="noopener noreferrer" className="flex items-center">
                 {profile.data.login}

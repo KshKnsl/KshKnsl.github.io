@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Send, CheckCircle, Phone } from "lucide-react"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, CheckCircle, Phone } from "lucide-react";
 
 interface FormErrors {
   name?: string;
@@ -17,49 +17,59 @@ export default function ContactForm() {
     email: "",
     phone: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [formErrors, setFormErrors] = useState<FormErrors>({})
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
     setFormState((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const validateForm = () => {
-    const errors: FormErrors = {}
+    const errors: FormErrors = {};
 
-    if (!formState.name.trim()) errors.name = "Name is required"
-    if (!formState.email.trim()) errors.email = "Email is required"
-    else if (!/\S+@\S+\.\S+/.test(formState.email)) errors.email = "Email is invalid"
-    if (formState.phone && !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(formState.phone)) 
-      errors.phone = "Phone number is invalid"
-    if (!formState.message.trim()) errors.message = "Message is required"
+    if (!formState.name.trim()) errors.name = "Name is required";
+    if (!formState.email.trim()) errors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formState.email))
+      errors.email = "Email is invalid";
+    if (
+      formState.phone &&
+      !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(
+        formState.phone
+      )
+    )
+      errors.phone = "Phone number is invalid";
+    if (!formState.message.trim()) errors.message = "Message is required";
 
-    setFormErrors(errors)
-    return Object.keys(errors).length === 0
-  }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!validateForm()) return
+    if (!validateForm()) return;
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-      setFormState({ name: "", email: "", phone: "", message: "" })
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setFormState({ name: "", email: "", phone: "", message: "" });
 
       setTimeout(() => {
-        setIsSubmitted(false)
-      }, 5000)
-    }, 1500)
-  }
+        setIsSubmitted(false);
+      }, 5000);
+    }, 1500);
+  };
 
   return (
     <div className="w-full">
@@ -70,9 +80,12 @@ export default function ContactForm() {
           className="p-8 rounded-2xl bg-white/80 dark:bg-black/80 backdrop-blur-lg border border-gray-200 dark:border-gray-700 shadow-xl text-center"
         >
           <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
-          <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Message Sent!</h3>
+          <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+            Message Sent!
+          </h3>
           <p className="text-gray-600 dark:text-gray-300">
-            Thank you for reaching out. I&apos;ll get back to you as soon as possible.
+            Thank you for reaching out. I&apos;ll get back to you as soon as
+            possible.
           </p>
         </motion.div>
       ) : (
@@ -87,13 +100,17 @@ export default function ContactForm() {
             Send Me a Message
           </h2>
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">
-            Fill out the form below and I&apos;ll get back to you as soon as possible.
+            Fill out the form below and I&apos;ll get back to you as soon as
+            possible.
           </p>
-          
+
           <div className="space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Name <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -104,16 +121,25 @@ export default function ContactForm() {
                     value={formState.name}
                     onChange={handleChange}
                     className={`w-full px-4 py-3 bg-gray-50/50 dark:bg-[#0F0F10] border ${
-                      formErrors.name ? "border-red-300 dark:border-red-700" : "border-gray-200 dark:border-gray-700"
+                      formErrors.name
+                        ? "border-red-300 dark:border-red-700"
+                        : "border-gray-200 dark:border-gray-700"
                     } rounded-lg focus:ring-2 focus:ring-[#3b82f6]/50 dark:focus:ring-[#60a5fa]/50 focus:border-[#3b82f6] dark:focus:border-[#60a5fa] transition-all duration-200 text-gray-900 dark:text-white`}
                     placeholder="Your name"
                   />
-                  {formErrors.name && <p className="mt-1 text-sm text-red-500 dark:text-red-400">{formErrors.name}</p>}
+                  {formErrors.name && (
+                    <p className="mt-1 text-sm text-red-500 dark:text-red-400">
+                      {formErrors.name}
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Email <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -124,17 +150,26 @@ export default function ContactForm() {
                     value={formState.email}
                     onChange={handleChange}
                     className={`w-full px-4 py-3 bg-gray-50/50 dark:bg-[#0F0F10] border ${
-                      formErrors.email ? "border-red-300 dark:border-red-700" : "border-gray-200 dark:border-gray-700"
+                      formErrors.email
+                        ? "border-red-300 dark:border-red-700"
+                        : "border-gray-200 dark:border-gray-700"
                     } rounded-lg focus:ring-2 focus:ring-[#3b82f6]/50 dark:focus:ring-[#60a5fa]/50 focus:border-[#3b82f6] dark:focus:border-[#60a5fa] transition-all duration-200 text-gray-900 dark:text-white`}
                     placeholder="your.email@example.com"
                   />
-                  {formErrors.email && <p className="mt-1 text-sm text-red-500 dark:text-red-400">{formErrors.email}</p>}
+                  {formErrors.email && (
+                    <p className="mt-1 text-sm text-red-500 dark:text-red-400">
+                      {formErrors.email}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Phone Number
               </label>
               <div className="relative">
@@ -149,17 +184,26 @@ export default function ContactForm() {
                     value={formState.phone}
                     onChange={handleChange}
                     className={`w-full px-4 py-3 bg-gray-50/50 dark:bg-[#0F0F10] border ${
-                      formErrors.phone ? "border-red-300 dark:border-red-700" : "border-gray-200 dark:border-gray-700"
+                      formErrors.phone
+                        ? "border-red-300 dark:border-red-700"
+                        : "border-gray-200 dark:border-gray-700"
                     } rounded-r-lg focus:ring-2 focus:ring-[#3b82f6]/50 dark:focus:ring-[#60a5fa]/50 focus:border-[#3b82f6] dark:focus:border-[#60a5fa] transition-all duration-200 text-gray-900 dark:text-white`}
                     placeholder="+91 987-654-4321"
                   />
                 </div>
-                {formErrors.phone && <p className="mt-1 text-sm text-red-500 dark:text-red-400">{formErrors.phone}</p>}
+                {formErrors.phone && (
+                  <p className="mt-1 text-sm text-red-500 dark:text-red-400">
+                    {formErrors.phone}
+                  </p>
+                )}
               </div>
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Message <span className="text-red-500">*</span>
               </label>
               <div className="relative">
@@ -170,17 +214,31 @@ export default function ContactForm() {
                   onChange={handleChange}
                   rows={6}
                   className={`w-full px-4 py-3 bg-gray-50/50 dark:bg-[#0F0F10] border ${
-                    formErrors.message ? "border-red-300 dark:border-red-700" : "border-gray-200 dark:border-gray-700"
+                    formErrors.message
+                      ? "border-red-300 dark:border-red-700"
+                      : "border-gray-200 dark:border-gray-700"
                   } rounded-lg focus:ring-2 focus:ring-[#3b82f6]/50 dark:focus:ring-[#60a5fa]/50 focus:border-[#3b82f6] dark:focus:border-[#60a5fa] transition-all duration-200 resize-none text-gray-900 dark:text-white`}
                   placeholder="Your message here..."
                 />
                 {formErrors.message && (
-                  <p className="mt-1 text-sm text-red-500 dark:text-red-400">{formErrors.message}</p>
+                  <p className="mt-1 text-sm text-red-500 dark:text-red-400">
+                    {formErrors.message}
+                  </p>
                 )}
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 flex gap-4">
+            <motion.button
+              type="button"
+              onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
+              className="w-full py-3 px-6 flex items-center justify-center gap-2 bg-gray-50/50 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70 border border-gray-200 dark:border-gray-700"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span role="img" aria-label="sparkles">✨</span>
+              <span>Surprise me</span>
+            </motion.button>
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
@@ -224,5 +282,5 @@ export default function ContactForm() {
         </motion.form>
       )}
     </div>
-  )
+  );
 }

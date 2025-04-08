@@ -109,13 +109,13 @@ export default function CodingProfiles() {
       const response = await fetch("https://alfa-leetcode-api.onrender.com/userContestRankingInfo/kshkansal")
       
       if (!response.ok) {
-        console.error("Error fetching rating: API returned status", response.status)
+        // console.error("Error fetching rating: API returned status", response.status)
         return 0
       }
       const data = await response.json()
       return data?.data?.userContestRanking?.rating || 0
     } catch (error) {
-      console.error("Error fetching rating:", error)
+      // console.error("Error fetching rating:", error)
       return 0
     }
   }
@@ -147,7 +147,7 @@ export default function CodingProfiles() {
         setLoading((prev) => ({ ...prev, cf: false }))
       })
       .catch((error) => {
-        console.error("Error:", error)
+        // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, cf: false }))
       })
   }
@@ -162,7 +162,7 @@ export default function CodingProfiles() {
         setLoading((prev) => ({ ...prev, cc: false }))
       })
       .catch((error) => {
-        console.error("Error:", error)
+        // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, cc: false }))
       })
   }
@@ -177,7 +177,7 @@ export default function CodingProfiles() {
         setLoading((prev) => ({ ...prev, lc: false }))
       })
       .catch((error) => {
-        console.error("Error:", error)
+        // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, lc: false }))
       })
   }
@@ -192,7 +192,7 @@ export default function CodingProfiles() {
         setLoading((prev) => ({ ...prev, gfg: false }))
       })
       .catch((error) => {
-        console.error("Error:", error)
+        // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, gfg: false }))
       })
   }
@@ -204,7 +204,7 @@ export default function CodingProfiles() {
       icon: <TrendingUp className="w-5 h-5" />,
       color: "text-red-500",
       bgColor: "bg-red-500",
-      lightBgColor: "bg-red-100 dark:bg-red-900/30",
+      lightBgColor: "bg-red-300 dark:bg-red-900/30",
       logo: "https://codeforces.org/s/0/favicon-96x96.png",
       url: "https://codeforces.com/profile/mrkushkansal",
     },
@@ -214,7 +214,7 @@ export default function CodingProfiles() {
       icon: <Award className="w-5 h-5" />,
       color: "text-yellow-600",
       bgColor: "bg-yellow-600",
-      lightBgColor: "bg-yellow-100 dark:bg-yellow-900/30",
+      lightBgColor: "bg-amber-300 dark:bg-amber-900/30",
       logo: "https://img.icons8.com/fluent-systems-filled/200/4D4D4D/codechef.png",
       url: "https://www.codechef.com/users/knsl",
     },
@@ -224,7 +224,7 @@ export default function CodingProfiles() {
       icon: <Code className="w-5 h-5" />,
       color: "text-orange-500",
       bgColor: "bg-orange-500",
-      lightBgColor: "bg-orange-100 dark:bg-orange-900/30",
+      lightBgColor: "bg-[#F89F1B]/70 dark:bg-orange-900/30",
       logo: "https://leetcode.com/static/images/LeetCode_logo_rvs.png",
       url: "https://leetcode.com/kshkansal/",
     },
@@ -234,7 +234,7 @@ export default function CodingProfiles() {
       icon: <BarChart className="w-5 h-5" />,
       color: "text-green-600",
       bgColor: "bg-green-600",
-      lightBgColor: "bg-green-100 dark:bg-green-900/30",
+      lightBgColor: "bg-green-300 dark:bg-green-900/30",
       logo: "https://media.geeksforgeeks.org/gfg-gg-logo.svg",
       url: "https://auth.geeksforgeeks.org/user/kushkansal",
     },
@@ -349,15 +349,6 @@ export default function CodingProfiles() {
                 <ExternalLink className="w-2.5 h-2.5" />
                 View Full History
               </button>
-              <Link
-                href={safeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 flex items-center justify-center gap-1"
-              >
-                <ExternalLink className="w-2.5 h-2.5" />
-                Visit Profile
-              </Link>
             </div>
           </div>
         ) : null
@@ -383,7 +374,7 @@ export default function CodingProfiles() {
               <div className="flex">
                 {[...Array(Number.parseInt(ccData.stars?.toString() || "0"))].map((_, i) => (
                   <span key={i} className="text-yellow-500 text-xs">
-                    ★
+                    ⭐
                   </span>
                 ))}
               </div>
@@ -412,15 +403,6 @@ export default function CodingProfiles() {
                 <ExternalLink className="w-2.5 h-2.5" />
                 View Full Data
               </button>
-              <Link
-                href={safeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] text-yellow-600 hover:text-yellow-700 dark:text-yellow-500 dark:hover:text-yellow-400 flex items-center justify-center gap-1"
-              >
-                <ExternalLink className="w-2.5 h-2.5" />
-                Visit Profile
-              </Link>
             </div>
           </div>
         )
@@ -475,15 +457,6 @@ export default function CodingProfiles() {
                 <ExternalLink className="w-2.5 h-2.5" />
                 View Full Data
               </button>
-              <Link
-                href={safeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 flex items-center justify-center gap-1"
-              >
-                <ExternalLink className="w-2.5 h-2.5" />
-                Visit Profile
-              </Link>
             </div>
           </div>
         )
@@ -521,15 +494,6 @@ export default function CodingProfiles() {
                 <ExternalLink className="w-2.5 h-2.5" />
                 View Full Data
               </button>
-              <Link
-                href={safeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] text-green-600 hover:text-green-700 dark:text-green-500 dark:hover:text-green-400 flex items-center justify-center gap-1"
-              >
-                <ExternalLink className="w-2.5 h-2.5" />
-                Visit Profile
-              </Link>
             </div>
           </div>
         )

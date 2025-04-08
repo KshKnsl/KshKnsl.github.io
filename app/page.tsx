@@ -165,7 +165,22 @@ export default function Home() {
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
+    const API_URL = "https://ntyx.onrender.com/";
 
+    const fetchBackendData = async () => {
+      try {
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Backend data loaded:", data);
+      } catch (error) {
+      console.error("Error fetching backend data:", error);
+      }
+    };
+
+    fetchBackendData();
     type SectionRef = React.RefObject<HTMLElement>;
 
     const createObserver = (ref: SectionRef, id: string) => {
