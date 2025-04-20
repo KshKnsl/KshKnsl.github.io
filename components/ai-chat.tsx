@@ -135,7 +135,7 @@ export default function AiChat() {
                         },
                         blockquote: (props) => <blockquote className="border-l-4 border-gray-500 pl-4 italic my-2 text-sm" {...props} />,
                         img: (props) => <Image
-                          src={props.src || "/path/to/your/image.png"}
+                          src={typeof props.src === "string" ? props.src : "/path/to/your/image.png"}
                           alt={props.alt || "AI Assistant"}
                           width={40}
                           height={40}
@@ -197,4 +197,4 @@ export default function AiChat() {
       </div>
     </motion.div>
   );
-} 
+}

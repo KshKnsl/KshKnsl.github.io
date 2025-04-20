@@ -252,7 +252,7 @@ const safeUrl = platform.url || '#'
       >
         <div className={`border-b border-gray-200 dark:border-gray-800 ${platform.lightBgColor} p-3`}>
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0A0A0A] p-1 flex items-center justify-center shadow-sm">
+            <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0A0A0A] p-1 flex items-center justify-center shadow-xs">
               <Image
                 src={platform.logo || "/placeholder.svg"}
                 alt={platform.name}
@@ -514,7 +514,7 @@ const safeUrl = platform.url || '#'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4"
             onClick={() => setShowFullData(null)}
           >
             <motion.div

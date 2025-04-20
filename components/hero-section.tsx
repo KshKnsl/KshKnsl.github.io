@@ -123,7 +123,7 @@ export default function HeroSection() {
               className="text-3xl sm:text-4xl md:text-6xl font-bold dark:text-white text-[#323232]"
             >
               Hi, I&apos;m{" "}
-              <span className="bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-transparent bg-clip-text">
+              <span className="bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-transparent bg-clip-text">
                 Kush Kansal
               </span>
             </motion.h1>
@@ -157,7 +157,7 @@ export default function HeroSection() {
               <Link
                 href="#contact"
                 onClick={(e) => handleNavClick(e, "#contact")}
-                className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-[#0d47a1] to-[#3b82f6] text-white font-medium transition-all hover:shadow-lg hover:shadow-blue-500/25"
+                className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-linear-to-r from-[#0d47a1] to-[#3b82f6] text-white font-medium transition-all hover:shadow-lg hover:shadow-blue-500/25"
               >
                 Get in touch
               </Link>
@@ -191,11 +191,11 @@ export default function HeroSection() {
           >
             <div className="absolute inset-0 rounded-3xl border-4 border-dashed border-blue-300/20 -m-2"></div>
 
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0d47a1]/20 to-[#3b82f6]/20 rounded-3xl blur-3xl" />
+            <div className="absolute inset-0 bg-linear-to-r from-[#0d47a1]/20 to-[#3b82f6]/20 rounded-3xl blur-3xl" />
             <div className="relative rounded-3xl overflow-hidden border-2 border-blue-900/30 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
               <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay z-10"></div>
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg"
+                src="/assets/MyImage.png"
                 alt="Kush Kansal"
                 width={500}
                 height={500}

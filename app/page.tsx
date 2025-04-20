@@ -278,7 +278,7 @@ export default function Home() {
     if (isLoading) {
       const preloadHero = new window.Image();
       preloadHero.src =
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg";
+        "/assets/MyImage.png";
     }
   }, [isLoading]);
 
@@ -366,13 +366,13 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <div className="relative mb-6">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-2xl opacity-30 blur-sm"></div>
+                <div className="absolute -inset-1 bg-linear-to-r from-[#3b82f6] to-[#60a5fa] rounded-2xl opacity-30 blur-xs"></div>
                 <div
                   className="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)]"
                   style={{ maxHeight: "350px" }}
                 >
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg"
+                    src="/assets/MyImage.png"
                     alt="Kush Kansal"
                     width={500}
                     height={350}
@@ -561,7 +561,7 @@ export default function Home() {
           >
             <Link
               href="/projects"
-              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-00 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
+              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-00 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
             >
               View All Projects
               <ArrowUpRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />

@@ -96,7 +96,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                 })}
               </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#60A5FA80] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#60A5FA80] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </motion.div>
         ))}
       </div>
