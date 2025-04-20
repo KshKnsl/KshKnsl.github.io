@@ -61,31 +61,31 @@ const dummyData: {
 } = {
   cf: [
     {
-      rating: 1270,
-      contestName: "Codeforces Round 100...",
-      rank: 2888,
-      oldRating: 1200,
-      newRating: 1270,
+      rating: 1351,
+      contestName: "Codeforces Round 1011",
+      rank: 2756,
+      oldRating: 1270,
+      newRating: 1351,
       timestamp: 0,
       handle: "mrkushkansal",
     },
   ],
   cc: {
-    rating: 1679,
+    rating: 1730,
     stars: 3,
-    global_rank: 11897,
-    country_rank: 10186,
+    global_rank: 8896,
+    country_rank: 7360,
   },
   lc: {
-    totalSolved: 918,
-    totalQuestions: 3491,
-    easySolved: 300,
-    mediumSolved: 500,
-    hardSolved: 118,
-    ranking: 25793,
+    totalSolved: 966,
+    totalQuestions: 3525,
+    easySolved: 371,
+    mediumSolved: 507,
+    hardSolved: 88,
+    ranking: 22503,
   },
   gfg: {
-    institution_rank: 300,
+    institution_rank: 359,
     totalProblemsSolved: 256,
   },
 }
@@ -108,13 +108,11 @@ export default function CodingProfiles() {
       const response = await fetch("https://alfa-leetcode-api.onrender.com/userContestRankingInfo/kshkansal")
       
       if (!response.ok) {
-        // console.error("Error fetching rating: API returned status", response.status)
         return 0
       }
       const data = await response.json()
       return data?.data?.userContestRanking?.rating || 0
     } catch {
-      // console.error("Error fetching rating:", error)
       return 0
     }
   }
@@ -278,7 +276,6 @@ const safeUrl = platform.url || '#'
     )
   }
 
-  // Update the renderPlatformData function to include CountUp animations and proper links
   const renderPlatformData = (platformId: string, data: PlatformData | ContestData[] | null, platformUrl: string) => {
     if (!data) {
       return (
@@ -394,9 +391,7 @@ const safeUrl = platform.url || '#'
             <div className="flex justify-between mt-1.5">
               <button
                 onClick={() => {
-                  if (Array.isArray(data)) {
-                    setShowFullData({ platform: "CodeChef", data });
-                  }
+                  setShowFullData({ platform: "CodeChef", data });
                 }}
                 className="text-[10px] text-yellow-600 hover:text-yellow-700 dark:text-yellow-500 dark:hover:text-yellow-400 flex items-center justify-center gap-1"
               >         
@@ -448,9 +443,7 @@ const safeUrl = platform.url || '#'
             <div className="flex justify-between mt-1.5">
               <button
                 onClick={() => {
-                  if (Array.isArray(data)) {
-                    setShowFullData({ platform: "LeetCode", data });
-                  }
+                  setShowFullData({ platform: "LeetCode", data });
                 }}
                 className="text-[10px] text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 flex items-center justify-center gap-1"
               >
@@ -465,7 +458,6 @@ const safeUrl = platform.url || '#'
         const gfgData = data as PlatformData;
         return (
           <div className="space-y-1.5">
-            {/* Campus Ambassador Badge */}
             <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-1.5 mb-2 flex items-center gap-1.5">
               <Star className="w-3 h-3 text-green-600 dark:text-green-400" />
               <span className="text-[10px] font-medium text-green-700 dark:text-green-300">Campus Ambassador</span>
@@ -485,9 +477,7 @@ const safeUrl = platform.url || '#'
             <div className="flex justify-between mt-1.5">
               <button
                 onClick={() => {
-                  if (Array.isArray(data)) {
-                    setShowFullData({ platform: "GeeksForGeeks", data });
-                  }
+                  setShowFullData({ platform: "GeeksForGeeks", data });
                 }}
                 className="text-[10px] text-green-600 hover:text-green-700 dark:text-green-500 dark:hover:text-green-400 flex items-center justify-center gap-1"
               >
@@ -518,7 +508,6 @@ const safeUrl = platform.url || '#'
         ))}
       </div>
 
-      {/* Full Data Modal */}
       <AnimatePresence>
         {showFullData && (
           <motion.div

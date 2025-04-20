@@ -50,7 +50,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Hack Club colors
         hackclub: {
           red: "#ec3750",
           orange: "#ff8c37",

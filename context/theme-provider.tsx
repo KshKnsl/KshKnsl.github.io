@@ -33,7 +33,6 @@ export function ThemeProvider({
   const [mounted, setMounted] = useState(false)
   const [theme, setTheme] = useState<Theme>(defaultTheme)
 
-  // Only run once on mount to get the stored theme
   useEffect(() => {
     const stored = localStorage.getItem(storageKey) as Theme
     if (stored) {

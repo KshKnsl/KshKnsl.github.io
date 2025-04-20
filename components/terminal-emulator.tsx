@@ -269,7 +269,6 @@ Click the link below to download my resume:
   },
 
   date: () => {
-    // Safe for SSR
     if (typeof window === "undefined") {
       return `<span class="text-green-600 dark:text-green-400">Loading date...</span>`;
     }
@@ -371,7 +370,6 @@ Type <span class="text-yellow-600 dark:text-yellow-400">help</span> to see avail
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  // Process command and return output
   const processCommand = (cmd: string) => {
     const parts = cmd.trim().split(" ")
     const command = parts[0].toLowerCase()
@@ -454,8 +452,7 @@ Type <span class="text-yellow-600 dark:text-yellow-400">help</span> to see avail
             />
           ))}
           
-          {/* Terminal Input */}
-          <TerminalInput
+           <TerminalInput
             input={currentCommand}
             setInput={setCurrentCommand}
             handleCommand={handleCommand}

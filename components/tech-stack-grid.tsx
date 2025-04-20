@@ -216,16 +216,16 @@ export default function TechStackGrid() {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
-    
-    // Check on initial load
     checkIfMobile()
-    
-    // Add event listener for window resize
     window.addEventListener('resize', checkIfMobile)
-    
-    // Cleanup
     return () => window.removeEventListener('resize', checkIfMobile)
   }, [])
+
+  useEffect(() => {
+    if (isMobile) {
+      setVisibleCount(activeCategory === null ? 16 : 8)
+    }
+  }, [activeCategory, isMobile])
 
   const techs = activeCategory 
     ? techCategories.find(c => c.name === activeCategory)?.techs || []
@@ -243,7 +243,7 @@ export default function TechStackGrid() {
         <button 
           onClick={() => {
             setActiveCategory(null)
-            setVisibleCount(15)
+            setVisibleCount(isMobile ? 16 : allTechs.length)
           }}
           className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
             activeCategory === null 
@@ -259,7 +259,7 @@ export default function TechStackGrid() {
             key={category.name}
             onClick={() => {
               setActiveCategory(category.name)
-              setVisibleCount(1)
+              setVisibleCount(isMobile ? 8 : category.techs.length)
             }}
             className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
               activeCategory === category.name 

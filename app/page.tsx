@@ -21,7 +21,6 @@ import Image from "next/image";
 import { handleHashLinkClick } from "@/utils/scroll-utils";
 import Link from "next/link";
 
-// Lazy load components that aren't needed immediately
 const ProjectGrid = lazy(() => import("@/components/project-grid"));
 const TechStackGrid = lazy(() => import("@/components/tech-stack-grid"));
 const EducationTimeline = lazy(() => import("@/components/education-timeline"));
@@ -32,7 +31,6 @@ const GitHubProfile = lazy(() => import("@/components/github-profile"));
 const VisitorCounter = lazy(() => import("@/components/visitor-countor"));
 const AiChat = lazy(() => import("@/components/ai-chat"));
 
-// Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -65,7 +63,7 @@ const personalInfo = {
   linkedin: "https://www.linkedin.com/in/kushkansal/",
   instagram: "https://www.instagram.com/kushkansal.exe/",
   twitter: "https://twitter.com/knslji",
-  about: `Hi everyone. My name is Kush Kansal and I am a second-year college student pursuing my B.tech from JIIT. I have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies. Driven by a strong sense of curiosity. Currently, my skills are in HTML, CSS, Object Oriented programming, C, C++, and Java. I am currently learning full-stack web development and DSA. My unwavering determination propels me towards achieving excellence, and I aspire to contribute significantly to society by enhancing people&apos;s lives.`,
+  about: `Hi everyone. My name is Kush Kansal and I am a second-year college student pursuing my B.tech from JIIT. I have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies. Driven by a strong sense of curiosity. Currently, my skills are in HTML, CSS, Object Oriented programming, C, C++, and Java. I am currently learning full-stack web development and DSA. My unwavering determination propels me towards achieving excellence, and I aspire to contribute significantly to society.`,
   projects: [
     {
       title: "GuruGram",
@@ -155,7 +153,6 @@ export default function Home() {
     restDelta: 0.001,
   });
 
-  // Use HTMLDivElement as it's compatible with section elements
   const heroRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -235,24 +232,18 @@ export default function Home() {
     };
   }, []);
 
-  // Skip loading screen if user has already interacted with the site
   useEffect(() => {
-    // Check if user has visited before
     const hasVisited = sessionStorage.getItem("hasVisited");
 
-    // If this is a return visit, skip the loading screen
     if (hasVisited) {
       setIsLoading(false);
     } else {
-      // For first-time visitors, show loading screen but with a maximum time limit
       const maxLoadingTime = setTimeout(() => {
         handleLoadingComplete();
-      }, 3000); // Maximum 3 seconds for loading screen
+      }, 3000);
 
       return () => clearTimeout(maxLoadingTime);
     }
-
-    // Add interaction detection
     const handleInteraction = () => {
       setHasInteracted(true);
     };
@@ -297,20 +288,15 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-black transition-colors duration-300">
-      {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-primary transform origin-left z-50"
         style={{ scaleX }}
       />
 
       <BrowserNavbar activeSection={activeSection} />
-
-      {/* Hero Section */}
       <section ref={heroRef}>
         <HeroSection />
       </section>
-
-      {/* Terminal Section */}
       <section
         ref={terminalRef}
         id="terminal"
@@ -342,7 +328,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
       <section
         ref={aboutRef}
         id="about"
@@ -372,9 +357,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* About Me Content */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
-            {/* Left column - Image and bio */}
             <motion.div
               className="lg:col-span-5 xl:col-span-5"
               initial={{ opacity: 0, x: -30 }}
@@ -439,7 +422,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Right column - Highlights and coding profiles */}
             <motion.div
               className="lg:col-span-7 xl:col-span-7"
               initial={{ opacity: 0, x: 30 }}
@@ -496,7 +478,6 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Tech Stack Section */}
           <div className="mt-12 sm:mt-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -530,7 +511,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section
         ref={projectsRef}
         id="projects"
@@ -590,7 +570,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Education Section */}
       <section
         ref={educationRef}
         id="education"
@@ -630,7 +609,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section
         ref={contactRef}
         id="contact"
@@ -680,7 +658,6 @@ export default function Home() {
                 </Suspense>
               </div>
 
-              {/* AI Chat for large screens */}
               <motion.div
                 variants={fadeInUp}
                 whileHover={{ y: -5 }}
@@ -739,7 +716,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Chat for medium and smaller screens */}
       <section className="py-12 sm:py-20 bg-gray-50 dark:bg-black lg:hidden">
         <div className="container px-4 mx-auto max-w-7xl">
           <motion.div
@@ -796,7 +772,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-gray-50 dark:bg-black/90 border-t border-gray-200 dark:border-gray-800 flex container justify-center items-center sm:flex-row flex-col">
         <div className="container my-6 sm:my-8 px-4 mx-auto">
           <motion.div

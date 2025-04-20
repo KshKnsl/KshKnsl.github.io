@@ -115,7 +115,6 @@ export default function HeroSection() {
 
       <div className="container relative z-10 px-4 mx-auto max-w-7xl h-screen">
         <div className="grid h-full gap-8 md:gap-12 md:grid-cols-2 items-center pt-20">
-          {/* Left column */}
           <div className="text-center md:text-left space-y-6">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -184,7 +183,6 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right column - Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

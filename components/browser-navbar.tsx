@@ -136,7 +136,6 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
                         behavior: "smooth",
                       });
                     } else {
-                      // Otherwise scroll to the section
                       const targetId = tab.href.replace("#", "");
                       scrollToElement(targetId);
                     }
@@ -208,7 +207,6 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
                               behavior: "smooth",
                             });
                           } else {
-                            // Otherwise scroll to the section
                             const targetId = tab.href.replace("#", "");
                             scrollToElement(targetId);
                           }
@@ -243,7 +241,6 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
         )}
       </AnimatePresence>
 
-      {/* Tooltip */}
       <AnimatePresence>
         {showTooltip && (
           <motion.div
