@@ -1,5 +1,5 @@
 const mock = [
-  "I'm sorry, Dave. I'm afraid I can't do that.",
+  "I'm sorry, Bro. I'm afraid I can't do that.",
   "Did you seriously expect this button to do something?",
   "Come on, stop trying... This is a fake UI and you know it.",
   "It's not like I can stop you from moving your mouse, but you're wasting your time here.",
@@ -17,11 +17,6 @@ const mock = [
 export const getRandomMessage = () => {
   return mock[Math.floor(Math.random() * mock.length)]
 }
-
-/**
- * Returns a greeting message that makes sense for the time of day.
- * @returns A greeting message that makes sense for the time of day.
- */
 export function greeting(): string {
   const date = new Date()
   const hours = date.getHours()
@@ -42,6 +37,3 @@ export function greeting(): string {
 }
 
 export default mock
-
-//complete all incomplete section including theme toggler of terminal, addings more commands, and allow all basic git, powershell, terminal bash commands
-

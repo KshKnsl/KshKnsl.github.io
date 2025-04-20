@@ -216,16 +216,16 @@ export default function TechStackGrid() {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
-    
-    // Check on initial load
     checkIfMobile()
-    
-    // Add event listener for window resize
     window.addEventListener('resize', checkIfMobile)
-    
-    // Cleanup
     return () => window.removeEventListener('resize', checkIfMobile)
   }, [])
+
+  useEffect(() => {
+    if (isMobile) {
+      setVisibleCount(activeCategory === null ? 16 : 8)
+    }
+  }, [activeCategory, isMobile])
 
   const techs = activeCategory 
     ? techCategories.find(c => c.name === activeCategory)?.techs || []
@@ -243,11 +243,11 @@ export default function TechStackGrid() {
         <button 
           onClick={() => {
             setActiveCategory(null)
-            setVisibleCount(15)
+            setVisibleCount(isMobile ? 16 : allTechs.length)
           }}
           className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
             activeCategory === null 
-              ? 'bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md' 
+              ? 'bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md' 
               : 'bg-gray-100 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
@@ -259,11 +259,11 @@ export default function TechStackGrid() {
             key={category.name}
             onClick={() => {
               setActiveCategory(category.name)
-              setVisibleCount(1)
+              setVisibleCount(isMobile ? 8 : category.techs.length)
             }}
             className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
               activeCategory === category.name 
-                ? 'bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md' 
+                ? 'bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md' 
                 : 'bg-gray-100 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
@@ -334,7 +334,7 @@ export default function TechStackGrid() {
         <div className="flex justify-center mt-4">
           <button
             onClick={handleShowMore}
-            className="px-4 py-2 bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-600 transition-colors"
+            className="px-4 py-2 bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-600 transition-colors"
           >
             Show More
           </button>

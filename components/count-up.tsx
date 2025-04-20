@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 interface CountUpProps {
-  end: number | string; // Allow `end` to be a number or string
+  end: number | string;
   duration?: number;
   prefix?: string;
   suffix?: string;
@@ -17,10 +17,9 @@ export default function CountUp({
   suffix = "", 
   decimals = 0 
 }: CountUpProps) {
-  const [count, setCount] = useState<number | string>(0); // Handle both numbers and strings
+  const [count, setCount] = useState<number | string>(0); 
 
   useEffect(() => {
-    // If `end` is a string, return it as-is
     if (typeof end === "string") {
       setCount(end);
       return;
@@ -34,10 +33,8 @@ export default function CountUp({
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
 
-      // Calculate current count with decimal precision if needed
       const currentCount = progress * (endCount - startCount) + startCount;
 
-      // Set the count with appropriate decimal places
       setCount(decimals > 0 ? Number(currentCount.toFixed(decimals)) : Math.floor(currentCount));
 
       if (progress < 1) {

@@ -11,7 +11,7 @@ import {
   Award,
   Cpu,
   BookOpen,
-  Lightbulb,
+  Lightbulb
 } from "lucide-react";
 import BrowserNavbar from "@/components/browser-navbar";
 import TerminalEmulator from "@/components/terminal-emulator";
@@ -21,7 +21,6 @@ import Image from "next/image";
 import { handleHashLinkClick } from "@/utils/scroll-utils";
 import Link from "next/link";
 
-// Lazy load components that aren't needed immediately
 const ProjectGrid = lazy(() => import("@/components/project-grid"));
 const TechStackGrid = lazy(() => import("@/components/tech-stack-grid"));
 const EducationTimeline = lazy(() => import("@/components/education-timeline"));
@@ -30,16 +29,14 @@ const ContactIcons = lazy(() => import("@/components/contact-icons"));
 const CodingProfiles = lazy(() => import("@/components/coding-profiles"));
 const GitHubProfile = lazy(() => import("@/components/github-profile"));
 const VisitorCounter = lazy(() => import("@/components/visitor-countor"));
-const AiChat = lazy(() => import("@/components/ai-chat"));
+// const AiChat = lazy(() => import("@/components/ai-chat"));
 
-// Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring",
       damping: 25,
       stiffness: 100,
     },
@@ -59,14 +56,30 @@ const staggerContainer = {
 const personalInfo = {
   name: "Kush Kansal",
   title:
-    "CSE @JIIT&apos; 27 || Java || JavaScript || Web Developer || 900+ LeetCode || 3 ⭐ CodeChef",
+    "Full-Stack Developer | CSE @ JIIT&apos; 27  MERN | Knight @ LeetCode (1865) | 4⭐ @ CodeChef (1769) | Specialist @ Codeforces",
   email: "kushkansal0@gmail.com",
   github: "https://github.com/KshKnsl/",
   linkedin: "https://www.linkedin.com/in/kushkansal/",
   instagram: "https://www.instagram.com/kushkansal.exe/",
   twitter: "https://twitter.com/knslji",
-  about: `Hi everyone. My name is Kush Kansal and I am a second-year college student pursuing my B.tech from JIIT. I have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies. Driven by a strong sense of curiosity. Currently, my skills are in HTML, CSS, Object Oriented programming, C, C++, and Java. I am currently learning full-stack web development and DSA. My unwavering determination propels me towards achieving excellence, and I aspire to contribute significantly to society by enhancing people&apos;s lives.`,
+  about: `Hi, I am Kush Kansal — a pre-final year B.Tech student at JIIT, passionate about building tech that solves real problems. I'm a full-stack developer specializing in the MERN stack (MongoDB, Express, React, Node.js) with strong foundations in Java, C++, and Data Structures & Algorithms. Curious by nature and driven by impact, I love exploring the potential of emerging technologies, crafting solutions to complex challenges. I enjoy turning ideas into scalable, clean, maintainable code. Currently deepening my expertise in advanced full-stack development patterns and advanced DSA concepts, with a goal to grow, build, and make a meaningful difference through technology.`,
   projects: [
+    {
+      title: "CircuitAI",
+      liveLink: "https://circuitai.vercel.app",
+      codeLink: "https://github.com/KshKnsl/CircuitAI",
+      description:
+        "This project is an AI-powered circuit creator for circuit simulation and visualization. Now designing using natural language prompts or guided design flows.",
+      technologies: ["Next.js", "React", "TypeScript", "TailwindCSS", "DigitalJS"],
+      // youtubeLink: "https://www.youtube.com/watch?v=example1"
+    },
+    {
+      title: "MindEase",
+      liveLink: "https://mindeases.vercel.app",
+      codeLink: "https://github.com/KshKnsl/MindEase",
+      description: "MindEase is an AI-powered mental wellness platform that helps users manage their emotional wellbeing, schedule tasks, and get personalized support.",
+      technologies: ["React", "TypeScript", "Generative AI", "LangChain", "MongoDB", "Express"],
+    },
     {
       title: "GuruGram",
       liveLink: "https://gurugramm.vercel.app",
@@ -74,6 +87,14 @@ const personalInfo = {
       description:
         "A mentorship platform that connects students with industry professionals to bridge the gap between academics and real-world skills. With features like skill-based matching, video communication, and progress tracking.",
       technologies: ["React", "Node.js", "Express", "MongoDB"],
+    },
+    {
+      title: "ReadMates",
+      liveLink: "https://readmates.vercel.app/",
+      codeLink: "https://github.com/KshKnsl/ReadMates",
+      description:
+        "A collaborative hub for tech enthusiasts, writers, and readers with real-time co-editing experience.",
+      technologies: ["TypeScript", "React", "MERN"],
     },
     {
       title: "Cubix",
@@ -84,43 +105,19 @@ const personalInfo = {
       technologies: ["React", "C++"],
     },
     {
-      title: "URL Shortener",
+      title: "Maksad.crx - Chrome Extension",
+      liveLink: "https://github.com/KshKnsl/Maksad.crx",
+      codeLink: "https://github.com/KshKnsl/Maksad.crx",
       description:
-        "A free tool to shorten URLs and generate QR codes & links making it easy to share.",
-      liveLink: "https://tinyu.vercel.app/",
-      codeLink: "https://github.com/KshKnsl/URL-Shorten",
-      technologies: ["NodeJS", "EJS"],
-    },
-    {
-      title: "Portfolio Site",
-      description:
-        "My personal portfolio website showcasing my projects and skills with an interactive terminal.",
-      liveLink: "#",
-      codeLink: "https://github.com/KshKnsl/Portfolio",
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    },
-    {
-      title: "ReadMates",
-      description:
-        "A collaborative hub for tech enthusiasts, writers, and readers with real-time co-editing experience.",
-      liveLink: "https://readmates.vercel.app/",
-      codeLink: "https://github.com/KshKnsl/ReadMates",
-      technologies: ["TypeScript", "React", "MERN"],
-    },
-    {
-      title: "Chintan Trivia",
-      description:
-        "A web-based quiz app for creating and participating in AI-driven quizzes, enhancing classroom interactions.",
-      liveLink: "http://chintan.42web.io/",
-      codeLink: "https://github.com/KshKnsl/ChintanTrivia",
-      technologies: ["PHP", "Tailwind CSS", "JavaScript", "MySQL"],
+        "This Chrome extension helps users stay focused by blocking distracting content like YouTube Shorts and enabling voice commands (e.g., 'Close tab').",
+      technologies: ["JavaScript", "Chrome Extension"],
     },
   ],
   highlights: [
     {
       title: "Problem Solver",
       description:
-        "1200+ problems solved on various platforms with strong algorithmic skills",
+        "1500+ problems solved on various platforms with strong algorithmic skills",
       icon: <Cpu className="w-6 h-6 text-blue-500" />,
     },
     {
@@ -155,7 +152,6 @@ export default function Home() {
     restDelta: 0.001,
   });
 
-  // Use HTMLDivElement as it's compatible with section elements
   const heroRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -173,22 +169,6 @@ export default function Home() {
     );
     document.head.appendChild(script);
     const observers: IntersectionObserver[] = [];
-    const API_URL = "https://ntyx.onrender.com/";
-
-    const fetchBackendData = async () => {
-      try {
-      const response = await fetch(API_URL);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log("Backend data loaded:", data);
-      } catch (_) {
-      console.error("Error fetching backend data:", _);
-      }
-    };
-
-    fetchBackendData();
     type SectionRef = React.RefObject<HTMLElement>;
 
     const createObserver = (ref: SectionRef, id: string) => {
@@ -235,24 +215,18 @@ export default function Home() {
     };
   }, []);
 
-  // Skip loading screen if user has already interacted with the site
   useEffect(() => {
-    // Check if user has visited before
     const hasVisited = sessionStorage.getItem("hasVisited");
 
-    // If this is a return visit, skip the loading screen
     if (hasVisited) {
       setIsLoading(false);
     } else {
-      // For first-time visitors, show loading screen but with a maximum time limit
       const maxLoadingTime = setTimeout(() => {
         handleLoadingComplete();
-      }, 3000); // Maximum 3 seconds for loading screen
+      }, 3000);
 
       return () => clearTimeout(maxLoadingTime);
     }
-
-    // Add interaction detection
     const handleInteraction = () => {
       setHasInteracted(true);
     };
@@ -287,7 +261,7 @@ export default function Home() {
     if (isLoading) {
       const preloadHero = new window.Image();
       preloadHero.src =
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg";
+        "/assets/MyImage.png";
     }
   }, [isLoading]);
 
@@ -297,20 +271,15 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-black transition-colors duration-300">
-      {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-primary transform origin-left z-50"
         style={{ scaleX }}
       />
 
       <BrowserNavbar activeSection={activeSection} />
-
-      {/* Hero Section */}
       <section ref={heroRef}>
         <HeroSection />
       </section>
-
-      {/* Terminal Section */}
       <section
         ref={terminalRef}
         id="terminal"
@@ -342,7 +311,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
       <section
         ref={aboutRef}
         id="about"
@@ -372,9 +340,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* About Me Content */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
-            {/* Left column - Image and bio */}
             <motion.div
               className="lg:col-span-5 xl:col-span-5"
               initial={{ opacity: 0, x: -30 }}
@@ -383,13 +349,13 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <div className="relative mb-6">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-2xl opacity-30 blur-sm"></div>
+                <div className="absolute -inset-1 bg-linear-to-r from-[#3b82f6] to-[#60a5fa] rounded-2xl opacity-30 blur-xs"></div>
                 <div
                   className="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)]"
                   style={{ maxHeight: "350px" }}
                 >
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg"
+                    src="/assets/MyImage.png"
                     alt="Kush Kansal"
                     width={500}
                     height={350}
@@ -439,7 +405,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Right column - Highlights and coding profiles */}
             <motion.div
               className="lg:col-span-7 xl:col-span-7"
               initial={{ opacity: 0, x: 30 }}
@@ -496,7 +461,6 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Tech Stack Section */}
           <div className="mt-12 sm:mt-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -530,7 +494,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section
         ref={projectsRef}
         id="projects"
@@ -581,7 +544,7 @@ export default function Home() {
           >
             <Link
               href="/projects"
-              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-00 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
+              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-00 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
             >
               View All Projects
               <ArrowUpRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
@@ -590,7 +553,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Education Section */}
       <section
         ref={educationRef}
         id="education"
@@ -630,7 +592,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section
         ref={contactRef}
         id="contact"
@@ -665,13 +626,13 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
-            className="grid gap-8 md:gap-12 md:grid-cols-2 lg:grid-cols-2"
+            className="grid gap-8 md:gap-12 md:grid-cols-2" // Adjusted grid columns
           >
-            <motion.div variants={fadeInUp} className="lg:col-span-1">
-              <div className="space-y-6 sm:space-y-8 mb-3flex gap-2">
+            <motion.div variants={fadeInUp} className="md:col-span-1"> {/* Was lg:col-span-1 */}
+              <div className="space-y-6 sm:space-y-8 mb-3 flex flex-col gap-2"> {/* Fixed typo mb-3flex and ensured flex direction */}
                 <Suspense
                   fallback={
-                    <div className="min-h-[200px] flex items-center justify-center">
+                    <div className="min-h-[100px] flex items-center justify-center"> {/* Adjusted min-height */}
                       Loading...
                     </div>
                   }
@@ -679,51 +640,12 @@ export default function Home() {
                   <ContactIcons />
                 </Suspense>
               </div>
-
-              {/* AI Chat for large screens */}
-              <motion.div
-                variants={fadeInUp}
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="hidden lg:block mt-8"
-              >
-                <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 mr-2 text-[#3b82f6] dark:text-[#60a5fa]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                    />
-                  </svg>
-                  Chat with my AI twin
-                </h2>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4">
-                  Have a quick question? Chat with my AI twin and get instant
-                  responses
-                </p>
-                <Suspense
-                  fallback={
-                    <div className="min-h-[200px] flex items-center justify-center">
-                      Loading...
-                    </div>
-                  }
-                >
-                  <AiChat />
-                </Suspense>
-              </motion.div>
             </motion.div>
             <motion.div
               variants={fadeInUp}
               whileHover={{ y: -5 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="lg:col-span-1"
+              className="md:col-span-1" // Was lg:col-span-1
             >
               <Suspense
                 fallback={
@@ -739,8 +661,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Chat for medium and smaller screens */}
-      <section className="py-12 sm:py-20 bg-gray-50 dark:bg-black lg:hidden">
+      {/* New AI Chat Section 
+      <section
+        id="ai-chat-section"
+        className="py-12 sm:py-20 bg-gray-50 dark:bg-black/90 border-t border-gray-200 dark:border-gray-800"
+      >
         <div className="container px-4 mx-auto max-w-7xl">
           <motion.div
             initial="hidden"
@@ -754,49 +679,36 @@ export default function Home() {
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
               className="inline-block"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 text-[#3b82f6] dark:text-[#60a5fa]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                />
-              </svg>
+              <Bot className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 text-[#3b82f6] dark:text-[#60a5fa]" />
             </motion.div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">
-              Chat with my AI twin
+              Chat with My AI Twin
             </h2>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Have a quick question? Get instant responses from my AI assistant
+              Have a quick question? Get instant responses from my AI assistant.
             </p>
           </motion.div>
-
+ 
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
+            className="max-w-3xl mx-auto" // Center the chat component
           >
             <Suspense
               fallback={
-                <div className="min-h-[200px] flex items-center justify-center">
-                  Loading...
+                <div className="min-h-[450px] flex items-center justify-center">
+                  Loading AI Chat...
                 </div>
               }
             >
               <AiChat />
             </Suspense>
-          </motion.div>
+          </motion.div> 
         </div>
-      </section>
+      </section> */}
 
-      {/* Footer */}
       <footer className="bg-gray-50 dark:bg-black/90 border-t border-gray-200 dark:border-gray-800 flex container justify-center items-center sm:flex-row flex-col">
         <div className="container my-6 sm:my-8 px-4 mx-auto">
           <motion.div

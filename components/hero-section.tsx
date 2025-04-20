@@ -7,12 +7,15 @@ import { Terminal, Download } from "lucide-react"
 import Link from "next/link"
 
 const roleTitles = [
-  { text: "Student @JIIT-27' 🎓", color: "#0A6AD6" },
-  { text: "Back End Developer 🌱", color: "#FFAF45" },
-  { text: "Front End Developer 🌱", color: "#A34343" },
-  { text: "900+ LeetCode 💻", color: "#2C2C2C" },
-  { text: "3⭐ CodeChef", color: "#FF204E" },
+  { text: "Student @JIIT-27 🎓", color: "#0A6AD6" },
+  { text: "Back End Developer 🔧", color: "#FFAF45" },
+  { text: "Front End Developer 🎨", color: "#A34343" },
+  { text: "DSA Lover 📊", color: "#2C2C2C" },
+  { text: "Half a Decade of Coding ⏳", color: "#FF204E" },
   { text: "Exploring Tech 🚀", color: "#19A95B" },
+  { text: "Open Source Contributor 🌐", color: "#FFAF45" },
+  { text: "Competitive Programmer 🏆", color: "#FF204E" },
+  { text: "React & TypeScript Dev ⚛️", color: "#2C2C2C" },
 ]
 
 export default function HeroSection() {
@@ -115,7 +118,6 @@ export default function HeroSection() {
 
       <div className="container relative z-10 px-4 mx-auto max-w-7xl h-screen">
         <div className="grid h-full gap-8 md:gap-12 md:grid-cols-2 items-center pt-20">
-          {/* Left column */}
           <div className="text-center md:text-left space-y-6">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -124,7 +126,7 @@ export default function HeroSection() {
               className="text-3xl sm:text-4xl md:text-6xl font-bold dark:text-white text-[#323232]"
             >
               Hi, I&apos;m{" "}
-              <span className="bg-gradient-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-transparent bg-clip-text">
+              <span className="bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-transparent bg-clip-text">
                 Kush Kansal
               </span>
             </motion.h1>
@@ -146,7 +148,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-base sm:text-lg md:text-xl dark:text-gray-400"
             >
-              CSE @JIIT&apos; 27 || Java || JavaScript || Full Stack Developer || 900+ LeetCode || 3 ⭐ CodeChef
+             Full-Stack Developer | CSE @ JIIT&apos; 27  MERN | Knight @ LeetCode (solved 1000+) | 3⭐ @ CodeChef | Specialist @ Codeforces
             </motion.p>
 
             <motion.div
@@ -158,7 +160,7 @@ export default function HeroSection() {
               <Link
                 href="#contact"
                 onClick={(e) => handleNavClick(e, "#contact")}
-                className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-[#0d47a1] to-[#3b82f6] text-white font-medium transition-all hover:shadow-lg hover:shadow-blue-500/25"
+                className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-linear-to-r from-[#0d47a1] to-[#3b82f6] text-white font-medium transition-all hover:shadow-lg hover:shadow-blue-500/25"
               >
                 Get in touch
               </Link>
@@ -184,7 +186,6 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right column - Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -193,17 +194,19 @@ export default function HeroSection() {
           >
             <div className="absolute inset-0 rounded-3xl border-4 border-dashed border-blue-300/20 -m-2"></div>
 
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0d47a1]/20 to-[#3b82f6]/20 rounded-3xl blur-3xl" />
+            <div className="absolute inset-0 bg-linear-to-r from-[#0d47a1]/20 to-[#3b82f6]/20 rounded-3xl blur-3xl" />
             <div className="relative rounded-3xl overflow-hidden border-2 border-blue-900/30 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
               <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay z-10"></div>
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MyImage.jpg-8UPBc9HASn3izHAC3JKWZcDnUPjvJ2.jpeg"
+                src="/assets/MyImage.png"
                 alt="Kush Kansal"
                 width={500}
                 height={500}
                 className="object-cover w-full h-full"
                 style={{ width: '100%', height: 'auto' }}
-                priority
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />
             </div>
           </motion.div>
@@ -212,4 +215,3 @@ export default function HeroSection() {
     </section>
   )
 }
-

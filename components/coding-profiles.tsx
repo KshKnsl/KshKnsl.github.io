@@ -61,32 +61,32 @@ const dummyData: {
 } = {
   cf: [
     {
-      rating: 1270,
-      contestName: "Codeforces Round 100...",
-      rank: 2888,
-      oldRating: 1200,
-      newRating: 1270,
+      rating: 1446,
+      contestName: "Codeforces Round 1022 (Div. 2)",
+      rank: 4435,
+      oldRating: 1400,
+      newRating: 1446,
       timestamp: 0,
       handle: "mrkushkansal",
     },
   ],
   cc: {
-    rating: 1679,
-    stars: 3,
-    global_rank: 11897,
-    country_rank: 10186,
+    rating: 1822,
+    stars: 4,
+    global_rank: 5435,
+    country_rank: 4428,
   },
   lc: {
-    totalSolved: 918,
-    totalQuestions: 3491,
-    easySolved: 300,
-    mediumSolved: 500,
-    hardSolved: 118,
-    ranking: 25793,
+    totalSolved: 998,
+    totalQuestions: 3554,
+    easySolved: 371,
+    mediumSolved: 507,
+    hardSolved: 88,
+    ranking: 18727,
   },
   gfg: {
-    institution_rank: 300,
-    totalProblemsSolved: 256,
+    institution_rank: 254,
+    totalProblemsSolved: 294,
   },
 }
 
@@ -108,17 +108,15 @@ export default function CodingProfiles() {
       const response = await fetch("https://alfa-leetcode-api.onrender.com/userContestRankingInfo/kshkansal")
       
       if (!response.ok) {
-        // console.error("Error fetching rating: API returned status", response.status)
-        return 0
+        return 1963
       }
       const data = await response.json()
-      return data?.data?.userContestRanking?.rating || 0
+      return Math.max(data?.data?.userContestRanking?.rating || 1963, 1963)
     } catch {
-      // console.error("Error fetching rating:", error)
-      return 0
+      return 1963
     }
   }
-  const [lcrating, setlcRating] = useState(0)
+  const [lcrating, setlcRating] = useState(1963)
 
   useEffect(() => {
     const fetchRating = async () => {
@@ -254,7 +252,7 @@ const safeUrl = platform.url || '#'
       >
         <div className={`border-b border-gray-200 dark:border-gray-800 ${platform.lightBgColor} p-3`}>
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0A0A0A] p-1 flex items-center justify-center shadow-sm">
+            <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0A0A0A] p-1 flex items-center justify-center shadow-xs">
               <Image
                 src={platform.logo || "/placeholder.svg"}
                 alt={platform.name}
@@ -278,7 +276,6 @@ const safeUrl = platform.url || '#'
     )
   }
 
-  // Update the renderPlatformData function to include CountUp animations and proper links
   const renderPlatformData = (platformId: string, data: PlatformData | ContestData[] | null, platformUrl: string) => {
     if (!data) {
       return (
@@ -394,9 +391,7 @@ const safeUrl = platform.url || '#'
             <div className="flex justify-between mt-1.5">
               <button
                 onClick={() => {
-                  if (Array.isArray(data)) {
-                    setShowFullData({ platform: "CodeChef", data });
-                  }
+                  setShowFullData({ platform: "CodeChef", data });
                 }}
                 className="text-[10px] text-yellow-600 hover:text-yellow-700 dark:text-yellow-500 dark:hover:text-yellow-400 flex items-center justify-center gap-1"
               >         
@@ -442,15 +437,13 @@ const safeUrl = platform.url || '#'
             <div className="flex justify-between items-center">
               <span className="text-xs text-gray-600 dark:text-gray-400">Rating</span>
               <span className="text-xs text-gray-800 dark:text-gray-200">
-                <CountUp end={lcrating} />
+                <CountUp end={Math.max(lcrating, 1963)} />
               </span>
             </div>
             <div className="flex justify-between mt-1.5">
               <button
                 onClick={() => {
-                  if (Array.isArray(data)) {
-                    setShowFullData({ platform: "LeetCode", data });
-                  }
+                  setShowFullData({ platform: "LeetCode", data });
                 }}
                 className="text-[10px] text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 flex items-center justify-center gap-1"
               >
@@ -465,7 +458,6 @@ const safeUrl = platform.url || '#'
         const gfgData = data as PlatformData;
         return (
           <div className="space-y-1.5">
-            {/* Campus Ambassador Badge */}
             <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-1.5 mb-2 flex items-center gap-1.5">
               <Star className="w-3 h-3 text-green-600 dark:text-green-400" />
               <span className="text-[10px] font-medium text-green-700 dark:text-green-300">Campus Ambassador</span>
@@ -485,9 +477,7 @@ const safeUrl = platform.url || '#'
             <div className="flex justify-between mt-1.5">
               <button
                 onClick={() => {
-                  if (Array.isArray(data)) {
-                    setShowFullData({ platform: "GeeksForGeeks", data });
-                  }
+                  setShowFullData({ platform: "GeeksForGeeks", data });
                 }}
                 className="text-[10px] text-green-600 hover:text-green-700 dark:text-green-500 dark:hover:text-green-400 flex items-center justify-center gap-1"
               >
@@ -518,14 +508,13 @@ const safeUrl = platform.url || '#'
         ))}
       </div>
 
-      {/* Full Data Modal */}
       <AnimatePresence>
         {showFullData && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4"
             onClick={() => setShowFullData(null)}
           >
             <motion.div
