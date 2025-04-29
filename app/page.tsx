@@ -66,12 +66,35 @@ const personalInfo = {
   about: `Hi everyone. My name is Kush Kansal and I am a second-year college student pursuing my B.tech from JIIT. I have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies. Driven by a strong sense of curiosity. Currently, my skills are in HTML, CSS, Object Oriented programming, C, C++, and Java. I am currently learning full-stack web development and DSA. My unwavering determination propels me towards achieving excellence, and I aspire to contribute significantly to society.`,
   projects: [
     {
+      title: "CircuitAI",
+      liveLink: "https://circuitai.vercel.app",
+      codeLink: "https://github.com/KshKnsl/CircuitAI",
+      description:
+        "This project is an AI-powered circuit creator for circuit simulation and visualization. Now designing using natural language prompts or guided design flows.",
+      technologies: ["Next.js", "React", "TypeScript", "TailwindCSS", "DigitalJS"],
+    },
+    {
+      title: "MindEase",
+      liveLink: "mind-ease-eosin.vercel.app",
+      codeLink: "https://github.com/KshKnsl/MindEase",
+      description: "MindEase is an AI-powered mental wellness platform that helps users manage their emotional wellbeing, schedule tasks, and get personalized support.",
+      technologies: ["React", "TypeScript", "Generative AI", "LangChain", "MongoDB", "Express"],
+    },
+    {
       title: "GuruGram",
       liveLink: "https://gurugramm.vercel.app",
       codeLink: "https://github.com/KshKnsl/GuruGram",
       description:
         "A mentorship platform that connects students with industry professionals to bridge the gap between academics and real-world skills. With features like skill-based matching, video communication, and progress tracking.",
       technologies: ["React", "Node.js", "Express", "MongoDB"],
+    },
+    {
+      title: "ReadMates",
+      liveLink: "https://readmates.vercel.app/",
+      codeLink: "https://github.com/KshKnsl/ReadMates",
+      description:
+        "A collaborative hub for tech enthusiasts, writers, and readers with real-time co-editing experience.",
+      technologies: ["TypeScript", "React", "MERN"],
     },
     {
       title: "Cubix",
@@ -82,36 +105,12 @@ const personalInfo = {
       technologies: ["React", "C++"],
     },
     {
-      title: "URL Shortener",
+      title: "Maksad.crx - Chrome Extension",
+      liveLink: "https://github.com/KshKnsl/Maksad.crx",
+      codeLink: "https://github.com/KshKnsl/Maksad.crx",
       description:
-        "A free tool to shorten URLs and generate QR codes & links making it easy to share.",
-      liveLink: "https://tinyu.vercel.app/",
-      codeLink: "https://github.com/KshKnsl/URL-Shorten",
-      technologies: ["NodeJS", "EJS"],
-    },
-    {
-      title: "Portfolio Site",
-      description:
-        "My personal portfolio website showcasing my projects and skills with an interactive terminal.",
-      liveLink: "#",
-      codeLink: "https://github.com/KshKnsl/Portfolio",
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    },
-    {
-      title: "ReadMates",
-      description:
-        "A collaborative hub for tech enthusiasts, writers, and readers with real-time co-editing experience.",
-      liveLink: "https://readmates.vercel.app/",
-      codeLink: "https://github.com/KshKnsl/ReadMates",
-      technologies: ["TypeScript", "React", "MERN"],
-    },
-    {
-      title: "Chintan Trivia",
-      description:
-        "A web-based quiz app for creating and participating in AI-driven quizzes, enhancing classroom interactions.",
-      liveLink: "http://chintan.42web.io/",
-      codeLink: "https://github.com/KshKnsl/ChintanTrivia",
-      technologies: ["PHP", "Tailwind CSS", "JavaScript", "MySQL"],
+        "This Chrome extension helps users stay focused by blocking distracting content like YouTube Shorts and enabling voice commands (e.g., 'Close tab').",
+      technologies: ["JavaScript", "Chrome Extension"],
     },
   ],
   highlights: [

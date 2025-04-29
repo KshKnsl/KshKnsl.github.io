@@ -25,6 +25,14 @@ const truncateDescription = (description: string, maxLength: number) => {
 
 const projects = [
   {
+    title: "CircuitAI",
+    liveLink: "https://circuitai.vercel.app",
+    codeLink: "https://github.com/KshKnsl/CircuitsAI",
+    description:
+      "This project is an AI-powered circuit creator for circuit simulation and visualization. Now designing using natural language prompts or guided design flows.",
+    technologies: ["Next.js", "React", "TypeScript", "TailwindCSS", "DigitalJS"],
+  },
+  {
     title: "Cubix",
     liveLink: "https://kshknsl.github.io/cubix/",
     codeLink: "https://github.com/KshKnsl/cubix",
@@ -32,6 +40,14 @@ const projects = [
       "A web-based puzzle solver that efficiently solves Rubik's Cube, 15-Puzzle, and Sudoku using advanced algorithms. The frontend, built with React, provides an interactive UI, while the backend, powered by C++, ensures fast and optimized solutions.",
     technologies: ["React", "C++"],
   },
+  {
+    title: "MindEase",
+    liveLink: "mind-ease-eosin.vercel.app",
+    codeLink: "https://github.com/KshKnsl/MindEase",
+    description: "MindEase is an AI-powered mental wellness platform that helps users manage their emotional wellbeing, schedule tasks, and get personalized support.",
+    technologies: ["React", "TypeScript", "Generative AI", "LangChain", "MongoDB", "Express"],
+    },
+
   {
     title: "ReadMates",
     liveLink: "https://readmates.vercel.app/",
@@ -49,20 +65,20 @@ const projects = [
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
   {
-    title: "Maksad.ai - Chrome Extension",
+    title: "Maksad.crx - Chrome Extension",
     liveLink: "https://github.com/KshKnsl/Maksad.crx",
     codeLink: "https://github.com/KshKnsl/Maksad.crx",
     description:
-      "This Chrome extension helps users stay focused by blocking distracting content like YouTube Shorts and enabling voice commands (e.g., 'Close tab'). It provides a simple UI with a microphone button.",
+      "This Chrome extension helps users stay focused by blocking distracting content like YouTube Shorts and enabling voice commands (e.g., 'Close tab').",
     technologies: ["JavaScript", "Chrome Extension"],
   },
   {
-    title: "Portfolio Site",
-    liveLink: "/",
+    title: "An Older Portfolio Site",
+    liveLink: "knsl.vercel.app",
     codeLink: "https://github.com/KshKnsl/Portfolio",
     description:
       "My personal portfolio website showcasing my projects and skills with an interactive terminal.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+    technologies: ["HTML", "Tailwind CSS", "GSAP"],
   },
   {
     title: "AI Chat Application",
@@ -208,9 +224,28 @@ export default function ProjectsPage() {
                       bgColor = "bg-gray-100 dark:bg-gray-900/30 text-gray-800 dark:text-gray-300";
                     else if (tech === "LangChain") 
                       bgColor = "bg-blue-200 dark:bg-blue-800/30 text-blue-900 dark:text-blue-400";
+                    else if (tech === "CSS") 
+                      bgColor = "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300";
+                    else if (tech === "Generative AI") 
+                      bgColor = "bg-violet-100 dark:bg-violet-900/30 text-violet-800 dark:text-violet-300";
+                    else if (tech === "MongoDB") 
+                      bgColor = "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300";
+                    else if (tech === "Express") 
+                      bgColor = "bg-gray-100 dark:bg-gray-900/30 text-gray-800 dark:text-gray-300";
+                    else if (tech === "GSAP") 
+                      bgColor = "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300";
+                    else if (tech === "Flask") 
+                      bgColor = "bg-slate-100 dark:bg-slate-900/30 text-slate-800 dark:text-slate-300";
+                    else if (tech === "GeminiAI") 
+                      bgColor = "bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-800 dark:text-fuchsia-300";
+                    else if (tech === "Python") 
+                      bgColor = "bg-sky-100 dark:bg-sky-900/30 text-sky-800 dark:text-sky-300";
+                    else if (tech === "Java") 
+                      bgColor = "bg-rose-100 dark:bg-rose-900/30 text-rose-800 dark:text-rose-300";
+                    else if (tech === "Chrome Extension") 
+                      bgColor = "bg-lime-100 dark:bg-lime-900/30 text-lime-800 dark:text-lime-300";
                     else
                       bgColor = "bg-purple-200 dark:bg-purple-800/30 text-purple-900 dark:text-purple-400";
-                    
                     return (
                       <span key={i} className={`${bgColor} px-2 py-1 text-xs rounded-md font-medium`}>
                         {tech}
