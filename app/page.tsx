@@ -57,13 +57,13 @@ const staggerContainer = {
 const personalInfo = {
   name: "Kush Kansal",
   title:
-    "CSE @JIIT&apos; 27 || Java || JavaScript || Web Developer || 900+ LeetCode || 3 ⭐ CodeChef",
+    "Full-Stack Developer | CSE @ JIIT&apos; 27  MERN | Knight @ LeetCode (1865) | 3⭐ @ CodeChef (1769) | Specialist @ Codeforces",
   email: "kushkansal0@gmail.com",
   github: "https://github.com/KshKnsl/",
   linkedin: "https://www.linkedin.com/in/kushkansal/",
   instagram: "https://www.instagram.com/kushkansal.exe/",
   twitter: "https://twitter.com/knslji",
-  about: `Hi everyone. My name is Kush Kansal and I am a second-year college student pursuing my B.tech from JIIT. I have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies. Driven by a strong sense of curiosity. Currently, my skills are in HTML, CSS, Object Oriented programming, C, C++, and Java. I am currently learning full-stack web development and DSA. My unwavering determination propels me towards achieving excellence, and I aspire to contribute significantly to society.`,
+  about: `Hi, I'm Kush Kansal — a pre-final year B.Tech student at JIIT, passionate about building tech that solves real problems. I'm a full-stack developer specializing in the MERN stack (MongoDB, Express, React, Node.js) with strong foundations in Java, C++, and Data Structures & Algorithms. Curious by nature and driven by impact, I love exploring the potential of emerging technologies, crafting solutions to complex challenges. I enjoy turning ideas into scalable, clean, maintainable code. Currently deepening my expertise in advanced full-stack development patterns and advanced DSA concepts, with a goal to grow, build, and make a meaningful difference through technology.`,
   projects: [
     {
       title: "CircuitAI",
@@ -117,7 +117,7 @@ const personalInfo = {
     {
       title: "Problem Solver",
       description:
-        "1200+ problems solved on various platforms with strong algorithmic skills",
+        "1500+ problems solved on various platforms with strong algorithmic skills",
       icon: <Cpu className="w-6 h-6 text-blue-500" />,
     },
     {

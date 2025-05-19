@@ -61,32 +61,32 @@ const dummyData: {
 } = {
   cf: [
     {
-      rating: 1351,
-      contestName: "Codeforces Round 1011",
-      rank: 2756,
-      oldRating: 1270,
-      newRating: 1351,
+      rating: 1446,
+      contestName: "Codeforces Round 1022 (Div. 2)",
+      rank: 4435,
+      oldRating: 1400,
+      newRating: 1446,
       timestamp: 0,
       handle: "mrkushkansal",
     },
   ],
   cc: {
-    rating: 1730,
+    rating: 1769,
     stars: 3,
-    global_rank: 8896,
-    country_rank: 7360,
+    global_rank: 7195,
+    country_rank: 5956,
   },
   lc: {
-    totalSolved: 966,
-    totalQuestions: 3525,
+    totalSolved: 998,
+    totalQuestions: 3554,
     easySolved: 371,
     mediumSolved: 507,
     hardSolved: 88,
-    ranking: 22503,
+    ranking: 21049,
   },
   gfg: {
-    institution_rank: 359,
-    totalProblemsSolved: 256,
+    institution_rank: 319,
+    totalProblemsSolved: 264,
   },
 }
 

@@ -8,11 +8,14 @@ import Link from "next/link"
 
 const roleTitles = [
   { text: "Student @JIIT-27' 🎓", color: "#0A6AD6" },
-  { text: "Back End Developer 🌱", color: "#FFAF45" },
-  { text: "Front End Developer 🌱", color: "#A34343" },
-  { text: "900+ LeetCode 💻", color: "#2C2C2C" },
-  { text: "3⭐ CodeChef", color: "#FF204E" },
+  { text: "Back End Developer 🔧", color: "#FFAF45" },
+  { text: "Front End Developer 🎨", color: "#A34343" },
+  { text: "DSA Lover 📊", color: "#2C2C2C" },
+  { text: "Half a Decade of Coding ⏳", color: "#FF204E" },
   { text: "Exploring Tech 🚀", color: "#19A95B" },
+  { text: "Open Source Contributor 🌐", color: "#FFAF45" },
+  { text: "Competitive Programmer 🏆", color: "#FF204E" },
+  { text: "React & TypeScript Dev ⚛️", color: "#2C2C2C" },
 ]
 
 export default function HeroSection() {
@@ -145,7 +148,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-base sm:text-lg md:text-xl dark:text-gray-400"
             >
-              CSE @JIIT&apos; 27 || Java || JavaScript || Full Stack Developer || 900+ LeetCode || 3 ⭐ CodeChef
+             Full-Stack Developer | CSE @ JIIT&apos; 27  MERN | Knight @ LeetCode (solved 1000+) | 3⭐ @ CodeChef | Specialist @ Codeforces
             </motion.p>
 
             <motion.div
