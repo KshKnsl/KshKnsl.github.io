@@ -4,9 +4,10 @@ import type React from "react";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { GitFork, Users, BookOpen, ExternalLink, X } from "lucide-react";
-import { GithubIcon } from "lucide-react"; // Using the renamed icon
+import { GithubIcon } from "lucide-react";
 import Link from "next/link";
 import CountUp from "./count-up";
+import Image from "next/image";
 
 interface GitHubProfileProps {
   username: string;
@@ -198,17 +199,19 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
             </div>
             <div className="p-6 overflow-y-auto">
               <h1 className="text-3xl font-bold text-center mb-4">
-                Hi, I'm Kush Kansal👋
+                Hi, I&apos;m Kush Kansal👋
               </h1>
               <h3 className="text-xl font-medium text-center mb-6">
                 Frontend Developer, Passionate Coder
               </h3>
 
               <div className="flex justify-center mb-8">
-                <img
+                <Image
                   src="https://user-images.githubusercontent.com/74038190/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif"
                   alt="Header GIF"
                   className="w-full rounded-lg max-w-4xl"
+                  width={1280}
+                  height={320}
                 />
               </div>
 
@@ -246,18 +249,27 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
                   📊 GitHub Stats:
                 </h2>
                 <div className="flex flex-col items-center gap-4">
-                  <img
+                  <Image
                     src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=kshknsl&theme=radical"
                     className="w-full max-w-2xl"
+                    alt="GitHub Profile Details"
+                    width={700}
+                    height={250}
                   />
                   <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                    <img
+                    <Image
                       src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=kshknsl&theme=radical"
                       className="max-w-xs"
+                      alt="GitHub Repos per Language"
+                      width={350}
+                      height={200}
                     />
-                    <img
+                    <Image
                       src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=kshknsl&theme=radical"
                       className="max-w-xs"
+                      alt="GitHub Stats"
+                      width={350}
+                      height={200}
                     />
                   </div>
                 </div>
@@ -269,216 +281,320 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
                 </h2>
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex-1 space-y-2 flex flex-wrap gap-2">
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white"
                       alt="C"
+                      width={60}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white"
                       alt="C++"
+                      width={75}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"
                       alt="HTML5"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white"
                       alt="Java"
+                      width={80}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"
                       alt="JavaScript"
+                      width={122}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white"
                       alt="Markdown"
+                      width={110}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/php-%73777BB4.svg?style=for-the-badge&logo=php&logoColor=white"
                       alt="PHP"
+                      width={70}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white"
                       alt="PowerShell"
+                      width={120}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"
                       alt="Python"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"
                       alt="TypeScript"
+                      width={131}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white"
                       alt="Vercel"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7"
                       alt="Netlify"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white"
                       alt="Render"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white"
                       alt="Astro"
+                      width={80}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white"
                       alt="Chakra"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/Bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white"
                       alt="Bun"
+                      width={60}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white"
                       alt="Chart.js"
+                      width={95}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white"
                       alt="Bootstrap"
+                      width={110}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/daisyui-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white"
                       alt="DaisyUI"
+                      width={95}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/ejs-%23B4CA65.svg?style=for-the-badge&logo=ejs&logoColor=black"
                       alt="EJS"
+                      width={60}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"
                       alt="Express.js"
+                      width={115}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37"
                       alt="Expo"
+                      width={75}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/green%20sock-88CE02?style=for-the-badge&logo=greensock&logoColor=white"
                       alt="Green Sock"
+                      width={120}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens"
                       alt="JWT"
+                      width={70}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white"
                       alt="NPM"
+                      width={70}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white"
                       alt="jQuery"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white"
                       alt="MUI"
+                      width={70}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD"
                       alt="Nodemon"
+                      width={110}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white"
                       alt="Next JS"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"
                       alt="NodeJS"
+                      width={95}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/opencv-%23white.svg?style=for-the-badge&logo=opencv&logoColor=white"
                       alt="OpenCV"
+                      width={95}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/Pug-FFF?style=for-the-badge&logo=pug&logoColor=A86454"
                       alt="Pug"
+                      width={65}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"
                       alt="React"
+                      width={85}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"
                       alt="React Native"
+                      width={130}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white"
                       alt="Redux"
+                      width={80}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101"
                       alt="Socket.io"
+                      width={110}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white"
                       alt="Vite"
+                      width={70}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white"
                       alt="TailwindCSS"
+                      width={144}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/windicss-48B0F1.svg?style=for-the-badge&logo=windi-css&logoColor=white"
                       alt="Windicss"
+                      width={105}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white"
                       alt="MongoDB"
+                      width={120}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white"
                       alt="MySQL"
+                      width={85}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white"
                       alt="Postgres"
+                      width={105}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white"
                       alt="Figma"
+                      width={80}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white"
                       alt="NumPy"
+                      width={85}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white"
                       alt="Pandas"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black"
                       alt="Matplotlib"
+                      width={115}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"
                       alt="GitHub"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white"
                       alt="Git"
+                      width={61}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"
                       alt="Docker"
+                      width={90}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white"
                       alt="ESLint"
+                      width={85}
+                      height={28}
                     />
-                    <img
+                    <Image
                       src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"
                       alt="Postman"
+                      width={100}
+                      height={28}
                     />
                   </div>
                   <div className="flex-1 flex justify-center items-center">
-                    <img
+                    <Image
                       src="https://i.pinimg.com/originals/4f/4e/16/4f4e1638e028090ff030ec2ae0fc6919.gif"
                       alt="Coding"
                       className="max-w-xs rounded-lg"
+                      width={300}
+                      height={200}
                     />
                   </div>
                 </div>

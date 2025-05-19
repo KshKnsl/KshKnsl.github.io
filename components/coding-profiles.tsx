@@ -71,10 +71,10 @@ const dummyData: {
     },
   ],
   cc: {
-    rating: 1769,
-    stars: 3,
-    global_rank: 7195,
-    country_rank: 5956,
+    rating: 1822,
+    stars: 4,
+    global_rank: 5435,
+    country_rank: 4428,
   },
   lc: {
     totalSolved: 998,
@@ -82,11 +82,11 @@ const dummyData: {
     easySolved: 371,
     mediumSolved: 507,
     hardSolved: 88,
-    ranking: 21049,
+    ranking: 18727,
   },
   gfg: {
-    institution_rank: 319,
-    totalProblemsSolved: 264,
+    institution_rank: 254,
+    totalProblemsSolved: 294,
   },
 }
 
@@ -108,15 +108,15 @@ export default function CodingProfiles() {
       const response = await fetch("https://alfa-leetcode-api.onrender.com/userContestRankingInfo/kshkansal")
       
       if (!response.ok) {
-        return 0
+        return 1963
       }
       const data = await response.json()
-      return data?.data?.userContestRanking?.rating || 0
+      return Math.max(data?.data?.userContestRanking?.rating || 1963, 1963)
     } catch {
-      return 0
+      return 1963
     }
   }
-  const [lcrating, setlcRating] = useState(0)
+  const [lcrating, setlcRating] = useState(1963)
 
   useEffect(() => {
     const fetchRating = async () => {
@@ -437,7 +437,7 @@ const safeUrl = platform.url || '#'
             <div className="flex justify-between items-center">
               <span className="text-xs text-gray-600 dark:text-gray-400">Rating</span>
               <span className="text-xs text-gray-800 dark:text-gray-200">
-                <CountUp end={lcrating} />
+                <CountUp end={Math.max(lcrating, 1963)} />
               </span>
             </div>
             <div className="flex justify-between mt-1.5">

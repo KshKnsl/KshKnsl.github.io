@@ -14,7 +14,6 @@ import {
   Code,
   Mail,
   Terminal,
-  Download,
 } from "lucide-react"
 import { getRandomMessage } from "@/utils/messages"
 import { scrollToElement } from "@/utils/scroll-utils"
@@ -29,6 +28,7 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
   const [showTooltip, setShowTooltip] = useState(false)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const navbarRef = useRef(null)
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,6 +68,8 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
     { id: "projects", label: "Projects", icon: <Code className="w-4 h-4" />, href: "#projects" },
     { id: "contact", label: "Contact", icon: <Mail className="w-4 h-4" />, href: "#contact" },
   ]
+
+  const hideTabs = pathname.endsWith("/projects");
 
   return (
     <header
@@ -123,51 +125,42 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
           </div>
 
           <div className="flex items-center">
-            <div className="hidden lg:flex items-center space-x-1 overflow-x-auto scrollbar-hide px-1">
-              {tabs.map((tab) => (
-                <Link
-                  key={tab.id}
-                  href={tab.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (tab.href === "#") {
-                      window.scrollTo({
-                        top: 0,
-                        behavior: "smooth",
-                      });
-                    } else {
-                      const targetId = tab.href.replace("#", "");
-                      scrollToElement(targetId);
-                    }
-                  }}
-                  className={`flex items-center px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 border ${
-                    activeTab === tab.id
-                      ? "bg-gray-100 dark:bg-[#0F0F10] text-gray-900 dark:text-white border-gray-200 dark:border-gray-700"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 border-transparent"
-                  }`}
-                  style={{ boxShadow: activeTab === tab.id ? "1px 1px 0px rgba(0,0,0,0.1)" : "none" }}
-                >
-                  {tab.icon}
-                  <span className="ml-1.5">{tab.label}</span>
-                </Link>
-              ))}
-            </div>
+            {!hideTabs && (
+              <div className="hidden lg:flex items-center space-x-1 overflow-x-auto scrollbar-hide px-1">
+                {tabs.map((tab) => (
+                  <Link
+                    key={tab.id}
+                    href={tab.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (tab.href === "#") {
+                        window.scrollTo({
+                          top: 0,
+                          behavior: "smooth",
+                        });
+                      } else {
+                        const targetId = tab.href.replace("#", "");
+                        scrollToElement(targetId);
+                      }
+                    }}
+                    className={`flex items-center px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 border ${
+                      activeTab === tab.id
+                        ? "bg-gray-100 dark:bg-[#0F0F10] text-gray-900 dark:text-white border-gray-200 dark:border-gray-700"
+                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 border-transparent"
+                    }`}
+                    style={{ boxShadow: activeTab === tab.id ? "1px 1px 0px rgba(0,0,0,0.1)" : "none" }}
+                  >
+                    {tab.icon}
+                    <span className="ml-1.5">{tab.label}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
 
             <div className="flex items-center space-x-1">
               <div>
                 <ThemeToggle />
               </div>
-
-                <Link
-                href="https://drive.google.com/file/d/1PGtFhTsbfNuqJEsPgsTLSs9hKZm6uFc3/view?usp=sharing"
-                className="hidden md:flex items-center space-x-1 px-3 py-1.5 text-white bg-gradient-primary rounded-full shadow-sm hover:shadow-md transition-all text-sm font-medium border border-[#3b82f6]/20 dark:border-[#60a5fa]/20"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.2)" }}
-                >
-                <Download className="w-4 h-4 mr-1" />
-                <span>Resume</span>
-                </Link>
 
               <motion.button
                 className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
@@ -223,7 +216,7 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
                   ))}
 
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                    <Link
+                    {/* <Link
                       href="https://drive.google.com/file/d/1PGtFhTsbfNuqJEsPgsTLSs9hKZm6uFc3/view?usp=sharing"
                       className="mt-2 flex items-center justify-center px-4 py-3 text-white rounded-lg bg-gradient-primary border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-md"
                       target="_blank"
@@ -232,7 +225,7 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
                     >
                       <Download className="w-5 h-5 mr-2" />
                       Download Resume
-                    </Link>
+                    </Link> */}
                   </motion.div>
                 </div>
               </div>

@@ -2,8 +2,9 @@
 
 import BrowserNavbar from "@/components/browser-navbar"
 import { motion } from "framer-motion"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Play, Globe, Code } from "lucide-react"
 import Link from "next/link"
+import { LinkPreview } from "@/components/ui/link-preview"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -11,7 +12,7 @@ const fadeInUp = {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       damping: 25,
       stiffness: 100,
     },
@@ -23,7 +24,32 @@ const truncateDescription = (description: string, maxLength: number) => {
   return description.substring(0, maxLength) + '...';
 }
 
-const projects = [
+interface Project {
+  title: string;
+  liveLink?: string;
+  codeLink: string;
+  description: string;
+  technologies: string[];
+  youtubeLink?: string;
+}
+
+const projects: Project[] = [
+  {
+    title: "QuickCom Scraper",
+    codeLink: "https://github.com/KshKnsl/QuickCom",
+    description:
+      "A full-stack application for scraping product data from Blinkit, Zepto, and Swiggy Instamart platforms. Features real-time searching, product comparison, and cart management with WebSocket communication.",
+    technologies: ["React", "TypeScript", "Node.js", "WebSocket", "Puppeteer", "Tailwind CSS"],
+    // youtubeLink: "https://www.youtube.com/watch?v=ABC123"
+  },
+  {
+    title: "Terminax",
+    liveLink: "https://terminax.vercel.app",
+    codeLink: "https://github.com/KshKnsl/Terminax",
+    description:
+      "A hosting platform for terminal-based applications that enables developers to deploy, share, and run CLI apps directly in the browser and embedded them into any site easily.",
+    technologies: ["Next.js", "TypeScript", "WebSockets", "Docker", "Node.js"],
+  },
   {
     title: "CircuitAI",
     liveLink: "https://circuitai.vercel.app",
@@ -42,7 +68,7 @@ const projects = [
   },
   {
     title: "MindEase",
-    liveLink: "mind-ease-eosin.vercel.app",
+    liveLink: "https://mind-ease-eosin.vercel.app",
     codeLink: "https://github.com/KshKnsl/MindEase",
     description: "MindEase is an AI-powered mental wellness platform that helps users manage their emotional wellbeing, schedule tasks, and get personalized support.",
     technologies: ["React", "TypeScript", "Generative AI", "LangChain", "MongoDB", "Express"],
@@ -74,7 +100,7 @@ const projects = [
   },
   {
     title: "An Older Portfolio Site",
-    liveLink: "knsl.vercel.app",
+    liveLink: "https://knsl.vercel.app",
     codeLink: "https://github.com/KshKnsl/Portfolio",
     description:
       "My personal portfolio website showcasing my projects and skills with an interactive terminal.",
@@ -82,7 +108,7 @@ const projects = [
   },
   {
     title: "AI Chat Application",
-    liveLink: "nt-yx.vercel.app",
+    liveLink: "https://nt-yx.vercel.app",
     codeLink: "https://github.com/KshKnsl/Nyx",
     description: "A real-time chat application with ai engine to chat.",
     technologies: ["Socket.io", "Flask", "LangChain", "GeminiAI", "Python"],
@@ -102,6 +128,23 @@ const projects = [
       "A web-based quiz app for creating and participating in AI-driven quizzes, enhancing classroom interactions.",
     technologies: ["PHP", "Tailwind CSS", "JavaScript", "MySQL"],
   },
+   {
+    title: "CogniScript",
+    liveLink: "https://github.com/KshKnsl/CongiScript",
+    codeLink: "https://github.com/KshKnsl/CongiScript",
+    description:
+      "An AI-powered document chat application that allows users to upload documents and interact with their content through a conversational interface using Google Gemini and Qdrant vector database.",
+    technologies: ["VectorDB", "Generative AI", "LangChain"],
+  },
+   {
+    title: "BulkMailer",
+    liveLink: "https://github.com/KshKnsl/BulkMail",
+    codeLink: "https://github.com/KshKnsl/BulkMail",
+    description:
+      "A terminal-based bulk email sender with features like customizable subjects, messages, and optional random GIFs from Giphy API. The CLI interface allows sending emails to multiple recipients with configurable parameters.",
+    technologies: ["JavaScript", "Node.js", "CLI"],
+  },
+ 
   {
     title: "Spotify Clone",
     liveLink: "http://kushkansal.me/Spotify-Clone/",
@@ -138,8 +181,7 @@ const projects = [
     description:
       "A console-based Text Editor made in Java to perform basic tasks like cut, copy, paste, delete and edit.",
     technologies: ["Java"],
-  },
-  
+  }
 ]
 
 export default function ProjectsPage() {
@@ -181,11 +223,11 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="group relative bg-white/80 dark:bg-black/80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 backdrop-blur-md"
+              className="group relative bg-white/80 dark:bg-black/80 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 backdrop-blur-md flex flex-col h-full"
             >
               <div className="absolute inset-0 bg-linear-to-r from-[#ec3750]/5 to-[#ff8c37]/5 dark:from-[#ec3750]/10 dark:to-[#ff8c37]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              <div className="p-6 relative z-10">
+              <div className="p-6 relative z-10 flex flex-col flex-1">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#ec3750] dark:group-hover:text-[#ff4d6a] transition-colors">
                   {project.title}
                 </h3>
@@ -253,23 +295,57 @@ export default function ProjectsPage() {
                     );
                   })}
                 </div>
-                <div className="flex gap-4">
-                  <Link
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-[#ec3750] dark:text-[#ff4d6a] hover:underline"
+                
+                <div className="mt-auto pt-4 flex flex-wrap gap-3">
+                  {project.liveLink && project.liveLink !== project.codeLink && (
+                    <LinkPreview 
+                      url={project.liveLink}
+                      width={300}
+                      height={200}
+                    >
+                      <Link
+                        href={project.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#ec3750] dark:hover:text-[#ff4d6a] bg-gray-100 dark:bg-gray-800/60 px-3 py-1 rounded-full transition-colors"
+                      >
+                        <Globe className="w-3.5 h-3.5" />
+                        <span>Live Demo</span>
+                      </Link>
+                    </LinkPreview>
+                  )}
+                  <LinkPreview 
+                    url={project.codeLink}
+                    width={300}
+                    height={200}
                   >
-                    Live Demo
-                  </Link>
-                  <Link
-                    href={project.codeLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-[#ec3750] dark:hover:text-[#ff4d6a]"
-                  >
-                    View Code
-                  </Link>
+                    <Link
+                      href={project.codeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#ec3750] dark:hover:text-[#ff4d6a] bg-gray-100 dark:bg-gray-800/60 px-3 py-1 rounded-full transition-colors"
+                    >
+                      <Code className="w-3.5 h-3.5" />
+                      <span>Code</span>
+                    </Link>
+                  </LinkPreview>
+                  {project.youtubeLink && (
+                    <LinkPreview 
+                      url={project.youtubeLink}
+                      width={300}
+                      height={200}
+                    >
+                      <Link
+                        href={project.youtubeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm font-medium text-red-700 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 bg-red-100 dark:bg-red-900/30 px-3 py-1 rounded-full transition-colors"
+                      >
+                        <Play className="w-3.5 h-3.5 fill-current" />
+                        <span>Watch Demo</span>
+                      </Link>
+                    </LinkPreview>
+                  )}
                 </div>
               </div>
             </motion.div>

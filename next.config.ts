@@ -23,7 +23,42 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      { hostname: "user-images.githubusercontent.com" },
+      { hostname: "github-profile-summary-cards.vercel.app" },
+      { hostname: "img.shields.io" },
+      { hostname: "i.pinimg.com" },
+      { hostname: "cdn.jsdelivr.net" },
+      { hostname: "api.microlink.io" },
     ],
+  },
+  experimental: {
+    optimizePackageImports: [
+      "framer-motion",
+      "lucide-react",
+      "@react-three/fiber",
+      "@react-three/drei",
+    ],
+  },
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      config.optimization.splitChunks = {
+        chunks: "all",
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+          },
+          common: {
+            name: "common",
+            minChunks: 2,
+            chunks: "all",
+            enforce: true,
+          },
+        },
+      };
+    }
+    return config;
   },
 };
 

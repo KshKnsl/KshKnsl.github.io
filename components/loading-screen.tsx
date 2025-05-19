@@ -1,37 +1,11 @@
 "use client"
 
-import { useEffect, useState, memo } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Canvas } from "@react-three/fiber"
-import { Stars } from "@react-three/drei"
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
 }
-
-const StarsCanvas = memo(() => (
-  <Canvas 
-    camera={{ position: [0, 0, 3] }} 
-    dpr={[1, 1.5]} 
-    performance={{ min: 0.5 }}
-    frameloop="demand"
-    gl={{ powerPreference: "high-performance", antialias: false }}
-  >
-    <color attach="background" args={["#000000"]} />
-    <ambientLight intensity={0.5} />
-    <Stars 
-      radius={100} 
-      depth={50} 
-      count={1500} 
-      factor={4} 
-      saturation={0} 
-      fade 
-      speed={0.5} 
-    />
-  </Canvas>
-));
-
-StarsCanvas.displayName = 'StarsCanvas';
 
 export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0)
@@ -64,10 +38,6 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
       >
-        <div className="h-screen w-full absolute inset-0">
-          <StarsCanvas />
-        </div>
-
         <div className="relative z-10 flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -76,16 +46,18 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
             className="mb-8"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-2 text-white">
-              <span className="text-gradient">Kush Kansal</span>
+              <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                Kush Kansal
+              </span>
             </h1>
             <p className="text-gray-400 text-center text-lg">Web Developer & Problem Solver</p>
           </motion.div>
 
-          <div className="w-[280px] h-1 bg-secondary rounded-full mb-4 overflow-hidden">
+          <div className="w-[280px] h-1 bg-gray-800 rounded-full mb-4 overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
-              className="h-full bg-gradient-primary rounded-full"
+              className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
               transition={{ duration: 0.1 }}
             />
           </div>
@@ -102,4 +74,3 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
     </AnimatePresence>
   )
 }
-

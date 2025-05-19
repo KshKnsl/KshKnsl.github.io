@@ -7,7 +7,7 @@ import { Terminal, Download } from "lucide-react"
 import Link from "next/link"
 
 const roleTitles = [
-  { text: "Student @JIIT-27' 🎓", color: "#0A6AD6" },
+  { text: "Student @JIIT-27 🎓", color: "#0A6AD6" },
   { text: "Back End Developer 🔧", color: "#FFAF45" },
   { text: "Front End Developer 🎨", color: "#A34343" },
   { text: "DSA Lover 📊", color: "#2C2C2C" },
@@ -204,7 +204,9 @@ export default function HeroSection() {
                 height={500}
                 className="object-cover w-full h-full"
                 style={{ width: '100%', height: 'auto' }}
-                priority
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />
             </div>
           </motion.div>
@@ -213,4 +215,3 @@ export default function HeroSection() {
     </section>
   )
 }
-
