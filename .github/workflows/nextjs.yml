@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_TOKEN: ${{ vars.NEXT_PUBLIC_TOKEN }}
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

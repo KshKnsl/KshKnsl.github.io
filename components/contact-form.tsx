@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle, Phone } from "lucide-react";
+import { CheckCircle, Send, User, Mail, Phone, MessageSquare, AlertCircle } from "lucide-react";
 
 interface FormErrors {
   name?: string;
@@ -21,6 +21,7 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [submitError, setSubmitError] = useState<string>("");
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -32,6 +33,15 @@ export default function ContactForm() {
       ...prev,
       [name]: value,
     }));
+    
+    // Clear errors when user starts typing
+    if (formErrors[name as keyof FormErrors]) {
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }));
+    }
+    setSubmitError("");
   };
 
   const validateForm = () => {
@@ -54,21 +64,40 @@ export default function ContactForm() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError("");
 
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to send message');
+      }
+
       setIsSubmitted(true);
       setFormState({ name: "", email: "", phone: "", message: "" });
 
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -104,6 +133,17 @@ export default function ContactForm() {
             possible.
           </p>
 
+          {submitError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center gap-2"
+            >
+              <AlertCircle className="w-5 h-5 text-red-500" />
+              <p className="text-sm text-red-600 dark:text-red-400">{submitError}</p>
+            </motion.div>
+          )}
+
           <div className="space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
@@ -120,13 +160,14 @@ export default function ContactForm() {
                     name="name"
                     value={formState.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-gray-50/50 dark:bg-[#0F0F10] border ${
+                    className={`w-full px-4 py-3 pl-10 bg-gray-50/50 dark:bg-[#0F0F10] border ${
                       formErrors.name
                         ? "border-red-300 dark:border-red-700"
                         : "border-gray-200 dark:border-gray-700"
                     } rounded-lg focus:ring-2 focus:ring-[#3b82f6]/50 dark:focus:ring-[#60a5fa]/50 focus:border-[#3b82f6] dark:focus:border-[#60a5fa] transition-all duration-200 text-gray-900 dark:text-white`}
                     placeholder="Your name"
                   />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                   {formErrors.name && (
                     <p className="mt-1 text-sm text-red-500 dark:text-red-400">
                       {formErrors.name}
@@ -149,13 +190,14 @@ export default function ContactForm() {
                     name="email"
                     value={formState.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-gray-50/50 dark:bg-[#0F0F10] border ${
+                    className={`w-full px-4 py-3 pl-10 bg-gray-50/50 dark:bg-[#0F0F10] border ${
                       formErrors.email
                         ? "border-red-300 dark:border-red-700"
                         : "border-gray-200 dark:border-gray-700"
                     } rounded-lg focus:ring-2 focus:ring-[#3b82f6]/50 dark:focus:ring-[#60a5fa]/50 focus:border-[#3b82f6] dark:focus:border-[#60a5fa] transition-all duration-200 text-gray-900 dark:text-white`}
                     placeholder="your.email@example.com"
                   />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                   {formErrors.email && (
                     <p className="mt-1 text-sm text-red-500 dark:text-red-400">
                       {formErrors.email}
@@ -213,13 +255,14 @@ export default function ContactForm() {
                   value={formState.message}
                   onChange={handleChange}
                   rows={6}
-                  className={`w-full px-4 py-3 bg-gray-50/50 dark:bg-[#0F0F10] border ${
+                  className={`w-full px-4 py-3 pl-10 bg-gray-50/50 dark:bg-[#0F0F10] border ${
                     formErrors.message
                       ? "border-red-300 dark:border-red-700"
                       : "border-gray-200 dark:border-gray-700"
                   } rounded-lg focus:ring-2 focus:ring-[#3b82f6]/50 dark:focus:ring-[#60a5fa]/50 focus:border-[#3b82f6] dark:focus:border-[#60a5fa] transition-all duration-200 resize-none text-gray-900 dark:text-white`}
                   placeholder="Your message here..."
                 />
+                <MessageSquare className="absolute left-3 top-4 w-4 h-4 text-gray-400" />
                 {formErrors.message && (
                   <p className="mt-1 text-sm text-red-500 dark:text-red-400">
                     {formErrors.message}
