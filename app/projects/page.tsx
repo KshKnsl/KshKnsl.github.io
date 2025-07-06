@@ -68,7 +68,7 @@ const projects: Project[] = [
   },
   {
     title: "MindEase",
-    liveLink: "https://mind-ease-eosin.vercel.app",
+    liveLink: "https://mindeases.vercel.app",
     codeLink: "https://github.com/KshKnsl/MindEase",
     description: "MindEase is an AI-powered mental wellness platform that helps users manage their emotional wellbeing, schedule tasks, and get personalized support.",
     technologies: ["React", "TypeScript", "Generative AI", "LangChain", "MongoDB", "Express"],
