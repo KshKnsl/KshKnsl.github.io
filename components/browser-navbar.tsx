@@ -18,15 +18,13 @@ import {
 import { getRandomMessage } from "@/utils/messages"
 import { scrollToElement } from "@/utils/scroll-utils"
 import ThemeToggle from "./theme-toggle"
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 
 export default function BrowserNavbar({ activeSection }: { activeSection?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [currentUrl] = useState("kushkansal.me")
   const [activeTab, setActiveTab] = useState("home")
-  const [tooltipMessage, setTooltipMessage] = useState("")
-  const [showTooltip, setShowTooltip] = useState(false)
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const navbarRef = useRef(null)
   const pathname = typeof window !== "undefined" ? window.location.pathname : "";
 
@@ -45,22 +43,6 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
       setActiveTab(activeSection === "hero" ? "home" : activeSection)
     }
   }, [activeSection])
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>, isButton = false) => {
-    if (isButton) {
-      setTooltipMessage(getRandomMessage())
-      const rect = e.currentTarget.getBoundingClientRect()
-      setTooltipPosition({
-        x: rect.left + rect.width / 2,
-        y: rect.bottom + 10,
-      })
-      setShowTooltip(true)
-    }
-  }
-
-  const handleMouseLeave = () => {
-    setShowTooltip(false)
-  }
 
   const tabs = [
     { id: "terminal", label: "Terminal", icon: <Terminal className="w-4 h-4" />, href: "#terminal" },
@@ -84,33 +66,50 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
         <div className="flex items-center justify-between h-full px-2 sm:px-4">
           <div className="flex items-center space-x-2 flex-1">
             <div className="hidden md:flex items-center space-x-1">
-              <motion.button
-                className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
-                whileTap={{ scale: 0.95 }}
-                onMouseEnter={(e) => handleMouseEnter(e, true)}
-                onMouseLeave={handleMouseLeave}
-                style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </motion.button>
-              <motion.button
-                className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
-                whileTap={{ scale: 0.95 }}
-                onMouseEnter={(e) => handleMouseEnter(e, true)}
-                onMouseLeave={handleMouseLeave}
-                style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
-              >
-                <ChevronRight className="w-4 h-4" />
-              </motion.button>
-              <motion.button
-                className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
-                whileTap={{ scale: 0.95 }}
-                onMouseEnter={(e) => handleMouseEnter(e, true)}
-                onMouseLeave={handleMouseLeave}
-                style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
-              >
-                <RefreshCw className="w-4 h-4" />
-              </motion.button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.button
+                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
+                    whileTap={{ scale: 0.95 }}
+                    style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </motion.button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {getRandomMessage()}
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.button
+                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
+                    whileTap={{ scale: 0.95 }}
+                    style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </motion.button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {getRandomMessage()}
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <motion.button
+                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
+                    whileTap={{ scale: 0.95 }}
+                    style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                  </motion.button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {getRandomMessage()}
+                </TooltipContent>
+              </Tooltip>
             </div>
 
             <div className="hidden md:flex flex-1 max-w-xl">
@@ -230,27 +229,6 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
                 </div>
               </div>
             </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {showTooltip && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="fixed z-50 px-4 py-2 text-sm font-medium text-white bg-gray-900 dark:bg-black rounded-lg shadow-lg"
-            style={{
-              left: tooltipPosition.x,
-              top: tooltipPosition.y,
-              transform: "translateX(-50%)",
-              boxShadow: "2px 2px 0px rgba(0,0,0,0.2)",
-              border: "1px solid rgba(255,255,255,0.1)",
-            }}
-          >
-            {tooltipMessage}
-            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 rotate-45 w-2 h-2 bg-gray-900 dark:bg-black"></div>
           </motion.div>
         )}
       </AnimatePresence>
