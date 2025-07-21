@@ -74,8 +74,8 @@ const COMMANDS: CommandsType = {
   
 I'm currently pursuing my B.tech from JIIT and have a keen interest in technological stuff. I get excited just by thinking about the endless possibilities of cutting-edge technologies.
 
-<span class="text-purple-600 dark:text-purple-400">• 900+ LeetCode problems solved</span>
-<span class="text-purple-600 dark:text-purple-400">• 3 ⭐ CodeChef</span>
+<span class="text-purple-600 dark:text-purple-400">• 1100+ LeetCode problems solved</span>
+<span class="text-purple-600 dark:text-purple-400">• 4 ⭐ CodeChef</span>
 <span class="text-purple-600 dark:text-purple-400">• Full-stack web developer</span>`,
 
   education: `<span class="text-pink-600 dark:text-pink-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">🎓</span> Education:</span>
@@ -142,11 +142,6 @@ Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to na
 <span class="text-blue-600 dark:text-blue-400 font-bold">Twitter:</span> <a href="https://twitter.com/knslji" class="text-cyan-600 dark:text-cyan-400 underline">twitter.com/knslji</a>
 <span class="text-blue-600 dark:text-blue-400 font-bold">Instagram:</span> <a href="https://www.instagram.com/kushkansal.exe/" class="text-cyan-600 dark:text-cyan-400 underline">instagram.com/kushkansal.exe</a>`,
 
-  resume: `<span class="text-emerald-600 dark:text-emerald-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">📄</span> Resume:</span>
-
-Click the link below to download my resume:
-<a href="https://drive.google.com/file/d/1PGtFhTsbfNuqJEsPgsTLSs9hKZm6uFc3/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-cyan-600 dark:text-cyan-400 underline">Download Resume</a>`,
-
   tech: `<span class="text-green-600 dark:text-green-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">⚙️</span> Technologies I Use:</span>
 
 <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded">React</span> <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded">Next.js</span> <span class="bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded">TypeScript</span> <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 px-2 py-0.5 rounded">JavaScript</span> <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded">Tailwind CSS</span> <span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-0.5 rounded">Node.js</span> <span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-0.5 rounded">MongoDB</span> <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded">PostgreSQL</span> <span class="bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 px-2 py-0.5 rounded">Git</span> <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded">Docker</span>`,
@@ -189,7 +184,7 @@ Click the link below to download my resume:
 
   ls: (args: string | undefined) => {
     const directories: Record<string, string[]> = {
-      "/": ["home", "projects", "about", "skills", "contact.txt", "resume.pdf"],
+      "/": ["home", "projects", "about", "skills", "contact.txt"],
       "/home": ["kush", "documents", "downloads"],
       "/home/kush": ["projects", "notes.txt", "todo.md"],
       "/projects": ["url-shortener", "portfolio-site", "chintan-trivia", "wheel-buddy", "task-master", "text-editor"],
@@ -238,7 +233,6 @@ Click the link below to download my resume:
 
     const files: Record<string, string> = {
       "contact.txt": COMMANDS.contact as string,
-      "resume.pdf": `<span class="text-yellow-600 dark:text-yellow-400">Opening resume.pdf...</span>`,
       "notes.txt": `<span class="text-gray-600 dark:text-gray-300">- Remember to update portfolio\n- Complete LeetCode challenge\n- Study for exams</span>`,
       "todo.md": `<span class="text-gray-600 dark:text-gray-300"># TODO\n- [ ] Finish portfolio website\n- [ ] Apply for internships\n- [x] Complete Java assignment</span>`,
       "education.txt": COMMANDS.education as string,
