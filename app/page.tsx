@@ -257,13 +257,7 @@ export default function Home() {
     }
   }, [isLoading, hasInteracted]);
 
-  useEffect(() => {
-    if (isLoading) {
-      const preloadHero = new window.Image();
-      preloadHero.src =
-        "/assets/MyImage.png";
-    }
-  }, [isLoading]);
+
 
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
@@ -355,7 +349,7 @@ export default function Home() {
                   style={{ maxHeight: "350px" }}
                 >
                   <Image
-                    src="/assets/MyImage.png"
+                    src="https://res.cloudinary.com/dvvoebyu3/image/upload/c_auto,g_auto,h_500,w_500/686e2b2b1924280ff00d4c8f_1753282156198?_a=BAMCkGTG0"
                     alt="Kush Kansal"
                     width={500}
                     height={350}

@@ -30,6 +30,12 @@ const nextConfig: NextConfig = {
       { hostname: "i.pinimg.com" },
       { hostname: "cdn.jsdelivr.net" },
       { hostname: "api.microlink.io" },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   experimental: {

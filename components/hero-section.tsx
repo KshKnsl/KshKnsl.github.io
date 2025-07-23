@@ -188,7 +188,7 @@ export default function HeroSection() {
             <div className="relative rounded-3xl overflow-hidden border-2 border-blue-900/30 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
               <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay z-10"></div>
               <Image
-                src="/assets/MyImage.png"
+                src="https://res.cloudinary.com/dvvoebyu3/image/upload/c_auto,g_auto,h_500,w_500/686e2b2b1924280ff00d4c8f_1753282156198?_a=BAMCkGTG0"
                 alt="Kush Kansal"
                 width={500}
                 height={500}
