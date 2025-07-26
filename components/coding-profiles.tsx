@@ -41,6 +41,11 @@ interface PlatformData {
   ranking?: number;
   institution_rank?: number;
   totalProblemsSolved?: number;
+  is_campus_ambassador?: boolean;
+  campus_ambassador?: any;
+  score?: any;
+  institute_name?: any;
+  name?: any;
 }
 
 interface FullDataState {
@@ -94,7 +99,7 @@ export default function CodingProfiles() {
   const [cfData, setCFContestDetails] = useState<ContestData[] | null>(null)
   const [ccData, setCCContestDetails] = useState<ContestData[] | null>(null)
   const [lcData, setLCContestDetails] = useState<ContestData[] | null>(null)
-  const [gfgData, setGFGContestDetails] = useState<ContestData[] | null>(null)
+  const [gfgData, setGFGContestDetails] = useState<PlatformData | null>(null)
   const [loading, setLoading] = useState<LoadingState>({
     cf: true,
     cc: true,
@@ -181,15 +186,22 @@ export default function CodingProfiles() {
 
   const handleGFGsubmit = () => {
     setLoading((prev) => ({ ...prev, gfg: true }))
-    const apiUrl = `https://geeks-for-geeks-stats-api.vercel.app/?raw=Y&userName=kushkansal`
+    const apiUrl = `https://www.geeksforgeeks.org/user/kushkansal/`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setGFGContestDetails(data)
+        setGFGContestDetails({
+          institution_rank: data.data.institute_rank,
+          totalProblemsSolved: data.data.total_problems_solved,
+          is_campus_ambassador: data.data.is_campus_ambassador,
+          campus_ambassador: data.data.campus_ambassador,
+          score: data.data.score,
+          institute_name: data.data.institute_name,
+          name: data.data.name,
+        });
         setLoading((prev) => ({ ...prev, gfg: false }))
       })
       .catch(() => {
-        // console.error("Error:", error)
         setLoading((prev) => ({ ...prev, gfg: false }))
       })
   }
@@ -454,22 +466,27 @@ const safeUrl = platform.url || '#'
           </div>
         )
 
-      case "gfg":
-        const gfgData = data as PlatformData;
+
+      case "gfg": {
+        const gfgData = data as PlatformData & {
+          is_campus_ambassador?: boolean;
+        };
         return (
           <div className="space-y-1.5">
-            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-1.5 mb-2 flex items-center gap-1.5">
-              <Star className="w-3 h-3 text-green-600 dark:text-green-400" />
-              <span className="text-[10px] font-medium text-green-700 dark:text-green-300">Campus Ambassador</span>
-            </div>
+            {gfgData.is_campus_ambassador && (
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-1.5 mb-2 flex items-center gap-1.5">
+                <Star className="w-3 h-3 text-green-600 dark:text-green-400" />
+                <span className="text-[10px] font-medium text-green-700 dark:text-green-300">Campus Ambassador</span>
+              </div>
+            )}
             <div className="flex justify-between items-center">
               <span className="text-xs text-gray-600 dark:text-gray-400">Inst. Rank</span>
               <span className="font-bold text-xs text-green-600">
-                <CountUp end={gfgData.institution_rank || 300} />
+                <CountUp end={gfgData.institution_rank || 0} />
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Problems</span>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Problems Solved</span>
               <span className="text-xs text-gray-800 dark:text-gray-200">
                 <CountUp end={gfgData.totalProblemsSolved || 450} />
               </span>
@@ -486,7 +503,8 @@ const safeUrl = platform.url || '#'
               </button>
             </div>
           </div>
-        )
+        );
+      }
 
       default:
         return null
