@@ -47,7 +47,7 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
   const tabs = [
     { id: "terminal", label: "Terminal", icon: <Terminal className="w-4 h-4" />, href: "#terminal" },
     { id: "about", label: "About", icon: <User className="w-4 h-4" />, href: "#about" },
-    { id: "projects", label: "Projects", icon: <Code className="w-4 h-4" />, href: "#projects" },
+    { id: "projects", label: "Projects", icon: <Code className="w-4 h-4" />, href: "/projects" },
     { id: "contact", label: "Contact", icon: <Mail className="w-4 h-4" />, href: "#contact" },
   ]
 

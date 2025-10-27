@@ -1,11 +1,15 @@
+
+/* eslint-disable */
 "use client"
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Code, Award, TrendingUp, BarChart, ExternalLink, X, Star } from "lucide-react"
+import { Code, Award, TrendingUp, BarChart, ExternalLink, X } from "lucide-react"
 import Image from "next/image"
 import React from "react"
 import CountUp from "./count-up"
+import { Card, CardContent, CardHeader } from "./ui/Card"
+import { StatRow } from "./ui/StatRow"
 
 interface Platform {
   id: string;
@@ -39,13 +43,30 @@ interface PlatformData {
   mediumSolved?: number;
   hardSolved?: number;
   ranking?: number;
+  acceptanceRate?: number;
   institution_rank?: number;
   totalProblemsSolved?: number;
+  podSolvedLongestStreak?: number;
+  totalScore?: number;
   is_campus_ambassador?: boolean;
   campus_ambassador?: any;
   score?: any;
   institute_name?: any;
   name?: any;
+  School?: number;
+  Basic?: number;
+  Easy?: number;
+  Medium?: number;
+  Hard?: number;
+  // Codeforces fields
+  handle?: string;
+  rank?: string;
+  maxRating?: number;
+  friends?: number;
+  // CodeChef fields
+  username?: string;
+  globalRank?: number;
+  countryRank?: number;
 }
 
 interface FullDataState {
@@ -64,22 +85,19 @@ interface LoadingState {
 const dummyData: {
   [key: string]: ContestData[] | PlatformData;
 } = {
-  cf: [
-    {
-      rating: 1446,
-      contestName: "Codeforces Round 1022 (Div. 2)",
-      rank: 4435,
-      oldRating: 1400,
-      newRating: 1446,
-      timestamp: 0,
-      handle: "mrkushkansal",
-    },
-  ],
+  cf: {
+    rating: 1466,
+    rank: "specialist",
+    handle: "mrkushkansal",
+    maxRating: 1495,
+    friends: 8,
+  },
   cc: {
-    rating: 1822,
+    username: "knsl",
+    rating: 1831,
     stars: 4,
-    global_rank: 5435,
-    country_rank: 4428,
+    globalRank: 4597,
+    countryRank: 3740,
   },
   lc: {
     totalSolved: 998,
@@ -90,15 +108,15 @@ const dummyData: {
     ranking: 18727,
   },
   gfg: {
-    institution_rank: 254,
-    totalProblemsSolved: 294,
+    institution_rank: 194,
+    totalProblemsSolved: 320,
   },
 }
 
 export default function CodingProfiles() {
-  const [cfData, setCFContestDetails] = useState<ContestData[] | null>(null)
-  const [ccData, setCCContestDetails] = useState<ContestData[] | null>(null)
-  const [lcData, setLCContestDetails] = useState<ContestData[] | null>(null)
+  const [cfData, setCFContestDetails] = useState<ContestData[] | PlatformData | null>(null)
+  const [ccData, setCCContestDetails] = useState<PlatformData | null>(null)
+  const [lcData, setLCContestDetails] = useState<PlatformData | null>(null)
   const [gfgData, setGFGContestDetails] = useState<PlatformData | null>(null)
   const [loading, setLoading] = useState<LoadingState>({
     cf: true,
@@ -110,18 +128,18 @@ export default function CodingProfiles() {
 
   const getLCRating = async () => {
     try {
-      const response = await fetch("https://alfa-leetcode-api.onrender.com/userContestRankingInfo/kshkansal")
+      const response = await fetch("/api/leetcode-rating")
       
       if (!response.ok) {
-        return 1963
+        return 2069
       }
       const data = await response.json()
-      return Math.max(data?.data?.userContestRanking?.rating || 1963, 1963)
+      return Math.max(data?.data?.userContestRanking?.rating || 2069, 2069)
     } catch {
-      return 1963
+      return 2069
     }
   }
-  const [lcrating, setlcRating] = useState(1963)
+  const [lcrating, setlcRating] = useState(2069)
 
   useEffect(() => {
     const fetchRating = async () => {
@@ -141,22 +159,28 @@ export default function CodingProfiles() {
 
   const handleCFsubmit = () => {
     setLoading((prev) => ({ ...prev, cf: true }))
-    const apiUrl = `https://codeforces.com/api/user.rating?handle=mrkushkansal`
+    const apiUrl = `/api/codeforces`
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setCFContestDetails(data.result)
+        if (data && Array.isArray(data.result)) {
+          setCFContestDetails(data.result)
+        } else if (data && typeof data === 'object') {
+          setCFContestDetails(data as PlatformData)
+        } else {
+          setCFContestDetails(dummyData.cf as ContestData[])
+        }
         setLoading((prev) => ({ ...prev, cf: false }))
       })
       .catch(() => {
-        // console.error("Error:", error)
+        setCFContestDetails(dummyData.cf as ContestData[])
         setLoading((prev) => ({ ...prev, cf: false }))
       })
   }
 
   const handleCCsubmit = () => {
     setLoading((prev) => ({ ...prev, cc: true }))
-    const apiUrl = `https://codechef-api-1.onrender.com/codechef/knsl`
+    const apiUrl = `/api/codechef`
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -164,14 +188,14 @@ export default function CodingProfiles() {
         setLoading((prev) => ({ ...prev, cc: false }))
       })
       .catch(() => {
-        // console.error("Error:", error)
+        setCCContestDetails(dummyData.cc as PlatformData)
         setLoading((prev) => ({ ...prev, cc: false }))
       })
   }
 
   const handleLCsubmit = () => {
     setLoading((prev) => ({ ...prev, lc: true }))
-    const apiUrl = `https://leetcode-stats-api.herokuapp.com/kshkansal`
+    const apiUrl = `/api/leetcode`
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -179,29 +203,22 @@ export default function CodingProfiles() {
         setLoading((prev) => ({ ...prev, lc: false }))
       })
       .catch(() => {
-        // console.error("Error:", error)
+        setLCContestDetails(dummyData.lc as PlatformData)
         setLoading((prev) => ({ ...prev, lc: false }))
       })
   }
 
   const handleGFGsubmit = () => {
     setLoading((prev) => ({ ...prev, gfg: true }))
-    const apiUrl = `https://www.geeksforgeeks.org/user/kushkansal/`;
+    const apiUrl = `/api/gfg`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setGFGContestDetails({
-          institution_rank: data.data.institute_rank,
-          totalProblemsSolved: data.data.total_problems_solved,
-          is_campus_ambassador: data.data.is_campus_ambassador,
-          campus_ambassador: data.data.campus_ambassador,
-          score: data.data.score,
-          institute_name: data.data.institute_name,
-          name: data.data.name,
-        });
+        setGFGContestDetails(data);
         setLoading((prev) => ({ ...prev, gfg: false }))
       })
       .catch(() => {
+        setGFGContestDetails(dummyData.gfg as PlatformData)
         setLoading((prev) => ({ ...prev, gfg: false }))
       })
   }
@@ -255,14 +272,10 @@ export default function CodingProfiles() {
   }
 
   const renderProfileCard = (platform: Platform, data: PlatformData | ContestData[] | null, isLoading: boolean) => {
-const safeUrl = platform.url || '#'
+    const safeUrl = platform.url || '#';
     return (
-      <motion.div
-        className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0A0A0A] overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)] h-full"
-        whileHover={{ y: -5 }}
-        transition={{ duration: 0.2 }}
-      >
-        <div className={`border-b border-gray-200 dark:border-gray-800 ${platform.lightBgColor} p-3`}>
+      <Card>
+        <CardHeader className={platform.lightBgColor}>
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0A0A0A] p-1 flex items-center justify-center shadow-xs">
               <Image
@@ -276,154 +289,114 @@ const safeUrl = platform.url || '#'
             </div>
             <h4 className="font-bold text-sm text-gray-900 dark:text-white">{platform.name}</h4>
           </div>
-        </div>
-        <div className="p-3">
+        </CardHeader>
+        <CardContent>
           {isLoading ? (
             renderPlatformData(platform.id, dummyData[platform.id], safeUrl)
           ) : (
             renderPlatformData(platform.id, data, safeUrl)
           )}
-        </div>
-      </motion.div>
-    )
+        </CardContent>
+      </Card>
+    );
   }
 
   const renderPlatformData = (platformId: string, data: PlatformData | ContestData[] | null, platformUrl: string) => {
     if (!data) {
-      return (
-        <div className="flex justify-center items-center h-20 text-gray-500 dark:text-gray-400 text-xs">
-          No data available
-        </div>
-      )
+      return renderPlatformData(platformId, dummyData[platformId], platformUrl);
     }
 
-    const safeUrl = platformUrl || '#'
-    safeUrl.trim()
+    const safeUrl = platformUrl || '#';
+    safeUrl.trim();
 
     function getTitle(rating: number) {
-      if (rating < 1200) return "Newbie"
-      if (rating < 1400) return "Pupil"
-      if (rating < 1600) return "Specialist"
-      if (rating < 1900) return "Expert"
-      if (rating < 2100) return "Candidate Master"
+      if (rating < 1200) return "Newbie";
+      if (rating < 1400) return "Pupil";
+      if (rating < 1600) return "Specialist";
+      if (rating < 1900) return "Expert";
+      if (rating < 2100) return "Candidate Master";
     }
 
     switch (platformId) {
-      case "cf":
-        const lastContest = getLastContest(data as ContestData[] | null)
-        return lastContest ? (
-          <div className="space-y-1.5">
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">User handle</span>
-              <span className="font-bold text-xs text-red-500">
-                {lastContest.handle}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Rating</span>
-              <span className="font-bold text-xs text-red-500">
-                <CountUp end={lastContest.newRating} />
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Title</span>
-              <span className="font-bold text-xs text-red-500">
-                {getTitle(lastContest.newRating)}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Last Contest</span>
-              <span
-                className="text-xs text-gray-800 dark:text-gray-200 truncate max-w-[140px]"
-                title={lastContest.contestName}
-              >
-                {lastContest.contestName}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Rank</span>
-              <span className="text-xs text-gray-800 dark:text-gray-200">
-                <CountUp end={lastContest.rank} />
-              </span>
-            </div>
-            <div className="flex justify-between mt-1.5">
-              <button
-                onClick={() => {
-                  if (Array.isArray(data)) {
+      case "cf": {
+        if (Array.isArray(data)) {
+          const lastContest = getLastContest(data as ContestData[] | null);
+          return lastContest ? (
+            <div className="space-y-1.5">
+              <StatRow label="User handle" value={lastContest.handle} valueClassName="font-bold text-red-500" />
+              <StatRow label="Rating" value={<CountUp end={lastContest.newRating} />} valueClassName="font-bold text-red-500" />
+              <StatRow label="Title" value={getTitle(lastContest.newRating)} valueClassName="font-bold text-red-500" />
+              <StatRow label="Last Contest" value={lastContest.contestName} valueClassName="truncate max-w-[140px]" />
+              <StatRow label="Rank" value={<CountUp end={lastContest.rank} />} />
+              <div className="flex justify-between mt-1.5">
+                <button
+                  onClick={() => {
                     setShowFullData({ platform: "Codeforces", data });
-                  }
-                }}
-                className="text-[10px] text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 flex items-center justify-center gap-1"
-              >
-                <ExternalLink className="w-2.5 h-2.5" />
-                View Full History
-              </button>
-            </div>
-          </div>
-        ) : null
-
-      case "cc":
-        const ccData = data as PlatformData;
-        return (
-          <div className="space-y-1.5">
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">User handle</span>
-              <span className="font-bold text-xs text-red-500">
-                {"knsl"}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Rating</span>
-              <span className="font-bold text-xs text-yellow-600">
-                <CountUp end={ccData.rating || 0} />
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Stars</span>
-              <div className="flex">
-                {[...Array(Number.parseInt(ccData.stars?.toString() || "0"))].map((_, i) => (
-                  <span key={i} className="text-yellow-500 text-xs">
-                    ⭐
-                  </span>
-                ))}
+                  }}
+                  className="text-[10px] text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 flex items-center justify-center gap-1"
+                >
+                  <ExternalLink className="w-2.5 h-2.5" />
+                  View Full History
+                </button>
               </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Global Rank</span>
-              <span className="text-xs text-gray-800 dark:text-gray-200">
-                <CountUp end={ccData.global_rank || 0} />
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Country Rank</span>
-              <span className="text-xs text-gray-800 dark:text-gray-200">
-                <CountUp end={ccData.country_rank || 0} />
-              </span>
-            </div>
+          ) : null;
+        }
+
+        const cfSummary = data as PlatformData;
+        return (
+          <div className="space-y-1.5">
+            <StatRow label="User handle" value={(cfSummary as any).handle || (cfSummary as any).username} valueClassName="font-bold text-red-500" />
+            <StatRow label="Rating" value={<CountUp end={Number((cfSummary as any).rating) || 0} />} valueClassName="font-bold text-red-500" />
+            <StatRow label="Title" value={(cfSummary as any).rank || (cfSummary as any).title || getTitle(Number((cfSummary as any).rating) || 0)} valueClassName="font-bold text-red-500" />
+            <StatRow label="Max Rating" value={<CountUp end={Number((cfSummary as any).maxRating) || 0} />} />
+            <StatRow label="Friends" value={(cfSummary as any).friends || "0"} />
             <div className="flex justify-between mt-1.5">
               <button
-                onClick={() => {
-                  setShowFullData({ platform: "CodeChef", data });
-                }}
-                className="text-[10px] text-yellow-600 hover:text-yellow-700 dark:text-yellow-500 dark:hover:text-yellow-400 flex items-center justify-center gap-1"
-              >         
+                onClick={() => setShowFullData({ platform: "Codeforces", data })}
+                className="text-[10px] text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 flex items-center justify-center gap-1"
+              >
                 <ExternalLink className="w-2.5 h-2.5" />
                 View Full Data
               </button>
             </div>
           </div>
-        )
+        );
+      }
+
+      case "cc": {
+        // cp-rating-api summary object for CodeChef
+        const ccSummary = data as PlatformData;
+        return (
+          <div className="space-y-1.5">
+            <StatRow label="Username" value={(ccSummary as any).username} valueClassName="font-bold text-yellow-600" />
+            <StatRow label="Rating" value={<CountUp end={Number((ccSummary as any).rating) || 0} />} valueClassName="font-bold text-yellow-600" />
+            <StatRow label="Stars" value={(ccSummary as any).stars || "0★"} valueClassName="font-bold text-yellow-600" />
+            <StatRow label="Global Rank" value={<CountUp end={Number((ccSummary as any).globalRank) || 0} />} />
+            <StatRow label="Country Rank" value={<CountUp end={Number((ccSummary as any).countryRank) || 0} />} />
+            <div className="flex justify-between mt-1.5">
+              <button
+                onClick={() => setShowFullData({ platform: "CodeChef", data })}
+                className="text-[10px] text-yellow-600 hover:text-yellow-700 dark:text-yellow-500 dark:hover:text-yellow-400 flex items-center justify-center gap-1"
+              >
+                <ExternalLink className="w-2.5 h-2.5" />
+                View Full Data
+              </button>
+            </div>
+          </div>
+        );
+      }
 
       case "lc":
+        if (!data) return null;
         const lcData = data as PlatformData;
         return (
           <div className="space-y-1.5">
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Problems</span>
-              <span className="font-bold text-xs text-orange-500">
-                <CountUp end={lcData.totalSolved || 0} /> / {lcData.totalQuestions || 0}
-              </span>
-            </div>
+            <StatRow 
+              label="Problems" 
+              value={<><CountUp end={lcData.totalSolved || 0} /> / {lcData.totalQuestions || 0}</>} 
+              valueClassName="font-bold text-orange-500" 
+            />
             <div className="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <div className="flex h-full">
                 <div
@@ -440,18 +413,9 @@ const safeUrl = platform.url || '#'
                 ></div>
               </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Ranking</span>
-              <span className="text-xs text-gray-800 dark:text-gray-200">
-                <CountUp end={lcData.ranking || 0} />
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Rating</span>
-              <span className="text-xs text-gray-800 dark:text-gray-200">
-                <CountUp end={Math.max(lcrating, 1963)} />
-              </span>
-            </div>
+            <StatRow label="Ranking" value={<CountUp end={lcData.ranking || 0} />} />
+            <StatRow label="Rating" value={<CountUp end={Math.max(lcrating, 2069)} />} />
+            <StatRow label="Acceptance" value={`${lcData.acceptanceRate}%`} />
             <div className="flex justify-between mt-1.5">
               <button
                 onClick={() => {
@@ -464,33 +428,18 @@ const safeUrl = platform.url || '#'
               </button>
             </div>
           </div>
-        )
-
+        );
 
       case "gfg": {
-        const gfgData = data as PlatformData & {
-          is_campus_ambassador?: boolean;
-        };
+        const gfgData = data as any; // The full JSON response
         return (
           <div className="space-y-1.5">
-            {gfgData.is_campus_ambassador && (
-              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-1.5 mb-2 flex items-center gap-1.5">
-                <Star className="w-3 h-3 text-green-600 dark:text-green-400" />
-                <span className="text-[10px] font-medium text-green-700 dark:text-green-300">Campus Ambassador</span>
-              </div>
+            <StatRow label="User handle" value={gfgData.info?.userName || gfgData.name} valueClassName="font-bold text-green-500" />
+            <StatRow label="Problems Solved" value={<CountUp end={gfgData.info?.totalProblemsSolved || 0} />} />
+            <StatRow label="Coding Score" value={<CountUp end={gfgData.info?.codingScore || 0} />} />
+            {gfgData.info?.instituteRank && (
+              <StatRow label="Institute Rank" value={<CountUp end={gfgData.info.instituteRank} />} />
             )}
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Inst. Rank</span>
-              <span className="font-bold text-xs text-green-600">
-                <CountUp end={gfgData.institution_rank || 0} />
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Problems Solved</span>
-              <span className="text-xs text-gray-800 dark:text-gray-200">
-                <CountUp end={gfgData.totalProblemsSolved || 450} />
-              </span>
-            </div>
             <div className="flex justify-between mt-1.5">
               <button
                 onClick={() => {
@@ -507,7 +456,7 @@ const safeUrl = platform.url || '#'
       }
 
       default:
-        return null
+        return null;
     }
   }
 

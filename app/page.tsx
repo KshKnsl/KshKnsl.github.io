@@ -60,7 +60,7 @@ const personalInfo = {
   email: "kushkansal0@gmail.com",
   github: "https://github.com/KshKnsl/",
   linkedin: "https://www.linkedin.com/in/kushkansal/",
-  instagram: "https://www.instagram.com/kushkansal.exe/",
+  instagram: "https://www.instagram.com/kushkansal.async/",
   twitter: "https://twitter.com/knslji",
   about: `Hi, I am Kush Kansal — a pre-final year B.Tech student at JIIT, passionate about building tech that solves real problems. I'm a full-stack developer specializing in the MERN stack (MongoDB, Express, React, Node.js) with strong foundations in Java, C++, and Data Structures & Algorithms. Curious by nature and driven by impact, I love exploring the potential of emerging technologies, crafting solutions to complex challenges. I enjoy turning ideas into scalable, clean, maintainable code. Currently deepening my expertise in advanced full-stack development patterns and advanced DSA concepts, with a goal to grow, build, and make a meaningful difference through technology.`,
   projects: [
@@ -376,8 +376,8 @@ export default function Home() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <a
-                      href="#projects"
-                      onClick={(e) => handleHashLinkClick(e, "#projects")}
+                      href="/projects"
+                      onClick={(e) => handleHashLinkClick(e, "/projects")}
                       className="px-4 sm:px-6 py-2 text-white rounded-lg bg-gradient-primary hover:opacity-90 transition-opacity border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] text-sm sm:text-base"
                     >
                       View Projects

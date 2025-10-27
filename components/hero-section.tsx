@@ -148,7 +148,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-base sm:text-lg md:text-xl dark:text-gray-400"
             >
-             Full-Stack Developer | CSE @ JIIT&apos; 27  MERN | Knight @ LeetCode (solved 1000+) | 4⭐ @ CodeChef | Specialist @ Codeforces
+             Full-Stack Developer | CSE @ JIIT&apos; 27  MERN | Knight @ LeetCode (solved 1200+) | 4⭐ @ CodeChef | Specialist @ Codeforces
             </motion.p>
 
             <motion.div

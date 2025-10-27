@@ -28,7 +28,7 @@ const socialLinks = [
 	{
 		name: "Instagram",
 		icon: Instagram,
-		href: "https://www.instagram.com/kushkansal.exe/",
+		href: "https://www.instagram.com/kushkansal.async/",
 		color: "hover:text-[#e4405f] dark:hover:text-[#f4506f]",
 		bgColor: "hover:bg-pink-50 dark:hover:bg-pink-900/20",
 	},
@@ -109,7 +109,7 @@ export default function ContactIcons() {
 												{social.name === "GitHub" && "@kshknsl"}
 												{social.name === "LinkedIn" && "in/kushkansal"}
 												{social.name === "Twitter" && "@knslji"}
-												{social.name === "Instagram" && "@kushkansal.exe"}
+												{social.name === "Instagram" && "@kushkansal.async"}
 											</p>
 										</div>
 									</motion.a>
@@ -139,7 +139,7 @@ export default function ContactIcons() {
 						<span className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">Download Resume</span>
 					</motion.a>
 					<motion.a
-						href="#projects"
+						href="/projects"
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}
 						transition={{ type: "spring", stiffness: 400, damping: 20 }}

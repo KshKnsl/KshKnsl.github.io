@@ -140,7 +140,7 @@ Type <span class="text-yellow-600 dark:text-yellow-400">cd projects</span> to na
 <span class="text-blue-600 dark:text-blue-400 font-bold">GitHub:</span> <a href="https://github.com/kshknsl/" class="text-cyan-600 dark:text-cyan-400 underline">github.com/kshknsl</a>
 <span class="text-blue-600 dark:text-blue-400 font-bold">LinkedIn:</span> <a href="https://www.linkedin.com/in/kushkansal/" class="text-cyan-600 dark:text-cyan-400 underline">linkedin.com/in/kushkansal</a>
 <span class="text-blue-600 dark:text-blue-400 font-bold">Twitter:</span> <a href="https://twitter.com/knslji" class="text-cyan-600 dark:text-cyan-400 underline">twitter.com/knslji</a>
-<span class="text-blue-600 dark:text-blue-400 font-bold">Instagram:</span> <a href="https://www.instagram.com/kushkansal.exe/" class="text-cyan-600 dark:text-cyan-400 underline">instagram.com/kushkansal.exe</a>`,
+<span class="text-blue-600 dark:text-blue-400 font-bold">Instagram:</span> <a href="https://www.instagram.com/kushkansal.async/" class="text-cyan-600 dark:text-cyan-400 underline">instagram.com/kushkansal.async</a>`,
 
   tech: `<span class="text-green-600 dark:text-green-400 font-bold"><span class="text-yellow-600 dark:text-yellow-300">⚙️</span> Technologies I Use:</span>
 

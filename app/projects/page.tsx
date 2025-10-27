@@ -2,9 +2,10 @@
 
 import BrowserNavbar from "@/components/browser-navbar"
 import { motion } from "framer-motion"
-import { ArrowLeft, Play, Globe, Code } from "lucide-react"
+import { ArrowLeft, Play, Globe, Code, Search } from "lucide-react"
 import Link from "next/link"
 import { LinkPreview } from "@/components/ui/link-preview"
+import { useState } from "react"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -99,6 +100,28 @@ const projects: Project[] = [
     technologies: ["JavaScript", "Chrome Extension"],
   },
   {
+    title: "Leetcode-AutoTicker",
+    codeLink: "https://github.com/KshKnsl/Leetcode-AutoTicker",
+    description:
+      "LeetCode Auto Ticker is a Chrome extension that automatically marks (✔️) the LeetCode problems you've solved, directly in the UI of any websites—including Take U Forward sheets and any site with LeetCode problem links or sheets. It enhances UI for Take U Forward sheets with quick access buttons to GFG and Coding Ninja solutions. No popup required—just install and enjoy. No login or LeetCode ID required to be set up.",
+    technologies: ["JavaScript", "Chrome Extension"],
+  },
+  {
+    title: "Spotify Organiser",
+    codeLink: "https://github.com/KshKnsl/spotify-organiser",
+    description:
+      "A Flask web application that helps you organize your Spotify playlists by automatically categorizing tracks by genre and creating new organized playlists. Features Spotify authentication, playlist analysis, genre-based organization, and duplicate removal.",
+    technologies: ["Python", "Flask", "Spotipy", "OAuth"],
+  },
+  {
+    title: "FRA Atlas & Decision Support System",
+    liveLink: "https://fra-gis-dss.vercel.app",
+    codeLink: "https://github.com/KshKnsl/FRA-GIS-DSS",
+    description:
+      "A comprehensive Forest Rights Act (FRA) Atlas and Decision Support System that digitizes FRA records, builds interactive WebGIS maps, and provides scheme recommendations for forest-dwelling communities using satellite imagery and ML.",
+    technologies: ["React", "Node.js", "Leaflet", "PostGIS", "PostgreSQL", "Tesseract"],
+  },
+  {
     title: "An Older Portfolio Site",
     liveLink: "https://knsl.vercel.app",
     codeLink: "https://github.com/KshKnsl/Portfolio",
@@ -134,7 +157,7 @@ const projects: Project[] = [
     codeLink: "https://github.com/KshKnsl/CongiScript",
     description:
       "An AI-powered document chat application that allows users to upload documents and interact with their content through a conversational interface using Google Gemini and Qdrant vector database.",
-    technologies: ["VectorDB", "Generative AI", "LangChain"],
+    technologies: ["VectorDB", "Generative AI", "LangChain","Qdrant"],
   },
    {
     title: "BulkMailer",
@@ -185,6 +208,16 @@ const projects: Project[] = [
 ]
 
 export default function ProjectsPage() {
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const filteredProjects = projects.filter(project => {
+    const searchLower = searchTerm.toLowerCase()
+    return (
+      project.title.toLowerCase().includes(searchLower) ||
+      project.description.toLowerCase().includes(searchLower) ||
+      project.technologies.some(tech => tech.toLowerCase().includes(searchLower))
+    )
+  })
 
   return (
     <main className="min-h-screen bg-white dark:bg-black pt-24 pb-20">
@@ -207,17 +240,28 @@ export default function ProjectsPage() {
             className="border-b border-gray-200 dark:border-gray-800 pb-6 mb-10"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">All Projects</h1>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl">
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mb-6">
               A comprehensive showcase of my work, including web applications, tools, and other software projects. Each
               project represents different skills and technologies I&apos;ve worked with.
             </p>
+            
+            <div className="relative max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Search projects by title, description, or technology..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec3750] focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+              />
+            </div>
           </motion.div>
         </div>
 
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 20 }}
@@ -231,7 +275,7 @@ export default function ProjectsPage() {
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#ec3750] dark:group-hover:text-[#ff4d6a] transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{truncateDescription(project.description, 100)}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">{truncateDescription(project.description, 100)}</p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project?.technologies?.map((tech, i) => {
@@ -257,9 +301,9 @@ export default function ProjectsPage() {
                     else if (tech === "MySQL") 
                       bgColor = "bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300";
                     else if (tech === "PHP") 
-                      bgColor = "bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300";
+                      bgColor = "bg-violet-100 dark:bg-violet-900/30 text-violet-800 dark:text-violet-300";
                     else if (tech === "C++") 
-                      bgColor = "bg-pink-100 dark:bg-pink-900/30 text-pink-800 dark:text-pink-300";
+                      bgColor = "bg-rose-100 dark:bg-rose-900/30 text-rose-800 dark:text-rose-300";
                     else if (tech === "C") 
                       bgColor = "bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300";
                     else if (tech === "Socket.io") 
@@ -267,13 +311,41 @@ export default function ProjectsPage() {
                     else if (tech === "LangChain") 
                       bgColor = "bg-blue-200 dark:bg-blue-800/30 text-blue-900 dark:text-blue-400";
                     else if (tech === "CSS") 
-                      bgColor = "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300";
+                      bgColor = "bg-cyan-100 dark:bg-cyan-900/30 text-cyan-800 dark:text-cyan-300";
                     else if (tech === "Generative AI") 
                       bgColor = "bg-violet-100 dark:bg-violet-900/30 text-violet-800 dark:text-violet-300";
                     else if (tech === "MongoDB") 
-                      bgColor = "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300";
+                      bgColor = "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300";
                     else if (tech === "Express") 
-                      bgColor = "bg-gray-100 dark:bg-gray-900/30 text-gray-800 dark:text-gray-300";
+                      bgColor = "bg-stone-100 dark:bg-stone-900/30 text-stone-800 dark:text-stone-300";
+                    else if (tech === "VectorDB") 
+                      bgColor = "bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300";
+                    else if (tech === "Qdrant") 
+                      bgColor = "bg-lime-100 dark:bg-lime-900/30 text-lime-800 dark:text-lime-300";
+                    else if (tech === "PostGIS") 
+                      bgColor = "bg-teal-200 dark:bg-teal-800/30 text-teal-900 dark:text-teal-400";
+                    else if (tech === "PostgreSQL") 
+                      bgColor = "bg-blue-200 dark:bg-blue-800/30 text-blue-900 dark:text-blue-400";
+                    else if (tech === "Leaflet") 
+                      bgColor = "bg-green-200 dark:bg-green-800/30 text-green-900 dark:text-green-400";
+                    else if (tech === "Tesseract") 
+                      bgColor = "bg-indigo-200 dark:bg-indigo-800/30 text-indigo-900 dark:text-indigo-400";
+                    else if (tech === "OAuth") 
+                      bgColor = "bg-pink-200 dark:bg-pink-800/30 text-pink-900 dark:text-pink-400";
+                    else if (tech === "CLI") 
+                      bgColor = "bg-gray-200 dark:bg-gray-800/30 text-gray-900 dark:text-gray-400";
+                    else if (tech === "Puppeteer") 
+                      bgColor = "bg-red-200 dark:bg-red-800/30 text-red-900 dark:text-red-400";
+                    else if (tech === "WebSocket") 
+                      bgColor = "bg-yellow-200 dark:bg-yellow-800/30 text-yellow-900 dark:text-yellow-400";
+                    else if (tech === "Docker") 
+                      bgColor = "bg-blue-300 dark:bg-blue-700/30 text-blue-900 dark:text-blue-200";
+                    else if (tech === "DigitalJS") 
+                      bgColor = "bg-emerald-200 dark:bg-emerald-800/30 text-emerald-900 dark:text-emerald-400";
+                    else if (tech === "Spotipy") 
+                      bgColor = "bg-green-300 dark:bg-green-700/30 text-green-900 dark:text-green-200";
+                    else if (tech === "Java") 
+                      bgColor = "bg-rose-200 dark:bg-rose-800/30 text-rose-900 dark:text-rose-400";
                     else if (tech === "GSAP") 
                       bgColor = "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300";
                     else if (tech === "Flask") 

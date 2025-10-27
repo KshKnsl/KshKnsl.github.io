@@ -8,6 +8,7 @@ import { GithubIcon } from "lucide-react";
 import Link from "next/link";
 import CountUp from "./count-up";
 import Image from "next/image";
+import { Card, CardContent, CardHeader } from "./ui/Card";
 
 interface GitHubProfileProps {
   username: string;
@@ -121,64 +122,58 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
 
   return (
     <>
-      <motion.div
-        className="mt-2 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0A0A0A] overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)] cursor-pointer"
-        whileHover={{ y: -5 }}
-        transition={{ duration: 0.2 }}
-        onClick={handleProfileClick}
-      >
-        <div className="flex items-center gap-3 text-xl">
-          <GithubIcon className="rounded-full" />
-          <div>
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                GitHub
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                <Link
-                  href="https://github.com/KshKnsl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="flex items-center hover:underline"
-                >
-                  {profile.data.login}
-                  <ExternalLink className="w-3 h-3 ml-1" />
-                </Link>
-              </p>
+      <Card onClick={handleProfileClick} className="mt-2 cursor-pointer">
+        <CardHeader>
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-3">
+              <GithubIcon className="rounded-full" />
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  GitHub
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  <Link
+                    href="https://github.com/KshKnsl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center hover:underline"
+                  >
+                    {profile.data.login}
+                    <ExternalLink className="w-3 h-3 ml-1" />
+                  </Link>
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
+                <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
+                  <BookOpen className="w-3 h-3" /> Repos
+                </span>
+                <span className="text-sm font-bold text-gray-900 dark:text-white">
+                  <CountUp end={profile.data.public_repos} />
+                </span>
+              </div>
+              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
+                <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
+                  <Users className="w-3 h-3" /> Followers
+                </span>
+                <span className="text-sm font-bold text-gray-900 dark:text-white">
+                  <CountUp end={profile.data.followers} />
+                </span>
+              </div>
+              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
+                <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
+                  <GitFork className="w-3 h-3" /> Contrib
+                </span>
+                <span className="text-sm font-bold text-gray-900 dark:text-white">
+                  <CountUp end={profile.contributions} suffix="+" />
+                </span>
+              </div>
             </div>
           </div>
-
-          <div className="grid grid-cols-3 gap-2 w-full mt-4 sm:mt-0">
-            <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
-              <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
-                <BookOpen className="w-3 h-3" /> Repos
-              </span>
-              <span className="text-sm font-bold text-gray-900 dark:text-white">
-                <CountUp end={profile.data.public_repos} />
-              </span>
-            </div>
-
-            <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
-              <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
-                <Users className="w-3 h-3" /> Followers
-              </span>
-              <span className="text-sm font-bold text-gray-900 dark:text-white">
-                <CountUp end={profile.data.followers} />
-              </span>
-            </div>
-
-            <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
-              <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
-                <GitFork className="w-3 h-3" /> Contrib
-              </span>
-              <span className="text-sm font-bold text-gray-900 dark:text-white">
-                <CountUp end={profile.contributions} suffix="+" />
-              </span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+        </CardHeader>
+      </Card>
 
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -581,6 +576,14 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
                       width={85}
                       height={28}
                     />
+                    <Image
+                      src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"
+                      alt="Postman"
+                      width={100}
+                      height={28}
+                    />
+                  </div>
+                  <div className="flex-1 flex justify-center items-center">
                     <Image
                       src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"
                       alt="Postman"
