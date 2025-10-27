@@ -2,13 +2,12 @@
 
 import type React from "react";
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import { GitFork, Users, BookOpen, ExternalLink, X } from "lucide-react";
 import { GithubIcon } from "lucide-react";
 import Link from "next/link";
 import CountUp from "./count-up";
 import Image from "next/image";
-import { Card, CardContent, CardHeader } from "./ui/Card";
+import { Card, CardHeader } from "./ui/Card";
 
 interface GitHubProfileProps {
   username: string;
