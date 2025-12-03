@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Send, User, Mail, Phone, MessageSquare } from "lucide-react";
 import emailjs from '@emailjs/browser';
+import CustomButton from './ui/CustomButton';
 
 interface FormErrors {
   name?: string;
@@ -272,23 +273,20 @@ export default function ContactForm() {
               </div>
             </div>
 
-            <div className="pt-2 flex gap-4">
-            <motion.button
-              type="button"
-              onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
-              className="w-full py-3 px-6 flex items-center justify-center gap-2 bg-gray-50/50 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70 border border-gray-200 dark:border-gray-700"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span role="img" aria-label="sparkles">✨</span>
-              <span>Surprise me</span>
-            </motion.button>
-              <motion.button
+            <div className="pt-2 flex gap-4 justify-center">
+              <CustomButton
+                type="button"
+                onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
+                needBgGradient={false}
+              >
+                <span role="img" aria-label="sparkles">✨</span>
+                <span>Surprise me</span>
+              </CustomButton>
+              <CustomButton
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-6 flex items-center justify-center gap-2 bg-gradient-primary text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-70 border border-[#ec3750]/20 dark:border-[#ff4d6a]/20"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                needBgGradient={true}
+                onClick={() => {}}
               >
                 {isSubmitting ? (
                   <>
@@ -320,7 +318,7 @@ export default function ContactForm() {
                     <span>Send Message</span>
                   </>
                 )}
-              </motion.button>
+              </CustomButton>
             </div>
           </div>
         </motion.form>

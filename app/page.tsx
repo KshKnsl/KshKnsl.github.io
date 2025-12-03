@@ -17,6 +17,7 @@ import BrowserNavbar from "@/components/browser-navbar";
 import TerminalEmulator from "@/components/terminal-emulator";
 import LoadingScreen from "@/components/loading-screen";
 import HeroSection from "@/components/hero-section";
+import CustomButton from "@/components/ui/CustomButton";
 import Image from "next/image";
 import { handleHashLinkClick } from "@/utils/scroll-utils";
 import Link from "next/link";
@@ -29,7 +30,6 @@ const ContactIcons = lazy(() => import("@/components/contact-icons"));
 const CodingProfiles = lazy(() => import("@/components/coding-profiles"));
 const GitHubProfile = lazy(() => import("@/components/github-profile"));
 const VisitorCounter = lazy(() => import("@/components/visitor-countor"));
-// const AiChat = lazy(() => import("@/components/ai-chat"));
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -375,13 +375,11 @@ export default function Home() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <a
-                      href="/projects"
-                      onClick={(e) => handleHashLinkClick(e, "/projects")}
-                      className="px-4 sm:px-6 py-2 text-white rounded-lg bg-gradient-primary hover:opacity-90 transition-opacity border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] text-sm sm:text-base"
-                    >
-                      View Projects
-                    </a>
+                    <Link href="/projects">
+                      <button className="px-4 sm:px-6 py-2 text-white rounded-lg bg-gradient-primary hover:opacity-90 transition-opacity border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] text-sm sm:text-base">
+                        View Projects
+                      </button>
+                    </Link>
                   </motion.div>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -390,9 +388,10 @@ export default function Home() {
                     <a
                       href="#contact"
                       onClick={(e) => handleHashLinkClick(e, "#contact")}
-                      className="px-4 sm:px-6 py-2 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-[#0A0A0A] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] text-sm sm:text-base"
                     >
-                      Contact Me
+                      <button className="px-4 sm:px-6 py-2 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-[#0A0A0A] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] text-sm sm:text-base">
+                        Contact Me
+                      </button>
                     </a>
                   </motion.div>
                 </div>
@@ -536,12 +535,11 @@ export default function Home() {
             whileTap={{ scale: 0.95 }}
             className="flex align-center justify-center mt-6 sm:mt-10"
           >
-            <Link
-              href="/projects"
-              className="px-4 sm:px-6 py-2 sm:py-3 text-gray-800 dark:text-gray-200 border border-gray-00 dark:border-gray-700 rounded-lg hover:bg-blue-50 dark:hover:bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] flex items-center text-sm sm:text-base"
-            >
-              View All Projects
-              <ArrowUpRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
+            <Link href="/projects">
+              <CustomButton needBgGradient={false}>
+                View All Projects
+                <ArrowUpRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
+              </CustomButton>
             </Link>
           </motion.div>
         </div>
@@ -654,54 +652,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
-      {/* New AI Chat Section 
-      <section
-        id="ai-chat-section"
-        className="py-12 sm:py-20 bg-gray-50 dark:bg-black/90 border-t border-gray-200 dark:border-gray-800"
-      >
-        <div className="container px-4 mx-auto max-w-7xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeInUp}
-            className="text-center mb-8 sm:mb-12"
-          >
-            <motion.div
-              whileHover={{ rotate: 15, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="inline-block"
-            >
-              <Bot className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 text-[#3b82f6] dark:text-[#60a5fa]" />
-            </motion.div>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">
-              Chat with My AI Twin
-            </h2>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Have a quick question? Get instant responses from my AI assistant.
-            </p>
-          </motion.div>
- 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeInUp}
-            className="max-w-3xl mx-auto" // Center the chat component
-          >
-            <Suspense
-              fallback={
-                <div className="min-h-[450px] flex items-center justify-center">
-                  Loading AI Chat...
-                </div>
-              }
-            >
-              <AiChat />
-            </Suspense>
-          </motion.div> 
-        </div>
-      </section> */}
 
       <footer className="bg-gray-50 dark:bg-black/90 border-t border-gray-200 dark:border-gray-800 flex container justify-center items-center sm:flex-row flex-col">
         <div className="container my-6 sm:my-8 px-4 mx-auto">
