@@ -119,7 +119,7 @@ export default function ContactForm() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-8 rounded-2xl bg-white/80 dark:bg-black/80 backdrop-blur-lg border border-gray-200 dark:border-gray-700 shadow-xl text-center"
+          className="p-8 rounded-2xl bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-gray-200 dark:border-gray-700 shadow-[0_14px_34px_rgba(13,71,161,0.14)] text-center"
         >
           <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
           <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
@@ -133,7 +133,7 @@ export default function ContactForm() {
       ) : (
         <motion.form
           onSubmit={handleSubmit}
-          className="p-8 rounded-2xl bg-white/80 dark:bg-black/80 backdrop-blur-lg border border-gray-200 dark:border-gray-700 shadow-xl"
+          className="p-8 rounded-2xl bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-gray-200 dark:border-gray-700 shadow-[0_14px_34px_rgba(13,71,161,0.14)]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -280,7 +280,7 @@ export default function ContactForm() {
                 needBgGradient={false}
               >
                 <span role="img" aria-label="sparkles">✨</span>
-                <span>Surprise me</span>
+                <span>Fun Surprise</span>
               </CustomButton>
               <CustomButton
                 type="submit"

@@ -274,8 +274,8 @@ export default function CodingProfiles() {
   const renderProfileCard = (platform: Platform, data: PlatformData | ContestData[] | null, isLoading: boolean) => {
     const safeUrl = platform.url || '#';
     return (
-      <Card>
-        <CardHeader className={platform.lightBgColor}>
+      <Card className="h-full shadow-[0_10px_24px_rgba(13,71,161,0.12)]">
+        <CardHeader className={`${platform.lightBgColor} border-b border-gray-200/80 dark:border-gray-700/80`}>
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-full bg-white dark:bg-[#0A0A0A] p-1 flex items-center justify-center shadow-xs">
               <Image
@@ -461,9 +461,14 @@ export default function CodingProfiles() {
   }
 
   return (
-    <div className="w-full">
-      <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Coding Profiles</h3>
-      <div className="grid grid-cols-2 gap-2">
+    <div className="w-full rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-black/40 p-4 sm:p-5 shadow-[0_10px_24px_rgba(13,71,161,0.08)]">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white">Coding Profiles</h3>
+        <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-hackclub-blue/10 text-hackclub-blue dark:text-hackclub-cyan">
+          Live Snapshot
+        </span>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {platforms.map((platform) => (
           <div key={platform.id} className="h-full">
             {renderProfileCard(

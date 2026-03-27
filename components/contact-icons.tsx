@@ -58,11 +58,11 @@ export default function ContactIcons() {
 					variants={item}
 					initial="hidden"
 					animate="show"
-					className="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0A0A0A] hover:shadow-lg transition-all duration-200"
+					className="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0A0A0A] hover:shadow-[0_14px_30px_rgba(13,71,161,0.12)] transition-all duration-200"
 				>
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
-							<div className="p-3 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700">
+							<div className="p-3 rounded-lg bg-white dark:bg-black border border-blue-200/60 dark:border-blue-900/50">
 								<Mail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
 							</div>
 							<div>
@@ -95,7 +95,7 @@ export default function ContactIcons() {
 										whileHover={{ scale: 1.02, y: -2 }}
 										whileTap={{ scale: 0.98 }}
 										transition={{ type: "spring", stiffness: 400, damping: 20 }}
-										className={`p-3 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-150 ${social.color} ${social.bgColor} shadow-sm hover:shadow-md group flex items-center gap-3`}
+										className={`p-3 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700 transition-all duration-150 ${social.color} ${social.bgColor} shadow-sm hover:shadow-[0_8px_18px_rgba(13,71,161,0.14)] group flex items-center gap-3`}
 										title={social.name}
 									>
 										<div className="flex items-center justify-center w-8 h-8">
@@ -133,7 +133,7 @@ export default function ContactIcons() {
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}
 						transition={{ type: "spring", stiffness: 400, damping: 20 }}
-						className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0A0A0A] hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-150 text-center group"
+						className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0A0A0A] hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-150 text-center group hover:shadow-[0_10px_20px_rgba(13,71,161,0.12)]"
 					>
 						<div className="text-2xl mb-2">📄</div>
 						<span className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">Download Resume</span>
@@ -143,7 +143,7 @@ export default function ContactIcons() {
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}
 						transition={{ type: "spring", stiffness: 400, damping: 20 }}
-						className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0A0A0A] hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-150 text-center group"
+						className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0A0A0A] hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-150 text-center group hover:shadow-[0_10px_20px_rgba(13,71,161,0.12)]"
 					>
 						<div className="text-2xl mb-2">🚀</div>
 						<span className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">View My Work</span>

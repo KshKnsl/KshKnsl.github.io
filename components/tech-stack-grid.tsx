@@ -245,10 +245,10 @@ export default function TechStackGrid() {
             setActiveCategory(null)
             setVisibleCount(isMobile ? 16 : allTechs.length)
           }}
-          className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+          className={`px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all border ${
             activeCategory === null 
-              ? 'bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md' 
-              : 'bg-gray-100 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+              ? 'bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md border-blue-500/20' 
+              : 'bg-gray-100 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-hackclub-blue/40'
           }`}
         >
           All
@@ -261,10 +261,10 @@ export default function TechStackGrid() {
               setActiveCategory(category.name)
               setVisibleCount(isMobile ? 8 : category.techs.length)
             }}
-            className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+            className={`px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all border ${
               activeCategory === category.name 
-                ? 'bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md' 
-                : 'bg-gray-100 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                ? 'bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white shadow-md border-blue-500/20' 
+                : 'bg-gray-100 dark:bg-[#0F0F10] text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-hackclub-blue/40'
             }`}
           >
             {category.name}
@@ -280,12 +280,12 @@ export default function TechStackGrid() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.02 }}
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            className="group relative bg-white dark:bg-[#141415] rounded-lg md:rounded-xl p-2 md:p-4 flex flex-col items-center justify-center gap-2 md:gap-3 hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-800"
+            className="group relative bg-white dark:bg-[#141415] rounded-lg md:rounded-xl p-2 md:p-4 flex flex-col items-center justify-center gap-2 md:gap-3 hover:shadow-[0_8px_20px_rgba(13,71,161,0.16)] transition-all duration-300 border border-gray-100 dark:border-gray-800"
             onMouseEnter={() => setActiveTooltip(tech.name)}
             onMouseLeave={() => setActiveTooltip(null)}
-            style={{ boxShadow: "2px 2px 0px rgba(0,0,0,0.05)" }}
+            style={{ boxShadow: "2px 2px 0px rgba(0,0,0,0.04)" }}
           >
-            <div className="relative w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-gray-50 dark:bg-black/30 rounded-md md:rounded-lg p-1.5 md:p-2.5">
+            <div className="relative w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-blue-50 dark:bg-blue-950/30 rounded-md md:rounded-lg p-1.5 md:p-2.5 border border-blue-100 dark:border-blue-900/40">
               <motion.div
                 initial={{ scale: 1 }}
                 whileHover={{ scale: 1.1 }}
@@ -319,11 +319,11 @@ export default function TechStackGrid() {
 
             {!isMobile && activeTooltip === tech.name && (
               <div
-                className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-[#0A0A0A] dark:bg-black text-white text-xs rounded shadow-lg z-10 w-48 text-center border border-gray-700 dark:border-gray-600"
+                className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-[#101827] dark:bg-[#05070c] text-white text-xs rounded shadow-lg z-10 w-48 text-center border border-blue-800/60"
                 style={{ boxShadow: "2px 2px 0px rgba(0,0,0,0.2)" }}
               >
                 {tech.description}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-[#0A0A0A] dark:bg-black border-r border-b border-gray-700 dark:border-gray-600"></div>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-[#101827] dark:bg-[#05070c] border-r border-b border-blue-800/60"></div>
               </div>
             )}
           </motion.div>
@@ -334,7 +334,7 @@ export default function TechStackGrid() {
         <div className="flex justify-center mt-4">
           <button
             onClick={handleShowMore}
-            className="px-4 py-2 bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-600 transition-colors"
+            className="px-4 py-2 bg-linear-to-r from-[#0d47a1] via-[#2563eb] to-[#60a5fa] text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-[0_10px_20px_rgba(13,71,161,0.25)] transition-all"
           >
             Show More
           </button>

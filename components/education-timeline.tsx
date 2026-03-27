@@ -44,14 +44,14 @@ export default function EducationTimeline() {
       {education.map((edu, index) => (
         <motion.div key={edu.institution} variants={item} className="relative pl-8 pb-8 last:pb-0">
           {index !== education.length - 1 && (
-            <div className="absolute left-[11px] top-8 bottom-0 w-0.5 bg-linear-to-b from-[#ec3750] to-[#ff8c37] dark:bg-gray-700" />
+            <div className="absolute left-[11px] top-8 bottom-0 w-0.5 bg-linear-to-b from-hackclub-blue to-hackclub-cyan dark:bg-gray-700" />
           )}
           <div className="relative">
-            <div className="absolute -left-8 mt-2 w-6 h-6 rounded-full bg-[#ec3750] flex items-center justify-center">
+            <div className="absolute -left-8 mt-2 w-6 h-6 rounded-full bg-hackclub-blue flex items-center justify-center shadow-[0_0_0_4px_rgba(51,142,218,0.18)]">
               <edu.icon className="w-4 h-4 text-white" />
             </div>
             <motion.div
-              className="flex flex-col md:flex-row md:items-center gap-4 bg-white/80 dark:bg-black/80 rounded-xl p-6 shadow-lg backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50"
+              className="flex flex-col md:flex-row md:items-center gap-4 bg-white/80 dark:bg-black/80 rounded-2xl p-6 shadow-[0_12px_30px_rgba(13,71,161,0.12)] backdrop-blur-md border border-gray-200/60 dark:border-gray-700/60"
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
               <div className="shrink-0">
@@ -66,7 +66,7 @@ export default function EducationTimeline() {
               </div>
               <div className="grow">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">{edu.institution}</h3>
-                <p className="text-[#ec3750] font-medium">{edu.degree}</p>
+                <p className="text-hackclub-blue dark:text-hackclub-cyan font-medium">{edu.degree}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">{edu.period}</p>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">{edu.description}</p>
               </div>

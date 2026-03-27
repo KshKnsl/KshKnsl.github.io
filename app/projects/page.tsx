@@ -1,428 +1,481 @@
 "use client"
 
 import BrowserNavbar from "@/components/browser-navbar"
-import { motion } from "framer-motion"
-import { ArrowLeft, Play, Globe, Code, Search } from "lucide-react"
-import Link from "next/link"
 import { LinkPreview } from "@/components/ui/link-preview"
-import { useState } from "react"
+import { motion } from "framer-motion"
+import {
+  ArrowLeft,
+  Code,
+  Globe,
+  Play,
+  Search,
+  Sparkles,
+  Star,
+  CalendarClock,
+  GitFork,
+} from "lucide-react"
+import Link from "next/link"
+import { useMemo, useState } from "react"
+
+interface Project {
+  title: string
+  codeLink: string
+  liveLink?: string
+  youtubeLink?: string
+  description: string
+  technologies: string[]
+  stars: number
+  forks: number
+  updatedAt: string
+  featured?: boolean
+}
+
+type SortMode = "featured" | "latest" | "stars" | "az"
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       type: "spring" as const,
-      damping: 25,
-      stiffness: 100,
+      damping: 24,
+      stiffness: 120,
     },
   },
 }
 
-const truncateDescription = (description: string, maxLength: number) => {
-  if (description.length <= maxLength) return description;
-  return description.substring(0, maxLength) + '...';
+const techStyles = [
+  "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+  "bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-300",
+  "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300",
+  "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
+  "bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300",
+  "bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300",
+] as const
+
+const getTechStyle = (tech: string) => {
+  const index = tech.split("").reduce((sum, ch) => sum + ch.charCodeAt(0), 0) % techStyles.length
+  return techStyles[index]
 }
 
-interface Project {
-  title: string;
-  liveLink?: string;
-  codeLink: string;
-  description: string;
-  technologies: string[];
-  youtubeLink?: string;
-}
+const formatMonthYear = (isoDate: string) =>
+  new Date(isoDate).toLocaleDateString("en-US", { month: "short", year: "numeric" })
 
 const projects: Project[] = [
   {
-    title: "QuickCom Scraper",
-    codeLink: "https://github.com/KshKnsl/QuickCom",
-    description:
-      "A full-stack application for scraping product data from Blinkit, Zepto, and Swiggy Instamart platforms. Features real-time searching, product comparison, and cart management with WebSocket communication.",
-    technologies: ["React", "TypeScript", "Node.js", "WebSocket", "Puppeteer", "Tailwind CSS"],
-    // youtubeLink: "https://www.youtube.com/watch?v=ABC123"
+    title: "ZeroCrush",
+    codeLink: "https://github.com/KshKnsl/ZeroCrush",
+    liveLink: "https://zero-crush-beryl.vercel.app",
+    description: "A modern TypeScript web app focused on fast, polished interactive experiences.",
+    technologies: ["TypeScript", "Next.js", "Tailwind CSS"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2026-03-13T13:41:26Z",
+    featured: true,
   },
   {
-    title: "Terminax",
-    liveLink: "https://terminax.vercel.app",
-    codeLink: "https://github.com/KshKnsl/Terminax",
+    title: "QuickCom",
+    codeLink: "https://github.com/KshKnsl/QuickCom",
     description:
-      "A hosting platform for terminal-based applications that enables developers to deploy, share, and run CLI apps directly in the browser and embedded them into any site easily.",
-    technologies: ["Next.js", "TypeScript", "WebSockets", "Docker", "Node.js"],
+      "A full-stack quick-commerce scraper and comparator for Blinkit, Zepto, and Swiggy Instamart with real-time product search.",
+    technologies: ["JavaScript", "Node.js", "WebSocket", "Puppeteer"],
+    stars: 5,
+    forks: 3,
+    updatedAt: "2026-03-12T16:27:07Z",
+    featured: true,
+  },
+  {
+    title: "secure-transaction-spring",
+    codeLink: "https://github.com/KshKnsl/secure-transaction-spring",
+    liveLink: "https://secure-spring.vercel.app/",
+    description:
+      "A full-stack money transfer platform using Spring Boot with double-entry ledgering, idempotent transfers, and JWT cookie auth.",
+    technologies: ["Java", "Spring Boot", "React", "JWT"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2026-03-07T19:21:12Z",
+    featured: true,
+  },
+  {
+    title: "LocalDocu",
+    codeLink: "https://github.com/KshKnsl/LocalDocu",
+    liveLink: "https://localdocu.vercel.app/",
+    description:
+      "A fully local AI document Q&A and summarization app where files stay on-device, powered by Ollama and open-source models.",
+    technologies: ["TypeScript", "Next.js", "FastAPI", "Ollama", "RAG"],
+    stars: 1,
+    forks: 0,
+    updatedAt: "2026-02-19T21:01:35Z",
+    featured: true,
   },
   {
     title: "CircuitAI",
+    codeLink: "https://github.com/KshKnsl/CircuitAI",
     liveLink: "https://circuitai.vercel.app",
-    codeLink: "https://github.com/KshKnsl/CircuitsAI",
     description:
-      "This project is an AI-powered circuit creator for circuit simulation and visualization. Now designing using natural language prompts or guided design flows.",
-    technologies: ["Next.js", "React", "TypeScript", "TailwindCSS", "DigitalJS"],
-  },
-  {
-    title: "Cubix",
-    liveLink: "https://kshknsl.github.io/cubix/",
-    codeLink: "https://github.com/KshKnsl/cubix",
-    description:
-      "A web-based puzzle solver that efficiently solves Rubik's Cube, 15-Puzzle, and Sudoku using advanced algorithms. The frontend, built with React, provides an interactive UI, while the backend, powered by C++, ensures fast and optimized solutions.",
-    technologies: ["React", "C++"],
-  },
-  {
-    title: "MindEase",
-    liveLink: "https://mindeases.vercel.app",
-    codeLink: "https://github.com/KshKnsl/MindEase",
-    description: "MindEase is an AI-powered mental wellness platform that helps users manage their emotional wellbeing, schedule tasks, and get personalized support.",
-    technologies: ["React", "TypeScript", "Generative AI", "LangChain", "MongoDB", "Express"],
-    },
-
-  {
-    title: "ReadMates",
-    liveLink: "https://readmates.vercel.app/",
-    codeLink: "https://github.com/KshKnsl/ReadMates",
-    description:
-      "A collaborative hub for tech enthusiasts, writers, and readers with real-time co-editing experience.",
-    technologies: ["TypeScript", "React", "MERN"],
+      "An AI-powered circuit creator using DigitalJS for simulation and natural-language guided circuit design.",
+    technologies: ["JavaScript", "Next.js", "DigitalJS", "AI"],
+    stars: 1,
+    forks: 2,
+    updatedAt: "2026-01-25T12:46:45Z",
+    featured: true,
   },
   {
     title: "GuruGram",
-    liveLink: "https://gurugramm.vercel.app",
     codeLink: "https://github.com/KshKnsl/GuruGram",
+    liveLink: "https://gurugramm.vercel.app",
     description:
-      "A mentorship platform that connects students with industry professionals to bridge the gap between academics and real-world skills. With features like skill-based matching, video communication, and progress tracking.",
-    technologies: ["React", "Node.js", "Express", "MongoDB"],
+      "A mentorship platform connecting students and professionals through skill-based matching and collaborative learning workflows.",
+    technologies: ["TypeScript", "MERN", "WebRTC"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2026-03-12T19:58:00Z",
+    featured: true,
   },
   {
-    title: "Maksad.crx - Chrome Extension",
-    liveLink: "https://github.com/KshKnsl/Maksad.crx",
+    title: "MindEase",
+    codeLink: "https://github.com/KshKnsl/MindEase",
+    liveLink: "https://mind-ease-eosin.vercel.app",
+    description:
+      "An AI-assisted mental wellness platform for emotional support, reflective check-ins, and productivity structure.",
+    technologies: ["TypeScript", "React", "Generative AI", "MongoDB"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2026-01-25T12:21:33Z",
+  },
+  {
+    title: "SocioPilot",
+    codeLink: "https://github.com/KshKnsl/SocioPilot",
+    liveLink: "https://socio-pilot.vercel.app",
+    description:
+      "A BYOK social media automation platform that generates, schedules, and replies to comments across channels.",
+    technologies: ["TypeScript", "AI", "Automation"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2026-01-25T12:14:38Z",
+  },
+  {
+    title: "CodeStreamYard",
+    codeLink: "https://github.com/KshKnsl/CodeStreamYard",
+    liveLink: "https://code-stream-yard.vercel.app",
+    description: "A TypeScript project focused on clean, collaborative coding and streaming-friendly workflows.",
+    technologies: ["TypeScript", "Next.js"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2026-01-25T13:47:09Z",
+  },
+  {
+    title: "secure-transaction-system",
+    codeLink: "https://github.com/KshKnsl/secure-transaction-system",
+    description: "A secure transaction system with emphasis on reliable state transitions and safe monetary operations.",
+    technologies: ["JavaScript", "Node.js", "Auth"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2026-03-12T20:01:04Z",
+  },
+  {
+    title: "UniLLM",
+    codeLink: "https://github.com/KshKnsl/UniLLM",
+    description: "A Java-based project exploring unified large language model patterns and orchestration ideas.",
+    technologies: ["Java", "LLM"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2026-03-12T14:51:39Z",
+  },
+  {
+    title: "Terminax",
+    codeLink: "https://github.com/KshKnsl/Terminax",
+    liveLink: "https://terminax.vercel.app",
+    description:
+      "A browser-hosted terminal app platform that makes CLI tools shareable and embeddable with minimal setup.",
+    technologies: ["TypeScript", "Next.js", "Docker", "WebSocket"],
+    stars: 1,
+    forks: 0,
+    updatedAt: "2025-11-25T05:32:47Z",
+  },
+  {
+    title: "Maksad.crx",
     codeLink: "https://github.com/KshKnsl/Maksad.crx",
     description:
-      "This Chrome extension helps users stay focused by blocking distracting content like YouTube Shorts and enabling voice commands (e.g., 'Close tab').",
-    technologies: ["JavaScript", "Chrome Extension"],
+      "A focus-oriented Chrome extension that blocks distracting content and supports voice commands for tab control.",
+    technologies: ["TypeScript", "Chrome Extension"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2025-12-30T04:09:13Z",
+  },
+  {
+    title: "FRA-GIS-DSS",
+    codeLink: "https://github.com/KshKnsl/FRA-GIS-DSS",
+    liveLink: "https://fra-gis-dss.vercel.app",
+    description:
+      "A WebGIS-based Forest Rights Act atlas and decision support system with geospatial dashboards and scheme recommendations.",
+    technologies: ["JavaScript", "Leaflet", "PostGIS", "ML"],
+    stars: 0,
+    forks: 1,
+    updatedAt: "2025-12-30T04:08:21Z",
+  },
+  {
+    title: "cubix",
+    codeLink: "https://github.com/KshKnsl/cubix",
+    liveLink: "http://kushkansal.tech/cubix/",
+    description:
+      "A web puzzle solver using high-performance C++ logic in the browser for Rubik's Cube, 15-Puzzle, and Sudoku.",
+    technologies: ["JavaScript", "React", "C++", "WebAssembly"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2025-12-30T04:06:44Z",
+  },
+  {
+    title: "Nyx",
+    codeLink: "https://github.com/KshKnsl/Nyx",
+    liveLink: "https://nt-yx.vercel.app",
+    description: "A real-time conversational app integrating AI-assisted chat and responsive messaging flows.",
+    technologies: ["JavaScript", "Socket.io", "Flask", "LangChain"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2025-12-30T03:58:32Z",
+  },
+  {
+    title: "URL-Shorten",
+    codeLink: "https://github.com/KshKnsl/URL-Shorten",
+    liveLink: "https://tinyu.vercel.app/",
+    description: "A URL shortener with simple sharing flows and QR support for quick distribution.",
+    technologies: ["JavaScript", "Node.js", "EJS"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2025-09-15T06:11:17Z",
   },
   {
     title: "Leetcode-AutoTicker",
     codeLink: "https://github.com/KshKnsl/Leetcode-AutoTicker",
     description:
-      "LeetCode Auto Ticker is a Chrome extension that automatically marks (✔️) the LeetCode problems you've solved, directly in the UI of any websites—including Take U Forward sheets and any site with LeetCode problem links or sheets. It enhances UI for Take U Forward sheets with quick access buttons to GFG and Coding Ninja solutions. No popup required—just install and enjoy. No login or LeetCode ID required to be set up.",
+      "A browser extension that auto-marks solved LeetCode problems on third-party sheets and injects quick resource actions.",
     technologies: ["JavaScript", "Chrome Extension"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2025-07-16T12:41:13Z",
   },
   {
-    title: "Spotify Organiser",
-    codeLink: "https://github.com/KshKnsl/spotify-organiser",
-    description:
-      "A Flask web application that helps you organize your Spotify playlists by automatically categorizing tracks by genre and creating new organized playlists. Features Spotify authentication, playlist analysis, genre-based organization, and duplicate removal.",
-    technologies: ["Python", "Flask", "Spotipy", "OAuth"],
+    title: "ReadMates",
+    codeLink: "https://github.com/KshKnsl/ReadMates",
+    liveLink: "https://readmates.vercel.app/",
+    description: "A collaborative reading and writing workspace built for shared editing and community interaction.",
+    technologies: ["TypeScript", "React", "MERN"],
+    stars: 0,
+    forks: 0,
+    updatedAt: "2025-03-13T13:46:29Z",
   },
-  {
-    title: "FRA Atlas & Decision Support System",
-    liveLink: "https://fra-gis-dss.vercel.app",
-    codeLink: "https://github.com/KshKnsl/FRA-GIS-DSS",
-    description:
-      "A comprehensive Forest Rights Act (FRA) Atlas and Decision Support System that digitizes FRA records, builds interactive WebGIS maps, and provides scheme recommendations for forest-dwelling communities using satellite imagery and ML.",
-    technologies: ["React", "Node.js", "Leaflet", "PostGIS", "PostgreSQL", "Tesseract"],
-  },
-  {
-    title: "An Older Portfolio Site",
-    liveLink: "https://knsl.vercel.app",
-    codeLink: "https://github.com/KshKnsl/Portfolio",
-    description:
-      "My personal portfolio website showcasing my projects and skills with an interactive terminal.",
-    technologies: ["HTML", "Tailwind CSS", "GSAP"],
-  },
-  {
-    title: "AI Chat Application",
-    liveLink: "https://nt-yx.vercel.app",
-    codeLink: "https://github.com/KshKnsl/Nyx",
-    description: "A real-time chat application with ai engine to chat.",
-    technologies: ["Socket.io", "Flask", "LangChain", "GeminiAI", "Python"],
-  },
-  {
-    title: "URL Shortener",
-    liveLink: "https://tinyu.vercel.app/",
-    codeLink: "https://github.com/KshKnsl/URL-Shorten",
-    description: "A free tool to shorten URLs and generate QR codes & links making it easy to share.",
-    technologies: ["NodeJS", "EJS"],
-  },
-  {
-    title: "Chintan Trivia",
-    liveLink: "http://chintan.42web.io/",
-    codeLink: "https://github.com/KshKnsl/ChintanTrivia",
-    description:
-      "A web-based quiz app for creating and participating in AI-driven quizzes, enhancing classroom interactions.",
-    technologies: ["PHP", "Tailwind CSS", "JavaScript", "MySQL"],
-  },
-   {
-    title: "CogniScript",
-    liveLink: "https://github.com/KshKnsl/CongiScript",
-    codeLink: "https://github.com/KshKnsl/CongiScript",
-    description:
-      "An AI-powered document chat application that allows users to upload documents and interact with their content through a conversational interface using Google Gemini and Qdrant vector database.",
-    technologies: ["VectorDB", "Generative AI", "LangChain","Qdrant"],
-  },
-   {
-    title: "BulkMailer",
-    liveLink: "https://github.com/KshKnsl/BulkMail",
-    codeLink: "https://github.com/KshKnsl/BulkMail",
-    description:
-      "A terminal-based bulk email sender with features like customizable subjects, messages, and optional random GIFs from Giphy API. The CLI interface allows sending emails to multiple recipients with configurable parameters.",
-    technologies: ["JavaScript", "Node.js", "CLI"],
-  },
- 
-  {
-    title: "Spotify Clone",
-    liveLink: "http://kushkansal.me/Spotify-Clone/",
-    codeLink: "https://github.com/KshKnsl/Spotify-Clone",
-    description: "A clone of the Spotify web player using HTML, CSS, and JavaScript.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    title: "BEN10 Puzzle",
-    liveLink: "https://kshknsl.github.io/BEN10-PUZZLE/",
-    codeLink: "https://github.com/KshKnsl/BEN10-PUZZLE",
-    description: "A web-based puzzle game inspired by the BEN10 series.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-  {
-    title: "Wheel Buddy",
-    liveLink: "https://github.com/KshKnsl/WheelBuddy",
-    codeLink: "https://github.com/KshKnsl/WheelBuddy",
-    description: "A console-based car booking and car-pooling system with user management and booking features.",
-    technologies: ["C++"],
-  },
-  {
-    title: "Task Master X",
-    liveLink: "https://github.com/KshKnsl/TaskMaster-X",
-    codeLink: "https://github.com/KshKnsl/TaskMaster-X",
-    description:
-      "A console-based To-Do List application that simplifies task management and helps you stay organized.",
-    technologies: ["C"],
-  },
-  {
-    title: "Basic Text Editor",
-    liveLink: "https://github.com/KshKnsl/TextEditor",
-    codeLink: "https://github.com/KshKnsl/TextEditor",
-    description:
-      "A console-based Text Editor made in Java to perform basic tasks like cut, copy, paste, delete and edit.",
-    technologies: ["Java"],
-  }
+]
+
+const sortModes: { label: string; value: SortMode }[] = [
+  { label: "Featured", value: "featured" },
+  { label: "Latest", value: "latest" },
+  { label: "Most Starred", value: "stars" },
+  { label: "A-Z", value: "az" },
 ]
 
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState("")
+  const [sortMode, setSortMode] = useState<SortMode>("featured")
 
-  const filteredProjects = projects.filter(project => {
-    const searchLower = searchTerm.toLowerCase()
-    return (
-      project.title.toLowerCase().includes(searchLower) ||
-      project.description.toLowerCase().includes(searchLower) ||
-      project.technologies.some(tech => tech.toLowerCase().includes(searchLower))
-    )
-  })
+  const visibleProjects = useMemo(() => {
+    const query = searchTerm.trim().toLowerCase()
+
+    const filtered = projects.filter((project) => {
+      if (!query) return true
+
+      return (
+        project.title.toLowerCase().includes(query) ||
+        project.description.toLowerCase().includes(query) ||
+        project.technologies.some((tech) => tech.toLowerCase().includes(query))
+      )
+    })
+
+    const sorted = [...filtered]
+
+    if (sortMode === "featured") {
+      sorted.sort((a, b) => {
+        const featuredScore = Number(Boolean(b.featured)) - Number(Boolean(a.featured))
+        if (featuredScore !== 0) return featuredScore
+        if (b.stars !== a.stars) return b.stars - a.stars
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      })
+      return sorted
+    }
+
+    if (sortMode === "latest") {
+      sorted.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+      return sorted
+    }
+
+    if (sortMode === "stars") {
+      sorted.sort((a, b) => b.stars - a.stars || new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+      return sorted
+    }
+
+    sorted.sort((a, b) => a.title.localeCompare(b.title))
+    return sorted
+  }, [searchTerm, sortMode])
 
   return (
-    <main className="min-h-screen bg-white dark:bg-black pt-24 pb-20">
+    <main className="min-h-screen bg-white dark:bg-black pt-24 pb-20 relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 opacity-70 dark:opacity-40">
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-hackclub-blue/15 blur-3xl" />
+        <div className="absolute top-24 right-0 h-72 w-72 rounded-full bg-hackclub-cyan/15 blur-3xl" />
+      </div>
 
       <BrowserNavbar />
-      <div className="container px-4 mx-auto max-w-7xl">
-        <div className="mb-12">
+      <div className="container px-4 mx-auto max-w-7xl relative z-10">
+        <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="mb-12 border border-gray-200/70 dark:border-gray-800/90 rounded-2xl p-6 md:p-8 backdrop-blur-xl bg-white/80 dark:bg-black/50"
+        >
           <Link
             href="/"
-            className="inline-flex items-center text-gray-600 dark:text-gray-300 hover:text-[#ec3750] dark:hover:text-[#ff4d6a] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-hackclub-blue dark:hover:text-hackclub-cyan transition-colors mb-6"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="w-4 h-4" />
             <span>Back to Home</span>
           </Link>
 
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-            className="border-b border-gray-200 dark:border-gray-800 pb-6 mb-10"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">All Projects</h1>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mb-6">
-              A comprehensive showcase of my work, including web applications, tools, and other software projects. Each
-              project represents different skills and technologies I&apos;ve worked with.
-            </p>
-            
-            <div className="relative max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <div className="max-w-2xl">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Projects</h1>
+              <p className="text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed">
+                Updated portfolio list extracted from your GitHub repositories, with improved ordering and cleaner cards.
+                Use search and sorting to explore by recency, stars, or featured work.
+              </p>
+          </div>
+
+          <div className="mt-8 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+            <div className="relative w-full lg:max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search projects by title, description, or technology..."
+                placeholder="Search by title, stack, or description"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ec3750] focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                onChange={(event) => setSearchTerm(event.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-hackclub-blue"
               />
             </div>
-          </motion.div>
-        </div>
 
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {filteredProjects.map((project, index) => (
-            <motion.div
+            <div className="flex flex-wrap gap-2">
+              {sortModes.map((mode) => {
+                const active = sortMode === mode.value
+                return (
+                  <button
+                    key={mode.value}
+                    type="button"
+                    onClick={() => setSortMode(mode.value)}
+                    className={`px-3 py-2 text-sm rounded-xl border transition-colors ${
+                      active
+                        ? "border-hackclub-blue bg-hackclub-blue/10 text-hackclub-blue dark:text-hackclub-cyan"
+                        : "border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-hackclub-cyan"
+                    }`}
+                  >
+                    {mode.label}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </motion.section>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {visibleProjects.map((project, index) => (
+            <motion.article
               key={project.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative bg-white/80 dark:bg-black/80 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 backdrop-blur-md flex flex-col h-full"
+              transition={{ delay: index * 0.04 }}
+              className="group h-full rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white/80 dark:bg-black/70 backdrop-blur-xl p-5 shadow-[0_6px_20px_rgba(13,71,161,0.1)] hover:shadow-[0_10px_30px_rgba(13,71,161,0.2)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
             >
-              <div className="absolute inset-0 bg-linear-to-r from-[#ec3750]/5 to-[#ff8c37]/5 dark:from-[#ec3750]/10 dark:to-[#ff8c37]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="p-6 relative z-10 flex flex-col flex-1">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#ec3750] dark:group-hover:text-[#ff4d6a] transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">{truncateDescription(project.description, 100)}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project?.technologies?.map((tech, i) => {
-                    let bgColor = "bg-gray-100 dark:bg-[#0A0A0A] text-gray-800 dark:text-gray-200";
-                    if (tech === "React") 
-                      bgColor = "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300";
-                    else if (tech === "TypeScript") 
-                      bgColor = "bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300";
-                    else if (tech === "MERN") 
-                      bgColor = "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300";
-                    else if (tech === "Next.js") 
-                      bgColor = "bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300";
-                    else if (tech === "NodeJS" || tech === "Node.js") 
-                      bgColor = "bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-300";
-                    else if (tech === "EJS") 
-                      bgColor = "bg-pink-100 dark:bg-pink-900/30 text-pink-800 dark:text-pink-300";
-                    else if (tech === "HTML") 
-                      bgColor = "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300";
-                    else if (tech === "Tailwind CSS") 
-                      bgColor = "bg-cyan-100 dark:bg-cyan-900/30 text-cyan-800 dark:text-cyan-300";
-                    else if (tech === "JavaScript") 
-                      bgColor = "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300";
-                    else if (tech === "MySQL") 
-                      bgColor = "bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300";
-                    else if (tech === "PHP") 
-                      bgColor = "bg-violet-100 dark:bg-violet-900/30 text-violet-800 dark:text-violet-300";
-                    else if (tech === "C++") 
-                      bgColor = "bg-rose-100 dark:bg-rose-900/30 text-rose-800 dark:text-rose-300";
-                    else if (tech === "C") 
-                      bgColor = "bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300";
-                    else if (tech === "Socket.io") 
-                      bgColor = "bg-gray-100 dark:bg-gray-900/30 text-gray-800 dark:text-gray-300";
-                    else if (tech === "LangChain") 
-                      bgColor = "bg-blue-200 dark:bg-blue-800/30 text-blue-900 dark:text-blue-400";
-                    else if (tech === "CSS") 
-                      bgColor = "bg-cyan-100 dark:bg-cyan-900/30 text-cyan-800 dark:text-cyan-300";
-                    else if (tech === "Generative AI") 
-                      bgColor = "bg-violet-100 dark:bg-violet-900/30 text-violet-800 dark:text-violet-300";
-                    else if (tech === "MongoDB") 
-                      bgColor = "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300";
-                    else if (tech === "Express") 
-                      bgColor = "bg-stone-100 dark:bg-stone-900/30 text-stone-800 dark:text-stone-300";
-                    else if (tech === "VectorDB") 
-                      bgColor = "bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300";
-                    else if (tech === "Qdrant") 
-                      bgColor = "bg-lime-100 dark:bg-lime-900/30 text-lime-800 dark:text-lime-300";
-                    else if (tech === "PostGIS") 
-                      bgColor = "bg-teal-200 dark:bg-teal-800/30 text-teal-900 dark:text-teal-400";
-                    else if (tech === "PostgreSQL") 
-                      bgColor = "bg-blue-200 dark:bg-blue-800/30 text-blue-900 dark:text-blue-400";
-                    else if (tech === "Leaflet") 
-                      bgColor = "bg-green-200 dark:bg-green-800/30 text-green-900 dark:text-green-400";
-                    else if (tech === "Tesseract") 
-                      bgColor = "bg-indigo-200 dark:bg-indigo-800/30 text-indigo-900 dark:text-indigo-400";
-                    else if (tech === "OAuth") 
-                      bgColor = "bg-pink-200 dark:bg-pink-800/30 text-pink-900 dark:text-pink-400";
-                    else if (tech === "CLI") 
-                      bgColor = "bg-gray-200 dark:bg-gray-800/30 text-gray-900 dark:text-gray-400";
-                    else if (tech === "Puppeteer") 
-                      bgColor = "bg-red-200 dark:bg-red-800/30 text-red-900 dark:text-red-400";
-                    else if (tech === "WebSocket") 
-                      bgColor = "bg-yellow-200 dark:bg-yellow-800/30 text-yellow-900 dark:text-yellow-400";
-                    else if (tech === "Docker") 
-                      bgColor = "bg-blue-300 dark:bg-blue-700/30 text-blue-900 dark:text-blue-200";
-                    else if (tech === "DigitalJS") 
-                      bgColor = "bg-emerald-200 dark:bg-emerald-800/30 text-emerald-900 dark:text-emerald-400";
-                    else if (tech === "Spotipy") 
-                      bgColor = "bg-green-300 dark:bg-green-700/30 text-green-900 dark:text-green-200";
-                    else if (tech === "Java") 
-                      bgColor = "bg-rose-200 dark:bg-rose-800/30 text-rose-900 dark:text-rose-400";
-                    else if (tech === "GSAP") 
-                      bgColor = "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300";
-                    else if (tech === "Flask") 
-                      bgColor = "bg-slate-100 dark:bg-slate-900/30 text-slate-800 dark:text-slate-300";
-                    else if (tech === "GeminiAI") 
-                      bgColor = "bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-800 dark:text-fuchsia-300";
-                    else if (tech === "Python") 
-                      bgColor = "bg-sky-100 dark:bg-sky-900/30 text-sky-800 dark:text-sky-300";
-                    else if (tech === "Java") 
-                      bgColor = "bg-rose-100 dark:bg-rose-900/30 text-rose-800 dark:text-rose-300";
-                    else if (tech === "Chrome Extension") 
-                      bgColor = "bg-lime-100 dark:bg-lime-900/30 text-lime-800 dark:text-lime-300";
-                    else
-                      bgColor = "bg-purple-200 dark:bg-purple-800/30 text-purple-900 dark:text-purple-400";
-                    return (
-                      <span key={i} className={`${bgColor} px-2 py-1 text-xs rounded-md font-medium`}>
-                        {tech}
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    {project.featured && (
+                      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wide px-2 py-1 rounded-full bg-hackclub-blue/10 text-hackclub-blue dark:text-hackclub-cyan">
+                        <Sparkles className="w-3 h-3" /> Featured
                       </span>
-                    );
-                  })}
-                </div>
-                
-                <div className="mt-auto pt-4 flex flex-wrap gap-3">
-                  {project.liveLink && project.liveLink !== project.codeLink && (
-                    <LinkPreview 
-                      url={project.liveLink}
-                      width={300}
-                      height={200}
-                    >
-                      <Link
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#ec3750] dark:hover:text-[#ff4d6a] bg-gray-100 dark:bg-gray-800/60 px-3 py-1 rounded-full transition-colors"
-                      >
-                        <Globe className="w-3.5 h-3.5" />
-                        <span>Live Demo</span>
-                      </Link>
-                    </LinkPreview>
-                  )}
-                  <LinkPreview 
-                    url={project.codeLink}
-                    width={300}
-                    height={200}
-                  >
-                    <Link
-                      href={project.codeLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#ec3750] dark:hover:text-[#ff4d6a] bg-gray-100 dark:bg-gray-800/60 px-3 py-1 rounded-full transition-colors"
-                    >
-                      <Code className="w-3.5 h-3.5" />
-                      <span>Code</span>
-                    </Link>
-                  </LinkPreview>
-                  {project.youtubeLink && (
-                    <LinkPreview 
-                      url={project.youtubeLink}
-                      width={300}
-                      height={200}
-                    >
-                      <Link
-                        href={project.youtubeLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm font-medium text-red-700 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 bg-red-100 dark:bg-red-900/30 px-3 py-1 rounded-full transition-colors"
-                      >
-                        <Play className="w-3.5 h-3.5 fill-current" />
-                        <span>Watch Demo</span>
-                      </Link>
-                    </LinkPreview>
-                  )}
+                    )}
+                  </div>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-hackclub-blue dark:group-hover:text-hackclub-cyan transition-colors">
+                    {project.title}
+                  </h2>
                 </div>
               </div>
-            </motion.div>
+
+              <p className="mt-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{project.description}</p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span key={tech} className={`text-xs rounded-full px-2.5 py-1 font-medium ${getTechStyle(tech)}`}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-4 flex items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
+                <span className="inline-flex items-center gap-1">
+                  <Star className="w-3.5 h-3.5" /> {project.stars}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <GitFork className="w-3.5 h-3.5" /> {project.forks}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CalendarClock className="w-3.5 h-3.5" /> {formatMonthYear(project.updatedAt)}
+                </span>
+              </div>
+
+              <div className="mt-auto pt-5 flex flex-wrap gap-2">
+                {project.liveLink && (
+                  <LinkPreview url={project.liveLink} width={300} height={180}>
+                    <Link
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-full bg-hackclub-cyan/10 text-hackclub-blue dark:text-hackclub-cyan px-3 py-1.5 text-sm hover:bg-hackclub-cyan/20 transition-colors"
+                    >
+                      <Globe className="w-3.5 h-3.5" /> Live
+                    </Link>
+                  </LinkPreview>
+                )}
+
+                <LinkPreview url={project.codeLink} width={300} height={180}>
+                  <Link
+                    href={project.codeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-3 py-1.5 text-sm hover:text-hackclub-blue dark:hover:text-hackclub-cyan transition-colors"
+                  >
+                    <Code className="w-3.5 h-3.5" /> Code
+                  </Link>
+                </LinkPreview>
+
+                {project.youtubeLink && (
+                  <LinkPreview url={project.youtubeLink} width={300} height={180}>
+                    <Link
+                      href={project.youtubeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-full bg-hackclub-blue/10 dark:bg-hackclub-blue/20 text-hackclub-blue dark:text-hackclub-cyan px-3 py-1.5 text-sm"
+                    >
+                      <Play className="w-3.5 h-3.5 fill-current" /> Demo
+                    </Link>
+                  </LinkPreview>
+                )}
+              </div>
+            </motion.article>
           ))}
         </div>
+
+        {visibleProjects.length === 0 && (
+          <div className="mt-16 text-center rounded-xl border border-dashed border-gray-300 dark:border-gray-700 p-10">
+            <p className="text-gray-700 dark:text-gray-300">No projects matched your search.</p>
+          </div>
+        )}
       </div>
     </main>
   )

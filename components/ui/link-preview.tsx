@@ -1,6 +1,5 @@
 "use client";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
-import { encode } from "qss";
 import React from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -28,17 +27,17 @@ export const LinkPreview = ({
 }: LinkPreviewProps) => {
   let src;
   if (!isStatic) {
-    const params = encode({
+    const params = new URLSearchParams({
       url,
-      screenshot: true,
-      meta: false,
+      screenshot: "true",
+      meta: "false",
       embed: "screenshot.url",
       colorScheme: "dark",
-      "viewport.isMobile": true,
-      "viewport.deviceScaleFactor": 1,
-      "viewport.width": width * 3,
-      "viewport.height": height * 3,
-    });
+      "viewport.isMobile": "true",
+      "viewport.deviceScaleFactor": "1",
+      "viewport.width": String(width * 3),
+      "viewport.height": String(height * 3),
+    }).toString();
     src = `https://api.microlink.io/?${params}`;
   } else {
     src = imageSrc;
@@ -93,7 +92,7 @@ export const LinkPreview = ({
         </HoverCardPrimitive.Trigger>
 
         <HoverCardPrimitive.Content
-          className="[transform-origin:var(--radix-hover-card-content-transform-origin)]"
+          className="origin-(--radix-hover-card-content-transform-origin)"
           side="top"
           align="center"
           sideOffset={10}

@@ -277,15 +277,19 @@ export default function Home() {
       <section
         ref={terminalRef}
         id="terminal"
-        className="py-12 sm:py-20 bg-gray-50 dark:bg-black/90 border-t border-b border-gray-200 dark:border-gray-800"
+        className="py-12 sm:py-20 bg-gray-50/80 dark:bg-black/90 border-t border-b border-gray-200 dark:border-gray-800 relative overflow-hidden"
       >
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-16 top-10 h-64 w-64 rounded-full bg-hackclub-blue/10 blur-3xl" />
+          <div className="absolute right-0 bottom-10 h-72 w-72 rounded-full bg-hackclub-cyan/10 blur-3xl" />
+        </div>
         <div className="container px-4 mx-auto max-w-7xl">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
-            className="text-center mb-8 sm:mb-12"
+            className="text-center mb-8 sm:mb-12 relative z-10"
           >
             <motion.div
               whileHover={{ rotate: 15, scale: 1.1 }}
@@ -301,22 +305,28 @@ export default function Home() {
               Type &apos;help&apos; to see available commands
             </p>
           </motion.div>
-          <TerminalEmulator />
+          <div className="relative z-10">
+            <TerminalEmulator />
+          </div>
         </div>
       </section>
 
       <section
         ref={aboutRef}
         id="about"
-        className="py-12 sm:py-20 bg-white dark:bg-black"
+        className="py-12 sm:py-20 bg-white dark:bg-black relative overflow-hidden"
       >
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-hackclub-blue/10 blur-3xl" />
+          <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full bg-hackclub-cyan/10 blur-3xl" />
+        </div>
         <div className="container px-4 mx-auto max-w-8xl">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
-            className="text-center mb-8 sm:mb-12"
+            className="text-center mb-8 sm:mb-12 relative z-10"
           >
             <motion.div
               whileHover={{ rotate: 15, scale: 1.1 }}
@@ -334,7 +344,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16 relative z-10">
             <motion.div
               className="lg:col-span-5 xl:col-span-5"
               initial={{ opacity: 0, x: -30 }}
@@ -345,11 +355,11 @@ export default function Home() {
               <div className="relative mb-6">
                 <div className="absolute -inset-1 bg-linear-to-r from-[#3b82f6] to-[#60a5fa] rounded-2xl opacity-30 blur-xs"></div>
                 <div
-                  className="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)]"
+                  className="relative overflow-hidden rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-[0_14px_30px_rgba(13,71,161,0.14)]"
                   style={{ maxHeight: "350px" }}
                 >
                   <Image
-                    src="https://res.cloudinary.com/dvvoebyu3/image/upload/c_auto,g_auto,h_500,w_500/686e2b2b1924280ff00d4c8f_1753282156198?_a=BAMCkGTG0"
+                    src="/assets/Second.gif"
                     alt="Kush Kansal"
                     width={500}
                     height={350}
@@ -363,7 +373,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="p-4 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0A0A0A] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)]">
+              <div className="p-4 sm:p-6 rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-gray-50/90 dark:bg-[#0A0A0A] backdrop-blur-sm shadow-[0_14px_30px_rgba(13,71,161,0.12)]">
                 <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 dark:text-white">
                   My Journey
                 </h3>
@@ -376,7 +386,7 @@ export default function Home() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <Link href="/projects">
-                      <button className="px-4 sm:px-6 py-2 text-white rounded-lg bg-gradient-primary hover:opacity-90 transition-opacity border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] text-sm sm:text-base">
+                      <button className="px-4 sm:px-6 py-2 text-white rounded-xl bg-gradient-primary hover:opacity-95 transition-all border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-[0_10px_22px_rgba(13,71,161,0.22)] text-sm sm:text-base font-semibold">
                         View Projects
                       </button>
                     </Link>
@@ -389,7 +399,7 @@ export default function Home() {
                       href="#contact"
                       onClick={(e) => handleHashLinkClick(e, "#contact")}
                     >
-                      <button className="px-4 sm:px-6 py-2 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-[#0A0A0A] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)] text-sm sm:text-base">
+                      <button className="px-4 sm:px-6 py-2 text-hackclub-blue dark:text-hackclub-cyan border border-hackclub-blue/30 dark:border-hackclub-cyan/30 rounded-xl hover:bg-hackclub-blue/10 dark:hover:bg-hackclub-blue/20 transition-colors shadow-[0_8px_18px_rgba(13,71,161,0.12)] text-sm sm:text-base font-semibold">
                         Contact Me
                       </button>
                     </a>
@@ -409,15 +419,15 @@ export default function Home() {
                 {personalInfo.highlights.map((highlight, index) => (
                   <motion.div
                     key={highlight.title}
-                    className="p-3 sm:p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0A0A0A]"
+                    className="p-3 sm:p-4 rounded-xl border border-gray-200/80 dark:border-gray-800 bg-gray-50/90 dark:bg-[#0A0A0A] backdrop-blur-sm"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    style={{ boxShadow: "4px 4px 0px rgba(0,0,0,0.05)" }}
+                    style={{ boxShadow: "0 8px 18px rgba(13,71,161,0.08)" }}
                   >
                     <div className="flex items-start gap-2 sm:gap-3">
-                      <div className="p-1.5 sm:p-2 rounded-lg bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.05)]">
+                      <div className="p-1.5 sm:p-2 rounded-lg bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-700 shadow-[0_8px_16px_rgba(13,71,161,0.1)]">
                         {highlight.icon}
                       </div>
                       <div>
@@ -435,7 +445,7 @@ export default function Home() {
 
               <Suspense
                 fallback={
-                  <div className="min-h-[200px] flex items-center justify-center">
+                  <div className="min-h-50 flex items-center justify-center">
                     Loading...
                   </div>
                 }
@@ -444,7 +454,7 @@ export default function Home() {
               </Suspense>
               <Suspense
                 fallback={
-                  <div className="min-h-[200px] flex items-center justify-center">
+                  <div className="min-h-50 flex items-center justify-center">
                     Loading...
                   </div>
                 }
@@ -460,22 +470,30 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="flex items-center justify-between mb-4 sm:mb-6"
+              className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-4 sm:mb-6"
             >
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                Tech Stack
-              </h2>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                  Tech Stack
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                  Tools and technologies I currently build with.
+                </p>
+              </div>
+              <span className="text-xs font-semibold px-3 py-1 rounded-full border border-hackclub-blue/30 bg-hackclub-blue/10 text-hackclub-blue dark:text-hackclub-cyan w-fit">
+                Constantly Evolving
+              </span>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="p-3 sm:p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0A0A0A] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)]"
+              className="p-3 sm:p-6 rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-linear-to-br from-white via-blue-50/40 to-white dark:from-[#0A0A0A] dark:via-[#0D1320] dark:to-[#0A0A0A] shadow-[0_16px_32px_rgba(13,71,161,0.14)]"
             >
               <Suspense
                 fallback={
-                  <div className="min-h-[200px] flex items-center justify-center">
+                  <div className="min-h-50 flex items-center justify-center">
                     Loading...
                   </div>
                 }
@@ -490,7 +508,7 @@ export default function Home() {
       <section
         ref={projectsRef}
         id="projects"
-        className="py-12 sm:py-20 bg-gray-50 dark:bg-black/90 border-t border-b border-gray-200 dark:border-gray-800"
+        className="py-12 sm:py-20 bg-gray-50/80 dark:bg-black/90 border-t border-b border-gray-200 dark:border-gray-800"
       >
         <div className="container px-4 mx-auto max-w-7xl">
           <motion.div
@@ -522,7 +540,7 @@ export default function Home() {
           >
             <Suspense
               fallback={
-                <div className="min-h-[200px] flex items-center justify-center">
+                <div className="min-h-50 flex items-center justify-center">
                   Loading...
                 </div>
               }
@@ -548,7 +566,7 @@ export default function Home() {
       <section
         ref={educationRef}
         id="education"
-        className="py-12 sm:py-20 bg-gray-50 dark:bg-black/90 border-t border-b border-gray-200 dark:border-gray-800"
+        className="py-12 sm:py-20 bg-gray-50/80 dark:bg-black/90 border-t border-b border-gray-200 dark:border-gray-800"
       >
         <div className="container px-4 mx-auto max-w-7xl">
           <motion.div
@@ -574,7 +592,7 @@ export default function Home() {
           </motion.div>
           <Suspense
             fallback={
-              <div className="min-h-[200px] flex items-center justify-center">
+              <div className="min-h-50 flex items-center justify-center">
                 Loading...
               </div>
             }
@@ -587,15 +605,19 @@ export default function Home() {
       <section
         ref={contactRef}
         id="contact"
-        className="py-12 sm:py-20 bg-white dark:bg-black"
+        className="py-12 sm:py-20 bg-white dark:bg-black relative overflow-hidden"
       >
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-hackclub-blue/10 blur-3xl" />
+          <div className="absolute right-0 bottom-8 h-80 w-80 rounded-full bg-hackclub-cyan/10 blur-3xl" />
+        </div>
         <div className="container px-4 mx-auto max-w-7xl">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
-            className="text-center mb-8 sm:mb-12"
+            className="text-center mb-8 sm:mb-12 relative z-10"
           >
             <motion.div
               whileHover={{ rotate: 15, scale: 1.1 }}
@@ -618,13 +640,13 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
-            className="grid gap-8 md:gap-12 md:grid-cols-2" // Adjusted grid columns
+            className="grid gap-8 md:gap-10 md:grid-cols-2 relative z-10 p-4 sm:p-6 rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white/70 dark:bg-[#0A0A0A]/70 backdrop-blur-xl shadow-[0_16px_36px_rgba(13,71,161,0.14)]"
           >
-            <motion.div variants={fadeInUp} className="md:col-span-1"> {/* Was lg:col-span-1 */}
-              <div className="space-y-6 sm:space-y-8 mb-3 flex flex-col gap-2"> {/* Fixed typo mb-3flex and ensured flex direction */}
+            <motion.div variants={fadeInUp} className="md:col-span-1">
+              <div className="space-y-6 sm:space-y-8 mb-3 flex flex-col gap-2">
                 <Suspense
                   fallback={
-                    <div className="min-h-[100px] flex items-center justify-center"> {/* Adjusted min-height */}
+                    <div className="min-h-25 flex items-center justify-center">
                       Loading...
                     </div>
                   }
@@ -637,11 +659,11 @@ export default function Home() {
               variants={fadeInUp}
               whileHover={{ y: -5 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="md:col-span-1" // Was lg:col-span-1
+              className="md:col-span-1"
             >
               <Suspense
                 fallback={
-                  <div className="min-h-[200px] flex items-center justify-center">
+                  <div className="min-h-50 flex items-center justify-center">
                     Loading...
                   </div>
                 }
@@ -653,8 +675,12 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-gray-50 dark:bg-black/90 border-t border-gray-200 dark:border-gray-800 flex container justify-center items-center sm:flex-row flex-col">
-        <div className="container my-6 sm:my-8 px-4 mx-auto">
+      <footer className="bg-gray-50/80 dark:bg-black/90 border-t border-gray-200 dark:border-gray-800 relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-0 -top-10 h-44 w-44 rounded-full bg-hackclub-blue/10 blur-3xl" />
+          <div className="absolute right-0 -bottom-10 h-44 w-44 rounded-full bg-hackclub-cyan/10 blur-3xl" />
+        </div>
+        <div className="container my-6 sm:my-8 px-4 mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -662,21 +688,24 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="flex flex-col md:flex-row justify-between items-center gap-4"
           >
-            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-              © {new Date().getFullYear()} Kush Kansal. All rights reserved.
-            </p>
+            <div className="flex items-center justify-center md:justify-start gap-3 w-full md:w-auto">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 text-center md:text-left whitespace-nowrap">
+                © {new Date().getFullYear()} Kush Kansal. All rights reserved.
+              </p>
+            </div>
+              <VisitorCounter />
+            <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+              <Link href="#about" onClick={(e) => handleHashLinkClick(e, "#about")} className="px-2.5 py-1 rounded-full border border-gray-200 dark:border-gray-700 hover:border-hackclub-blue/50 text-gray-700 dark:text-gray-300 hover:text-hackclub-blue dark:hover:text-hackclub-cyan transition-colors">
+                About
+              </Link>
+              <Link href="#projects" onClick={(e) => handleHashLinkClick(e, "#projects")} className="px-2.5 py-1 rounded-full border border-gray-200 dark:border-gray-700 hover:border-hackclub-blue/50 text-gray-700 dark:text-gray-300 hover:text-hackclub-blue dark:hover:text-hackclub-cyan transition-colors">
+                Projects
+              </Link>
+              <Link href="#contact" onClick={(e) => handleHashLinkClick(e, "#contact")} className="px-2.5 py-1 rounded-full border border-gray-200 dark:border-gray-700 hover:border-hackclub-blue/50 text-gray-700 dark:text-gray-300 hover:text-hackclub-blue dark:hover:text-hackclub-cyan transition-colors">
+                Contact
+              </Link>
+            </div>
           </motion.div>
-        </div>
-        <div className="viscount-container h-[70px] overflow-hidden w-full">
-          <Suspense
-            fallback={
-              <div className="min-h-[200px] flex items-center justify-center">
-                Loading...
-              </div>
-            }
-          >
-            <VisitorCounter />
-          </Suspense>
         </div>
       </footer>
     </main>

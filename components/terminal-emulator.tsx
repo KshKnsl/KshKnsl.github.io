@@ -403,27 +403,29 @@ Type <span class="text-yellow-600 dark:text-yellow-400">help</span> to see avail
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-800">
-        <div className="flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-black">
+      <div className="rounded-2xl overflow-hidden shadow-[0_18px_40px_rgba(13,71,161,0.2)] border border-gray-200/80 dark:border-gray-700/80 backdrop-blur-xl bg-white/70 dark:bg-black/60">
+        <div className="flex items-center justify-between px-4 py-2.5 bg-linear-to-r from-gray-100 to-white dark:from-[#111827] dark:to-[#0A0A0A] border-b border-gray-200/80 dark:border-gray-800">
           <div className="flex space-x-2">
             <button
-              className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600"
+              className="w-3 h-3 rounded-full bg-red-500/90 hover:bg-red-500"
             />
             <button
-              className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600"
+              className="w-3 h-3 rounded-full bg-yellow-500/90 hover:bg-yellow-500"
             />
             <button
-              className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600"
+              className="w-3 h-3 rounded-full bg-green-500/90 hover:bg-green-500"
             />
           </div>
-          <div className="flex-1 text-center text-sm text-gray-600 dark:text-gray-400">terminal@kushkansal</div>
-          <div className="text-xs text-gray-500 dark:text-gray-600">v2.0.0</div>
+          <div className="flex-1 text-center text-sm font-medium text-gray-600 dark:text-gray-400">terminal@kushkansal</div>
+          <div className="text-xs text-hackclub-blue dark:text-hackclub-cyan">v2.1.0</div>
         </div>
 
         <div
           ref={terminalRef}
-          className={`h-96 sm:h-96 overflow-auto p-4 font-mono text-sm ${
-            theme === "light" ? "bg-gray-50 text-gray-800" : "bg-[#0A0A0A] text-green-500 cursor-text"
+          className={`h-96 sm:h-96 overflow-auto p-4 sm:p-5 font-mono text-sm ${
+            theme === "light"
+              ? "bg-white/85 text-gray-800"
+              : "bg-linear-to-b from-[#06090f] to-[#0A0A0A] text-green-500 cursor-text"
           } mobile-terminal-fix`}
           onClick={() => {
             const textarea = document.querySelector('.terminal-input') as HTMLTextAreaElement;

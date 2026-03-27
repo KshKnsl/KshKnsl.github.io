@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   RefreshCw,
+  Home,
   Search,
   Menu,
   X,
@@ -23,7 +24,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 export default function BrowserNavbar({ activeSection }: { activeSection?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [currentUrl] = useState("kushkansal.me")
+  const [currentUrl] = useState("kushkansal.tech")
   const [activeTab, setActiveTab] = useState("home")
   const navbarRef = useRef(null)
   const pathname = typeof window !== "undefined" ? window.location.pathname : "";
@@ -45,6 +46,7 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
   }, [activeSection])
 
   const tabs = [
+    { id: "home", label: "Home", icon: <Home className="w-4 h-4" />, href: "#" },
     { id: "terminal", label: "Terminal", icon: <Terminal className="w-4 h-4" />, href: "#terminal" },
     { id: "about", label: "About", icon: <User className="w-4 h-4" />, href: "#about" },
     { id: "projects", label: "Projects", icon: <Code className="w-4 h-4" />, href: "/projects" },
@@ -53,14 +55,34 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
 
   const hideTabs = pathname.endsWith("/projects");
 
+  const handleTabClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/")) {
+      setIsMenuOpen(false)
+      return
+    }
+
+    e.preventDefault()
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      setActiveTab("home")
+      setIsMenuOpen(false)
+      return
+    }
+
+    const targetId = href.replace("#", "")
+    scrollToElement(targetId)
+    setActiveTab(targetId)
+    setIsMenuOpen(false)
+  }
+
   return (
     <header
       ref={navbarRef}
-      className={`fixed top-0 left-0 right-0 z-50 h-16 transition-colors duration-300
-        ${scrolled ? "bg-white dark:bg-black shadow-md" : "bg-white dark:bg-black"}`}
-      style={{
-        borderBottom: "2px solid #e5e7eb",
-      }}
+      className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 border-b ${
+        scrolled
+          ? "bg-white/85 dark:bg-black/80 backdrop-blur-xl border-gray-200/90 dark:border-gray-800 shadow-[0_10px_24px_rgba(13,71,161,0.12)]"
+          : "bg-white/95 dark:bg-black/95 border-gray-200 dark:border-gray-800"
+      }`}
     >
       <div className="container mx-auto h-full">
         <div className="flex items-center justify-between h-full px-2 sm:px-4">
@@ -69,9 +91,9 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.button
-                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
+                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-hackclub-blue/10 dark:hover:bg-hackclub-blue/20 rounded-full border border-gray-200 dark:border-gray-700 transition-colors"
                     whileTap={{ scale: 0.95 }}
-                    style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
+                    style={{ boxShadow: "0 6px 14px rgba(13,71,161,0.08)" }}
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </motion.button>
@@ -84,9 +106,9 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.button
-                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
+                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-hackclub-blue/10 dark:hover:bg-hackclub-blue/20 rounded-full border border-gray-200 dark:border-gray-700 transition-colors"
                     whileTap={{ scale: 0.95 }}
-                    style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
+                    style={{ boxShadow: "0 6px 14px rgba(13,71,161,0.08)" }}
                   >
                     <ChevronRight className="w-4 h-4" />
                   </motion.button>
@@ -99,9 +121,9 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
               <Tooltip>
                 <TooltipTrigger asChild>
                   <motion.button
-                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
+                    className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-hackclub-blue/10 dark:hover:bg-hackclub-blue/20 rounded-full border border-gray-200 dark:border-gray-700 transition-colors"
                     whileTap={{ scale: 0.95 }}
-                    style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
+                    style={{ boxShadow: "0 6px 14px rgba(13,71,161,0.08)" }}
                   >
                     <RefreshCw className="w-4 h-4" />
                   </motion.button>
@@ -114,8 +136,8 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
 
             <div className="hidden md:flex flex-1 max-w-xl">
               <div
-                className="flex items-center w-full h-9 px-3 rounded-full bg-gray-100/80 dark:bg-[#0F0F10]/80 border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800/80 transition-colors"
-                style={{ boxShadow: "inset 1px 1px 2px rgba(0,0,0,0.05)" }}
+                className="flex items-center w-full h-9 px-3 rounded-full bg-gray-100/80 dark:bg-[#0F0F10]/80 border border-gray-200 dark:border-gray-700 hover:border-hackclub-blue/40 dark:hover:border-hackclub-cyan/40 transition-colors"
+                style={{ boxShadow: "inset 1px 1px 2px rgba(13,71,161,0.08)" }}
               >
                 <Search className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 mr-2" />
                 <span className="text-sm text-gray-600 dark:text-gray-300 truncate">{currentUrl}</span>
@@ -130,24 +152,13 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
                   <Link
                     key={tab.id}
                     href={tab.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (tab.href === "#") {
-                        window.scrollTo({
-                          top: 0,
-                          behavior: "smooth",
-                        });
-                      } else {
-                        const targetId = tab.href.replace("#", "");
-                        scrollToElement(targetId);
-                      }
-                    }}
+                    onClick={(e) => handleTabClick(e, tab.href)}
                     className={`flex items-center px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 border ${
                       activeTab === tab.id
-                        ? "bg-gray-100 dark:bg-[#0F0F10] text-gray-900 dark:text-white border-gray-200 dark:border-gray-700"
+                        ? "bg-hackclub-blue/10 dark:bg-hackclub-blue/20 text-hackclub-blue dark:text-hackclub-cyan border-hackclub-blue/40 dark:border-hackclub-cyan/30"
                         : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 border-transparent"
                     }`}
-                    style={{ boxShadow: activeTab === tab.id ? "1px 1px 0px rgba(0,0,0,0.1)" : "none" }}
+                    style={{ boxShadow: activeTab === tab.id ? "0 8px 16px rgba(13,71,161,0.14)" : "none" }}
                   >
                     {tab.icon}
                     <span className="ml-1.5">{tab.label}</span>
@@ -162,10 +173,10 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
               </div>
 
               <motion.button
-                className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 rounded-full border border-gray-200 dark:border-gray-700"
+                className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:bg-hackclub-blue/10 dark:hover:bg-hackclub-blue/20 rounded-full border border-gray-200 dark:border-gray-700 transition-colors"
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
+                style={{ boxShadow: "0 6px 14px rgba(13,71,161,0.08)" }}
               >
                 {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </motion.button>
@@ -190,42 +201,17 @@ export default function BrowserNavbar({ activeSection }: { activeSection?: strin
                     <motion.div key={tab.id} whileHover={{ x: 5 }} whileTap={{ scale: 0.98 }}>
                       <Link
                         href={tab.href}
-                        className="flex items-center px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 rounded-lg transition-colors border border-gray-200 dark:border-gray-700"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (tab.href === "#") {
-                            window.scrollTo({
-                              top: 0,
-                              behavior: "smooth",
-                            });
-                          } else {
-                            const targetId = tab.href.replace("#", "");
-                            scrollToElement(targetId);
-                          }
-                          setIsMenuOpen(false);
-                        }}
-                        style={{ boxShadow: "1px 1px 0px rgba(0,0,0,0.1)" }}
+                        className="flex items-center px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-hackclub-blue/10 dark:hover:bg-hackclub-blue/20 rounded-xl transition-colors border border-gray-200 dark:border-gray-700"
+                        onClick={(e) => handleTabClick(e, tab.href)}
+                        style={{ boxShadow: "0 8px 16px rgba(13,71,161,0.08)" }}
                       >
-                        <span className="bg-gray-100 dark:bg-[#0F0F10] p-2 rounded-lg mr-3 border border-gray-200 dark:border-gray-700">
+                        <span className="bg-gray-100 dark:bg-[#0F0F10] p-2 rounded-lg mr-3 border border-gray-200 dark:border-gray-700 text-hackclub-blue dark:text-hackclub-cyan">
                           {tab.icon}
                         </span>
                         {tab.label}
                       </Link>
                     </motion.div>
                   ))}
-
-                  <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                    {/* <Link
-                      href="https://drive.google.com/file/d/1PGtFhTsbfNuqJEsPgsTLSs9hKZm6uFc3/view?usp=sharing"
-                      className="mt-2 flex items-center justify-center px-4 py-3 text-white rounded-lg bg-gradient-primary border border-[#3b82f6]/20 dark:border-[#60a5fa]/20 shadow-md"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ boxShadow: "2px 2px 0px rgba(0,0,0,0.2)" }}
-                    >
-                      <Download className="w-5 h-5 mr-2" />
-                      Download Resume
-                    </Link> */}
-                  </motion.div>
                 </div>
               </div>
             </nav>

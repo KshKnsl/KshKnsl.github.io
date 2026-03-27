@@ -121,11 +121,13 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
 
   return (
     <>
-      <Card onClick={handleProfileClick} className="mt-2 cursor-pointer">
-        <CardHeader>
+      <Card onClick={handleProfileClick} className="mt-2 cursor-pointer shadow-[0_10px_24px_rgba(13,71,161,0.12)] border-gray-200/80 dark:border-gray-700/70">
+        <CardHeader className="bg-white/70 dark:bg-black/60">
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center gap-3">
-              <GithubIcon className="rounded-full" />
+              <div className="p-2 rounded-full bg-hackclub-blue/10 text-hackclub-blue dark:text-hackclub-cyan">
+                <GithubIcon className="rounded-full w-5 h-5" />
+              </div>
               <div>
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                   GitHub
@@ -145,7 +147,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
               </div>
             </div>
             <div className="flex gap-2">
-              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
+              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center border border-gray-200 dark:border-gray-800">
                 <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
                   <BookOpen className="w-3 h-3" /> Repos
                 </span>
@@ -153,7 +155,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
                   <CountUp end={profile.data.public_repos} />
                 </span>
               </div>
-              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
+              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center border border-gray-200 dark:border-gray-800">
                 <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
                   <Users className="w-3 h-3" /> Followers
                 </span>
@@ -161,7 +163,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
                   <CountUp end={profile.data.followers} />
                 </span>
               </div>
-              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center">
+              <div className="p-2 bg-gray-100 dark:bg-black rounded-lg text-center border border-gray-200 dark:border-gray-800">
                 <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
                   <GitFork className="w-3 h-3" /> Contrib
                 </span>
@@ -175,12 +177,12 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
       </Card>
 
       {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div
             ref={popupRef}
-            className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col"
+            className="bg-white dark:bg-gray-900 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.35)] overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col border border-gray-200 dark:border-gray-800"
           >
-            <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-800">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-black/30">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                 GitHub Profile
               </h3>
@@ -606,7 +608,7 @@ const GitHubProfile: React.FC<GitHubProfileProps> = ({ username }) => {
                   href="https://github.com/KshKnsl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#24292e] text-white hover:bg-[#1b1f23] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-linear-to-r from-[#0d47a1] to-[#3b82f6] text-white hover:opacity-90 transition-colors"
                 >
                   <GithubIcon className="w-5 h-5" />
                   View Full GitHub Profile

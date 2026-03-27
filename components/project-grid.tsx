@@ -21,26 +21,27 @@ interface ProjectGridProps {
 export default function ProjectGrid({ projects }: ProjectGridProps) {
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-2 sm:px-4">
         {projects.map((project, index) => (
           <div key={project.title} className="relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative bg-white/80 dark:bg-black/80 rounded-xl shadow-[0px_4px_15px_rgba(13,71,161,0.3)] hover:shadow-[0px_6px_20px_rgba(13,71,161,0.5)] transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-md"
+              transition={{ delay: index * 0.05 }}
+              className="group relative h-full bg-white/80 dark:bg-black/75 rounded-2xl shadow-[0_6px_20px_rgba(13,71,161,0.12)] hover:shadow-[0_14px_30px_rgba(13,71,161,0.2)] transition-all duration-300 border border-gray-200/60 dark:border-gray-700/60 backdrop-blur-xl flex flex-col hover:-translate-y-1"
             >
-              <div className="p-6 relative z-10">
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-hackclub-blue/5 via-transparent to-hackclub-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
-                  <div className="flex gap-2 z-[100]">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-hackclub-blue dark:group-hover:text-hackclub-cyan transition-colors">{project.title}</h3>
+                  <div className="flex gap-2 z-100">
                     {project.liveLink && project.liveLink !== project.codeLink && (
                       <LinkPreview url={project.liveLink} width={300} height={200}>
                         <Link
                           href={project.liveLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 text-gray-600 hover:text-[#3b82f6] transition-colors"
+                          className="p-2 rounded-full text-gray-600 hover:text-hackclub-blue dark:hover:text-hackclub-cyan hover:bg-hackclub-blue/10 transition-colors"
                         >
                           <ExternalLink className="w-5 h-5" />
                         </Link>
@@ -51,7 +52,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                         href={project.codeLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 text-gray-600 hover:text-[#3b82f6] transition-colors"
+                        className="p-2 rounded-full text-gray-600 hover:text-hackclub-blue dark:hover:text-hackclub-cyan hover:bg-hackclub-blue/10 transition-colors"
                       >
                         <Github className="w-5 h-5" />
                       </Link>
@@ -62,7 +63,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                           href={project.youtubeLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
+                          className="p-2 rounded-full text-gray-600 hover:text-hackclub-blue dark:hover:text-hackclub-cyan hover:bg-hackclub-blue/10 transition-colors"
                         >
                           <Play className="w-5 h-5 fill-current" />
                         </Link>
@@ -70,7 +71,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                     )}
                   </div>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                 {project?.technologies?.map((tech, i) => {
                       let bgColor = "bg-gray-100 dark:bg-[#0A0A0A] text-gray-800 dark:text-gray-200";
@@ -108,14 +109,13 @@ export default function ProjectGrid({ projects }: ProjectGridProps) {
                         bgColor = "bg-purple-200 dark:bg-purple-800/30 text-purple-900 dark:text-purple-400";
                       
                       return (
-                        <span key={i} className={`${bgColor} px-2 py-1 text-xs rounded-md font-medium`}>
+                        <span key={i} className={`${bgColor} px-2.5 py-1 text-xs rounded-full font-medium`}>
                           {tech}
                         </span>
                       );
                   })}
                 </div>
               </div>
-              <div className="absolute inset-0 bg-linear-to-t from-[#60A5FA80] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
           </div>
         ))}
